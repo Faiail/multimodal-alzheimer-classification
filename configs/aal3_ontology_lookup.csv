@@ -1,0 +1,171 @@
+label_id,name,hemisphere,fma_id,fma_label,fma_superclass,fma_lobe,fma_division,match_status
+1,Precentral_L,L,61894,Precentral gyrus,Gyrus of frontal lobe,Frontal,Cerebral_cortex,manual
+2,Precentral_R,R,61894,Precentral gyrus,Gyrus of frontal lobe,Frontal,Cerebral_cortex,manual
+3,Frontal_Sup_2_L,L,61857,Superior frontal gyrus,Gyrus of frontal lobe,Frontal,Cerebral_cortex,manual
+4,Frontal_Sup_2_R,R,61857,Superior frontal gyrus,Gyrus of frontal lobe,Frontal,Cerebral_cortex,manual
+5,Frontal_Mid_2_L,L,61859,Middle frontal gyrus,Gyrus of frontal lobe,Frontal,Cerebral_cortex,manual
+6,Frontal_Mid_2_R,R,61859,Middle frontal gyrus,Gyrus of frontal lobe,Frontal,Cerebral_cortex,manual
+7,Frontal_Inf_Oper_L,L,61860,Inferior frontal gyrus,Gyrus of frontal lobe,Frontal,Cerebral_cortex,manual
+8,Frontal_Inf_Oper_R,R,61860,Inferior frontal gyrus,Gyrus of frontal lobe,Frontal,Cerebral_cortex,manual
+9,Frontal_Inf_Tri_L,L,61860,Inferior frontal gyrus,Gyrus of frontal lobe,Frontal,Cerebral_cortex,manual
+10,Frontal_Inf_Tri_R,R,61860,Inferior frontal gyrus,Gyrus of frontal lobe,Frontal,Cerebral_cortex,manual
+11,Frontal_Inf_Orb_2_L,L,61860,Inferior frontal gyrus,Gyrus of frontal lobe,Frontal,Cerebral_cortex,manual
+12,Frontal_Inf_Orb_2_R,R,61860,Inferior frontal gyrus,Gyrus of frontal lobe,Frontal,Cerebral_cortex,manual
+13,Rolandic_Oper_L,L,323279,Frontoparietal operculum,Zone of telencephalon,Parietal,Cerebral_cortex,manual
+14,Rolandic_Oper_R,R,323279,Frontoparietal operculum,Zone of telencephalon,Parietal,Cerebral_cortex,manual
+15,Supp_Motor_Area_L,L,61857,Superior frontal gyrus,Gyrus of frontal lobe,Frontal,Cerebral_cortex,manual
+16,Supp_Motor_Area_R,R,61857,Superior frontal gyrus,Gyrus of frontal lobe,Frontal,Cerebral_cortex,manual
+17,Olfactory_L,L,61893,Straight gyrus,Gyrus of frontal lobe,Frontal,Cerebral_cortex,manual
+18,Olfactory_R,R,61893,Straight gyrus,Gyrus of frontal lobe,Frontal,Cerebral_cortex,manual
+19,Frontal_Sup_Medial_L,L,61857,Superior frontal gyrus,Gyrus of frontal lobe,Frontal,Cerebral_cortex,manual
+20,Frontal_Sup_Medial_R,R,61857,Superior frontal gyrus,Gyrus of frontal lobe,Frontal,Cerebral_cortex,manual
+21,Frontal_Med_Orb_L,L,62419,Medial orbital gyrus,Orbital gyrus,Frontal,Cerebral_cortex,manual
+22,Frontal_Med_Orb_R,R,62419,Medial orbital gyrus,Orbital gyrus,Frontal,Cerebral_cortex,manual
+23,Rectus_L,L,61893,Straight gyrus,Gyrus of frontal lobe,Frontal,Cerebral_cortex,manual
+24,Rectus_R,R,61893,Straight gyrus,Gyrus of frontal lobe,Frontal,Cerebral_cortex,manual
+25,OFCmed_L,L,62419,Medial orbital gyrus,Orbital gyrus,Frontal,Cerebral_cortex,manual
+26,OFCmed_R,R,62419,Medial orbital gyrus,Orbital gyrus,Frontal,Cerebral_cortex,manual
+27,OFCant_L,L,256196,Anterior orbital gyrus,Orbital gyrus,Frontal,Cerebral_cortex,manual
+28,OFCant_R,R,256196,Anterior orbital gyrus,Orbital gyrus,Frontal,Cerebral_cortex,manual
+29,OFCpost_L,L,80184,Posterior orbital gyrus,Orbital gyrus,Frontal,Cerebral_cortex,manual
+30,OFCpost_R,R,80184,Posterior orbital gyrus,Orbital gyrus,Frontal,Cerebral_cortex,manual
+31,OFClat_L,L,62418,Lateral orbital gyrus,Orbital gyrus,Frontal,Cerebral_cortex,manual
+32,OFClat_R,R,62418,Lateral orbital gyrus,Orbital gyrus,Frontal,Cerebral_cortex,manual
+33,Insula_L,L,67329,Insula,Lobe of cerebral hemisphere,Insula,Cerebral_cortex,manual
+34,Insula_R,R,67329,Insula,Lobe of cerebral hemisphere,Insula,Cerebral_cortex,manual
+35,Cingulate_Ant_L,L,62434,Cingulate gyrus,Gyrus of limbic lobe,Limbic,Cerebral_cortex,manual
+36,Cingulate_Ant_R,R,62434,Cingulate gyrus,Gyrus of limbic lobe,Limbic,Cerebral_cortex,manual
+37,Cingulate_Mid_L,L,62434,Cingulate gyrus,Gyrus of limbic lobe,Limbic,Cerebral_cortex,manual
+38,Cingulate_Mid_R,R,62434,Cingulate gyrus,Gyrus of limbic lobe,Limbic,Cerebral_cortex,manual
+39,Cingulate_Post_L,L,62434,Cingulate gyrus,Gyrus of limbic lobe,Limbic,Cerebral_cortex,manual
+40,Cingulate_Post_R,R,62434,Cingulate gyrus,Gyrus of limbic lobe,Limbic,Cerebral_cortex,manual
+41,Hippocampus_L,L,275020,Hippocampus,Gyrus of limbic lobe,Limbic,Subcortical,manual
+42,Hippocampus_R,R,275020,Hippocampus,Gyrus of limbic lobe,Limbic,Subcortical,manual
+43,ParaHippocampal_L,L,61918,Parahippocampal gyrus,Gyrus of limbic lobe,Limbic,Subcortical,manual
+44,ParaHippocampal_R,R,61918,Parahippocampal gyrus,Gyrus of limbic lobe,Limbic,Subcortical,manual
+45,Amygdala_L,L,61841,Amygdala,Basal ganglion of telencephalon,Limbic,Subcortical,manual
+46,Amygdala_R,R,61841,Amygdala,Basal ganglion of telencephalon,Limbic,Subcortical,manual
+47,Calcarine_L,L,276696,Intracalcarine cortex,Region of cortex of occipital lobe,Occipital,Cerebral_cortex,manual
+48,Calcarine_R,R,276696,Intracalcarine cortex,Region of cortex of occipital lobe,Occipital,Cerebral_cortex,manual
+49,Cuneus_L,L,61903,Cuneus,Gyrus of occipital lobe,Occipital,Cerebral_cortex,manual
+50,Cuneus_R,R,61903,Cuneus,Gyrus of occipital lobe,Occipital,Cerebral_cortex,manual
+51,Lingual_L,L,61904,Lingual gyrus,Gyrus of occipital lobe,Occipital,Cerebral_cortex,manual
+52,Lingual_R,R,61904,Lingual gyrus,Gyrus of occipital lobe,Occipital,Cerebral_cortex,manual
+53,Occipital_Sup_L,L,61901,Superior occipital gyrus,Gyrus of occipital lobe,Occipital,Cerebral_cortex,manual
+54,Occipital_Sup_R,R,61901,Superior occipital gyrus,Gyrus of occipital lobe,Occipital,Cerebral_cortex,manual
+55,Occipital_Mid_L,L,273600,Brodmann area 37 of middle occipital gyrus,Segment of Brodmann area 37,Occipital,Cerebral_cortex,manual
+56,Occipital_Mid_R,R,273600,Brodmann area 37 of middle occipital gyrus,Segment of Brodmann area 37,Occipital,Cerebral_cortex,manual
+57,Occipital_Inf_L,L,273129,Inferior occipital gyrus,Gyrus of occipital lobe,Occipital,Cerebral_cortex,manual
+58,Occipital_Inf_R,R,273129,Inferior occipital gyrus,Gyrus of occipital lobe,Occipital,Cerebral_cortex,manual
+59,Fusiform_L,L,61908,Fusiform gyrus,Gyrus of temporal lobe,Temporal,Cerebral_cortex,manual
+60,Fusiform_R,R,61908,Fusiform gyrus,Gyrus of temporal lobe,Temporal,Cerebral_cortex,manual
+61,Postcentral_L,L,61896,Postcentral gyrus,Gyrus of parietal lobe,Parietal,Cerebral_cortex,manual
+62,Postcentral_R,R,61896,Postcentral gyrus,Gyrus of parietal lobe,Parietal,Cerebral_cortex,manual
+63,Parietal_Sup_L,L,61899,Superior parietal lobule,Gyrus of parietal lobe,Parietal,Cerebral_cortex,manual
+64,Parietal_Sup_R,R,61899,Superior parietal lobule,Gyrus of parietal lobe,Parietal,Cerebral_cortex,manual
+65,Parietal_Inf_L,L,77536,Inferior parietal lobule,Gyrus of parietal lobe,Parietal,Cerebral_cortex,manual
+66,Parietal_Inf_R,R,77536,Inferior parietal lobule,Gyrus of parietal lobe,Parietal,Cerebral_cortex,manual
+67,SupraMarginal_L,L,61897,Supramarginal gyrus,Segment of inferior parietal lobule,Parietal,Cerebral_cortex,manual
+68,SupraMarginal_R,R,61897,Supramarginal gyrus,Segment of inferior parietal lobule,Parietal,Cerebral_cortex,manual
+69,Angular_L,L,61898,Angular gyrus,Segment of inferior parietal lobule,Parietal,Cerebral_cortex,manual
+70,Angular_R,R,61898,Angular gyrus,Segment of inferior parietal lobule,Parietal,Cerebral_cortex,manual
+71,Precuneus_L,L,61900,Precuneus,Gyrus of parietal lobe,Parietal,Cerebral_cortex,manual
+72,Precuneus_R,R,61900,Precuneus,Gyrus of parietal lobe,Parietal,Cerebral_cortex,manual
+73,Paracentral_Lobule_L,L,77534,Paracentral lobule,Gyrus of brain,Cerebellum,Cerebellum,manual
+74,Paracentral_Lobule_R,R,77534,Paracentral lobule,Gyrus of brain,Cerebellum,Cerebellum,manual
+75,Caudate_L,L,61833,Caudate nucleus,Nucleus of brain,Subcortical,Subcortical,manual
+76,Caudate_R,R,61833,Caudate nucleus,Nucleus of brain,Subcortical,Subcortical,manual
+77,Putamen_L,L,61834,Putamen,Nucleus of brain,Subcortical,Subcortical,manual
+78,Putamen_R,R,61834,Putamen,Nucleus of brain,Subcortical,Subcortical,manual
+79,Pallidum_L,L,61835,Globus pallidus,Nucleus of brain,Subcortical,Subcortical,manual
+80,Pallidum_R,R,61835,Globus pallidus,Nucleus of brain,Subcortical,Subcortical,manual
+81,Thalamus_L,L,62007,Thalamus,Organ component of neuraxis,Thalamus,Thalamus,manual
+82,Thalamus_R,R,62007,Thalamus,Organ component of neuraxis,Thalamus,Thalamus,manual
+83,Heschl_L,L,273671,Transverse temporal gyrus,Gyrus of temporal lobe,Temporal,Cerebral_cortex,manual
+84,Heschl_R,R,273671,Transverse temporal gyrus,Gyrus of temporal lobe,Temporal,Cerebral_cortex,manual
+85,Temporal_Sup_L,L,61905,Superior temporal gyrus,Gyrus of temporal lobe,Temporal,Cerebral_cortex,manual
+86,Temporal_Sup_R,R,61905,Superior temporal gyrus,Gyrus of temporal lobe,Temporal,Cerebral_cortex,manual
+87,Temporal_Pole_Sup_L,L,74890,Temporal pole,Zone of telencephalon,Temporal,,manual
+88,Temporal_Pole_Sup_R,R,74890,Temporal pole,Zone of telencephalon,Temporal,,manual
+89,Temporal_Mid_L,L,61906,Middle temporal gyrus,Gyrus of temporal lobe,Temporal,Cerebral_cortex,manual
+90,Temporal_Mid_R,R,61906,Middle temporal gyrus,Gyrus of temporal lobe,Temporal,Cerebral_cortex,manual
+91,Temporal_Pole_Mid_L,L,74890,Temporal pole,Zone of telencephalon,Temporal,,manual
+92,Temporal_Pole_Mid_R,R,74890,Temporal pole,Zone of telencephalon,Temporal,,manual
+93,Temporal_Inf_L,L,61907,Inferior temporal gyrus,Gyrus of temporal lobe,Temporal,Cerebral_cortex,manual
+94,Temporal_Inf_R,R,61907,Inferior temporal gyrus,Gyrus of temporal lobe,Temporal,Cerebral_cortex,manual
+95,Cerebellum_Crus1_L,L,278747,Lobule VIIA of hemisphere of cerebellum,Lobule of hemisphere of cerebellum,Cerebellum,Cerebellum,manual
+96,Cerebellum_Crus1_R,R,278747,Lobule VIIA of hemisphere of cerebellum,Lobule of hemisphere of cerebellum,Cerebellum,Cerebellum,manual
+97,Cerebellum_Crus2_L,L,72523,Gracile lobule,Lobule of hemisphere of cerebellum,Cerebellum,Cerebellum,manual
+98,Cerebellum_Crus2_R,R,72523,Gracile lobule,Lobule of hemisphere of cerebellum,Cerebellum,Cerebellum,manual
+99,Cerebellum_3_L,L,278672,Lobule III of hemisphere of cerebellum,Lobule of hemisphere of cerebellum,Cerebellum,Cerebellum,manual
+100,Cerebellum_3_R,R,278672,Lobule III of hemisphere of cerebellum,Lobule of hemisphere of cerebellum,Cerebellum,Cerebellum,manual
+101,Cerebellum_4_5_L,L,278683,Lobule IV of hemisphere of cerebellum,Lobule of hemisphere of cerebellum,Cerebellum,Cerebellum,manual
+102,Cerebellum_4_5_R,R,278683,Lobule IV of hemisphere of cerebellum,Lobule of hemisphere of cerebellum,Cerebellum,Cerebellum,manual
+103,Cerebellum_6_L,L,72522,Simple lobule of cerebellum,Lobule of hemisphere of cerebellum,Cerebellum,Cerebellum,manual
+104,Cerebellum_6_R,R,72522,Simple lobule of cerebellum,Lobule of hemisphere of cerebellum,Cerebellum,Cerebellum,manual
+105,Cerebellum_7b_L,L,72523,Gracile lobule,Lobule of hemisphere of cerebellum,Cerebellum,Cerebellum,manual
+106,Cerebellum_7b_R,R,72523,Gracile lobule,Lobule of hemisphere of cerebellum,Cerebellum,Cerebellum,manual
+107,Cerebellum_8_L,L,83464,Tonsil of cerebellum,Segment of cerebellum,Cerebellum,Cerebellum,manual
+108,Cerebellum_8_R,R,83464,Tonsil of cerebellum,Segment of cerebellum,Cerebellum,Cerebellum,manual
+109,Cerebellum_9_L,L,278790,Lobule IX of hemisphere of cerebellum,Lobule of hemisphere of cerebellum,Cerebellum,Cerebellum,manual
+110,Cerebellum_9_R,R,278790,Lobule IX of hemisphere of cerebellum,Lobule of hemisphere of cerebellum,Cerebellum,Cerebellum,manual
+111,Cerebellum_10_L,L,83881,Flocculus of cerebellum,Lobule of hemisphere of cerebellum,Cerebellum,Cerebellum,manual
+112,Cerebellum_10_R,R,83881,Flocculus of cerebellum,Lobule of hemisphere of cerebellum,Cerebellum,Cerebellum,manual
+113,Vermis_1_2,bilateral,83884,Lingula of vermis of cerebellum,Lobule of vermis,Cerebellum,Cerebellum,manual
+114,Vermis_3,bilateral,278639,Lobule III of vermis,Lobule of vermis,Cerebellum,Cerebellum,manual
+115,Vermis_4_5,bilateral,83886,Culmen of vermis of cerebellum,Lobule of vermis,Cerebellum,Cerebellum,manual
+116,Vermis_6,bilateral,83887,Declive of vermis of cerebellum,Lobule of vermis,Cerebellum,Cerebellum,manual
+117,Vermis_7,bilateral,278651,Lobule VII of vermis,Lobule of vermis,Cerebellum,Cerebellum,manual
+118,Vermis_8,bilateral,83888,Pyramis of vermis of cerebellum,Lobule of vermis,Cerebellum,Cerebellum,manual
+119,Vermis_9,bilateral,83883,Uvula of vermis of cerebellum,Lobule of vermis,Cerebellum,Cerebellum,manual
+120,Vermis_10,bilateral,83882,Nodule of vermis of cerebellum,Lobule of vermis,Cerebellum,Cerebellum,manual
+121,Thal_AV_L,L,62143,Anteroventral nucleus,Nucleus of thalamus,Thalamus,Thalamus,manual
+122,Thal_AV_R,R,62143,Anteroventral nucleus,Nucleus of thalamus,Thalamus,Thalamus,manual
+123,Thal_LP_L,L,62177,Lateral posterior nucleus,Nucleus of brain,,,manual
+124,Thal_LP_R,R,62177,Lateral posterior nucleus,Nucleus of brain,,,manual
+125,Thal_VA_L,L,62184,Ventral anterior nucleus,Nucleus of brain,,,manual
+126,Thal_VA_R,R,62184,Ventral anterior nucleus,Nucleus of brain,,,manual
+127,Thal_VL_L,L,62186,Ventral lateral nucleus,Nucleus of brain,,,manual
+128,Thal_VL_R,R,62186,Ventral lateral nucleus,Nucleus of brain,,,manual
+129,Thal_VPL_L,L,62200,Ventral posterolateral nucleus,Nucleus of thalamus,Thalamus,Thalamus,manual
+130,Thal_VPL_R,R,62200,Ventral posterolateral nucleus,Nucleus of thalamus,Thalamus,Thalamus,manual
+131,Thal_IL_L,L,327261,Intralaminar nucleus of thalamus,Nucleus of thalamus,Thalamus,Thalamus,manual
+132,Thal_IL_R,R,327261,Intralaminar nucleus of thalamus,Nucleus of thalamus,Thalamus,Thalamus,manual
+133,Thal_Re_L,L,62026,Thalamic reticular nucleus,Nucleus of thalamus,Thalamus,Thalamus,manual
+134,Thal_Re_R,R,62026,Thalamic reticular nucleus,Nucleus of thalamus,Thalamus,Thalamus,manual
+135,Thal_MDm_L,L,84343,Medial nucleus of medial dorsal nucleus of thalamus,Nucleus of thalamus,Thalamus,Thalamus,manual
+136,Thal_MDm_R,R,84343,Medial nucleus of medial dorsal nucleus of thalamus,Nucleus of thalamus,Thalamus,Thalamus,manual
+137,Thal_MDl_L,L,84343,Medial nucleus of medial dorsal nucleus of thalamus,Nucleus of thalamus,Thalamus,Thalamus,manual
+138,Thal_MDl_R,R,84343,Medial nucleus of medial dorsal nucleus of thalamus,Nucleus of thalamus,Thalamus,Thalamus,manual
+139,Thal_LGN_L,L,62209,Lateral geniculate body,Geniculate body,Thalamus,Thalamus,manual
+140,Thal_LGN_R,R,62209,Lateral geniculate body,Geniculate body,Thalamus,Thalamus,manual
+141,Thal_MGN_L,L,62211,Medial geniculate body,Geniculate body,Thalamus,Thalamus,manual
+142,Thal_MGN_R,R,62211,Medial geniculate body,Geniculate body,Thalamus,Thalamus,manual
+143,Thal_PuI_L,L,62183,Inferior pulvinar nucleus,Nucleus of thalamus,Thalamus,Thalamus,manual
+144,Thal_PuI_R,R,62183,Inferior pulvinar nucleus,Nucleus of thalamus,Thalamus,Thalamus,manual
+145,Thal_PuM_L,L,62182,Medial pulvinar nucleus,Nucleus of thalamus,Thalamus,Thalamus,manual
+146,Thal_PuM_R,R,62182,Medial pulvinar nucleus,Nucleus of thalamus,Thalamus,Thalamus,manual
+147,Thal_PuA_L,L,62180,Oral pulvinar nucleus,Nucleus of thalamus,Thalamus,Thalamus,manual
+148,Thal_PuA_R,R,62180,Oral pulvinar nucleus,Nucleus of thalamus,Thalamus,Thalamus,manual
+149,Thal_PuL_L,L,62181,Lateral pulvinar nucleus,Nucleus of thalamus,Thalamus,Thalamus,manual
+150,Thal_PuL_R,R,62181,Lateral pulvinar nucleus,Nucleus of thalamus,Thalamus,Thalamus,manual
+151,ACC_sub_L,L,62434,Cingulate gyrus,Gyrus of limbic lobe,Limbic,Cerebral_cortex,manual
+152,ACC_sub_R,R,62434,Cingulate gyrus,Gyrus of limbic lobe,Limbic,Cerebral_cortex,manual
+153,ACC_pre_L,L,62434,Cingulate gyrus,Gyrus of limbic lobe,Limbic,Cerebral_cortex,manual
+154,ACC_pre_R,R,62434,Cingulate gyrus,Gyrus of limbic lobe,Limbic,Cerebral_cortex,manual
+155,ACC_sup_L,L,62434,Cingulate gyrus,Gyrus of limbic lobe,Limbic,Cerebral_cortex,manual
+156,ACC_sup_R,R,62434,Cingulate gyrus,Gyrus of limbic lobe,Limbic,Cerebral_cortex,manual
+157,N_Acc_L,L,61889,Nucleus accumbens,Nucleus of brain,Subcortical,Subcortical,manual
+158,N_Acc_R,R,61889,Nucleus accumbens,Nucleus of brain,Subcortical,Subcortical,manual
+159,VTA_L,L,72438,Ventral tegmental area,Nucleus of midbrain tegmentum,Brainstem,Brainstem,manual
+160,VTA_R,R,72438,Ventral tegmental area,Nucleus of midbrain tegmentum,Brainstem,Brainstem,manual
+161,SN_pc_L,L,67947,Substantia nigra,Nucleus of brain,Brainstem,Brainstem,manual
+162,SN_pc_R,R,67947,Substantia nigra,Nucleus of brain,Brainstem,Brainstem,manual
+163,SN_pr_L,L,67947,Substantia nigra,Nucleus of brain,Brainstem,Brainstem,manual
+164,SN_pr_R,R,67947,Substantia nigra,Nucleus of brain,Brainstem,Brainstem,manual
+165,Red_N_L,L,62407,Red nucleus,Nucleus of midbrain tegmentum,Brainstem,Brainstem,manual
+166,Red_N_R,R,62407,Red nucleus,Nucleus of midbrain tegmentum,Brainstem,Brainstem,manual
+167,LC_L,L,72478,Locus ceruleus,Nucleus of brain,Brainstem,Brainstem,manual
+168,LC_R,R,72478,Locus ceruleus,Nucleus of brain,Brainstem,Brainstem,manual
+169,Raphe_D,bilateral,68462,Dorsal raphe nucleus,Nucleus of midbrain tegmentum,Brainstem,Brainstem,manual
+170,Raphe_M,bilateral,71990,Set of serotoninergic cells in median raphe nucleus [B6],Set of serotoninergic cells,Brainstem,Brainstem,manual

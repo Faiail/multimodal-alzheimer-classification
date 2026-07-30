@@ -1,0 +1,37 @@
+# Processing configuration for Tesi Cirilli
+
+paths:
+  raw_dicom: "/home/dcirilli2/Tesi Cirilli/data/01_raw"
+  processed: "/home/dcirilli2/Tesi Cirilli/data/02_processed"
+  features: "/home/dcirilli2/Tesi Cirilli/data/03_features"
+  logs: "/home/dcirilli2/Tesi Cirilli/data/02_processed/logs"
+  
+spm:
+  mcr_path: "/usr/local/MATLAB/MATLAB_Runtime/R2024b"
+  script_path: "/home/dcirilli2/spm_standalone/run_spm25.sh"
+  tpm_file: "/home/dcirilli2/spm_standalone/spm25_mcr/spm25/tpm/TPM.nii"
+
+n4:
+  bspline_fitting_distance: 300
+  shrink_factor: 3
+  n_iterations: [50, 50, 30, 20]
+
+processing:
+  n_workers: 6  # Parallel jobs (leave 2 cores free)
+  checkpoint_interval: 50  # Save progress every N subjects
+  skip_existing: true  # Skip already processed subjects
+  
+cleanup:
+  delete_intermediate_n4_unzipped: true  # Delete .nii after creating .nii.gz
+  delete_native_tissue_maps: false  # Keep c1, c2, c3 for now
+  compress_deformation_fields: true  # Compress y_*.nii to .nii.gz
+
+atlas:
+  aal_file: "/home/dcirilli2/Tesi Cirilli/configs/AAL3/ROI_MNI_V7_1mm.nii"
+  aal_labels: "/home/dcirilli2/Tesi Cirilli/configs/AAL3/ROI_MNI_V7_vol.txt"
+  cerebellum_labels: [95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120]
+
+dicom_conversion:
+  compression: true  # Output as .nii.gz
+  # Pattern to identify DICOM directories (directories containing .dcm files)
+  # The deepest folder containing .dcm files will be used

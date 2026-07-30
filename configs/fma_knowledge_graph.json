@@ -1,0 +1,3165 @@
+{
+  "version": 1,
+  "source_owl": "configs/FMA/fma.owl",
+  "source_sha256": "59465eb503c418dbf9216d362b94c7f42bc3b96b297e553ec17c7fee77979e44",
+  "max_depth": 8,
+  "nodes": [
+    {
+      "id": "14065",
+      "iri": "http://purl.org/sig/ont/fma/fma14065",
+      "label": "Organ component",
+      "definition": "Cardinal organ part, each instance of which is bounded predominantly by some bonafide boundaries.  Examples: lobe of lung, osteon, acinus, submucosa, anterior leaflet of mitral valve, fibrous capsule of kidney, compact bone, striated muscle fasciculus."
+    },
+    {
+      "id": "223151",
+      "iri": "http://purl.org/sig/ont/fma/fma223151",
+      "label": "Subcortical gray matter",
+      "definition": "Gray matter component of neuraxis which is located in the interior of the neuraxis. Example: thalamus, dentate nucleus, ventral horn of spinal cord."
+    },
+    {
+      "id": "242000",
+      "iri": "http://purl.org/sig/ont/fma/fma242000",
+      "label": "Limbic system",
+      "definition": ""
+    },
+    {
+      "id": "242166",
+      "iri": "http://purl.org/sig/ont/fma/fma242166",
+      "label": "Base of midbrain peduncle",
+      "definition": ""
+    },
+    {
+      "id": "24218",
+      "iri": "http://purl.org/sig/ont/fma/fma24218",
+      "label": "Subdivision of head",
+      "definition": ""
+    },
+    {
+      "id": "242193",
+      "iri": "http://purl.org/sig/ont/fma/fma242193",
+      "label": "Region of cerebral cortex",
+      "definition": ""
+    },
+    {
+      "id": "242392",
+      "iri": "http://purl.org/sig/ont/fma/fma242392",
+      "label": "Lobe of cerebellum",
+      "definition": ""
+    },
+    {
+      "id": "256150",
+      "iri": "http://purl.org/sig/ont/fma/fma256150",
+      "label": "Segment of cerebellum",
+      "definition": ""
+    },
+    {
+      "id": "256194",
+      "iri": "http://purl.org/sig/ont/fma/fma256194",
+      "label": "Orbital gyrus",
+      "definition": ""
+    },
+    {
+      "id": "256196",
+      "iri": "http://purl.org/sig/ont/fma/fma256196",
+      "label": "Anterior orbital gyrus",
+      "definition": ""
+    },
+    {
+      "id": "256204",
+      "iri": "http://purl.org/sig/ont/fma/fma256204",
+      "label": "Segment of cerebral lobe",
+      "definition": ""
+    },
+    {
+      "id": "256237",
+      "iri": "http://purl.org/sig/ont/fma/fma256237",
+      "label": "Segment of neuraxis",
+      "definition": "Organ segment which is a regional part of neuraxis. Examples: brain, brainstem, spinal cord."
+    },
+    {
+      "id": "256693",
+      "iri": "http://purl.org/sig/ont/fma/fma256693",
+      "label": "Nucleus of thalamus",
+      "definition": ""
+    },
+    {
+      "id": "258682",
+      "iri": "http://purl.org/sig/ont/fma/fma258682",
+      "label": "Pathway structure of neuraxis",
+      "definition": ""
+    },
+    {
+      "id": "258685",
+      "iri": "http://purl.org/sig/ont/fma/fma258685",
+      "label": "Dorsal column-medial lemniscal pathway structure",
+      "definition": ""
+    },
+    {
+      "id": "258768",
+      "iri": "http://purl.org/sig/ont/fma/fma258768",
+      "label": "Nucleus of midbrain tegmentum",
+      "definition": ""
+    },
+    {
+      "id": "265482",
+      "iri": "http://purl.org/sig/ont/fma/fma265482",
+      "label": "Set of neural cells",
+      "definition": ""
+    },
+    {
+      "id": "269079",
+      "iri": "http://purl.org/sig/ont/fma/fma269079",
+      "label": "Cranial compartment",
+      "definition": ""
+    },
+    {
+      "id": "270201",
+      "iri": "http://purl.org/sig/ont/fma/fma270201",
+      "label": "Basicranial part of head proper",
+      "definition": ""
+    },
+    {
+      "id": "271165",
+      "iri": "http://purl.org/sig/ont/fma/fma271165",
+      "label": "Segment of Brodmann area",
+      "definition": ""
+    },
+    {
+      "id": "271203",
+      "iri": "http://purl.org/sig/ont/fma/fma271203",
+      "label": "Segment of Brodmann area 37",
+      "definition": ""
+    },
+    {
+      "id": "273129",
+      "iri": "http://purl.org/sig/ont/fma/fma273129",
+      "label": "Inferior occipital gyrus",
+      "definition": ""
+    },
+    {
+      "id": "273600",
+      "iri": "http://purl.org/sig/ont/fma/fma273600",
+      "label": "Brodmann area 37 of middle occipital gyrus",
+      "definition": ""
+    },
+    {
+      "id": "273671",
+      "iri": "http://purl.org/sig/ont/fma/fma273671",
+      "label": "Transverse temporal gyrus",
+      "definition": ""
+    },
+    {
+      "id": "274337",
+      "iri": "http://purl.org/sig/ont/fma/fma274337",
+      "label": "Segment of frontal lobe",
+      "definition": ""
+    },
+    {
+      "id": "274359",
+      "iri": "http://purl.org/sig/ont/fma/fma274359",
+      "label": "Superolateral segment of frontal lobe",
+      "definition": ""
+    },
+    {
+      "id": "274366",
+      "iri": "http://purl.org/sig/ont/fma/fma274366",
+      "label": "Inferomedial segment of frontal lobe",
+      "definition": ""
+    },
+    {
+      "id": "274377",
+      "iri": "http://purl.org/sig/ont/fma/fma274377",
+      "label": "Orbitobasal segment of frontal lobe",
+      "definition": ""
+    },
+    {
+      "id": "274516",
+      "iri": "http://purl.org/sig/ont/fma/fma274516",
+      "label": "Gyrus of frontal lobe",
+      "definition": ""
+    },
+    {
+      "id": "274518",
+      "iri": "http://purl.org/sig/ont/fma/fma274518",
+      "label": "Gyrus of temporal lobe",
+      "definition": ""
+    },
+    {
+      "id": "274520",
+      "iri": "http://purl.org/sig/ont/fma/fma274520",
+      "label": "Gyrus of parietal lobe",
+      "definition": ""
+    },
+    {
+      "id": "274522",
+      "iri": "http://purl.org/sig/ont/fma/fma274522",
+      "label": "Gyrus of occipital lobe",
+      "definition": ""
+    },
+    {
+      "id": "274528",
+      "iri": "http://purl.org/sig/ont/fma/fma274528",
+      "label": "Gyrus of limbic lobe",
+      "definition": ""
+    },
+    {
+      "id": "274530",
+      "iri": "http://purl.org/sig/ont/fma/fma274530",
+      "label": "Segment of inferior parietal lobule",
+      "definition": ""
+    },
+    {
+      "id": "274534",
+      "iri": "http://purl.org/sig/ont/fma/fma274534",
+      "label": "Medial segment of cerebral hemisphere",
+      "definition": ""
+    },
+    {
+      "id": "274543",
+      "iri": "http://purl.org/sig/ont/fma/fma274543",
+      "label": "Segment of parietal lobe",
+      "definition": ""
+    },
+    {
+      "id": "274545",
+      "iri": "http://purl.org/sig/ont/fma/fma274545",
+      "label": "Medial segment of parietal lobe",
+      "definition": ""
+    },
+    {
+      "id": "274573",
+      "iri": "http://purl.org/sig/ont/fma/fma274573",
+      "label": "Segment of gyrus of parietal lobe",
+      "definition": ""
+    },
+    {
+      "id": "275020",
+      "iri": "http://purl.org/sig/ont/fma/fma275020",
+      "label": "Hippocampus",
+      "definition": "Gyrus of limbic lobe, each instance of which is convoluted mass of gray matter extending the entire length of the floor of the temporal horn of some lateral ventricle; it is part of some limbic system and plays major roles in short term memory and spatial navigation."
+    },
+    {
+      "id": "275048",
+      "iri": "http://purl.org/sig/ont/fma/fma275048",
+      "label": "Limbic gyrus",
+      "definition": ""
+    },
+    {
+      "id": "275054",
+      "iri": "http://purl.org/sig/ont/fma/fma275054",
+      "label": "Intralimbic gyrus",
+      "definition": ""
+    },
+    {
+      "id": "275191",
+      "iri": "http://purl.org/sig/ont/fma/fma275191",
+      "label": "Medial occipitotemporal gyrus",
+      "definition": ""
+    },
+    {
+      "id": "276694",
+      "iri": "http://purl.org/sig/ont/fma/fma276694",
+      "label": "Region of cortex of occipital lobe",
+      "definition": ""
+    },
+    {
+      "id": "276696",
+      "iri": "http://purl.org/sig/ont/fma/fma276696",
+      "label": "Intracalcarine cortex",
+      "definition": ""
+    },
+    {
+      "id": "277763",
+      "iri": "http://purl.org/sig/ont/fma/fma277763",
+      "label": "Region of cell part cluster of neuraxis",
+      "definition": ""
+    },
+    {
+      "id": "277765",
+      "iri": "http://purl.org/sig/ont/fma/fma277765",
+      "label": "Segment of cell part cluster of neuraxis",
+      "definition": ""
+    },
+    {
+      "id": "278629",
+      "iri": "http://purl.org/sig/ont/fma/fma278629",
+      "label": "Lobule of vermis",
+      "definition": ""
+    },
+    {
+      "id": "278639",
+      "iri": "http://purl.org/sig/ont/fma/fma278639",
+      "label": "Lobule III of vermis",
+      "definition": ""
+    },
+    {
+      "id": "278651",
+      "iri": "http://purl.org/sig/ont/fma/fma278651",
+      "label": "Lobule VII of vermis",
+      "definition": ""
+    },
+    {
+      "id": "278672",
+      "iri": "http://purl.org/sig/ont/fma/fma278672",
+      "label": "Lobule III of hemisphere of cerebellum",
+      "definition": ""
+    },
+    {
+      "id": "278683",
+      "iri": "http://purl.org/sig/ont/fma/fma278683",
+      "label": "Lobule IV of hemisphere of cerebellum",
+      "definition": ""
+    },
+    {
+      "id": "278747",
+      "iri": "http://purl.org/sig/ont/fma/fma278747",
+      "label": "Lobule VIIA of hemisphere of cerebellum",
+      "definition": ""
+    },
+    {
+      "id": "278790",
+      "iri": "http://purl.org/sig/ont/fma/fma278790",
+      "label": "Lobule IX of hemisphere of cerebellum",
+      "definition": ""
+    },
+    {
+      "id": "305751",
+      "iri": "http://purl.org/sig/ont/fma/fma305751",
+      "label": "Anatomical structure",
+      "definition": "Material anatomical entity which is generated by coordinated expression of the organism's own genes that guide its morphogenesis; has inherent 3D shape; its parts are connected and spatially related to one another in patterns determined by coordinated gene expression. Examples: embryo, mesoderm, heart, right ventricle, mitral valve, myocardium, endothelium, lymphocyte, fibroblast, thorax, cardiovascular system, hemoglobin, T cell receptor."
+    },
+    {
+      "id": "317760",
+      "iri": "http://purl.org/sig/ont/fma/fma317760",
+      "label": "Cerebral part of head",
+      "definition": ""
+    },
+    {
+      "id": "322077",
+      "iri": "http://purl.org/sig/ont/fma/fma322077",
+      "label": "Geniculate body",
+      "definition": ""
+    },
+    {
+      "id": "323279",
+      "iri": "http://purl.org/sig/ont/fma/fma323279",
+      "label": "Frontoparietal operculum",
+      "definition": ""
+    },
+    {
+      "id": "42603",
+      "iri": "http://purl.org/sig/ont/fma/fma42603",
+      "label": "Organ component cluster",
+      "definition": ""
+    },
+    {
+      "id": "49187",
+      "iri": "http://purl.org/sig/ont/fma/fma49187",
+      "label": "Occipital part of head",
+      "definition": "Subdivision of head proper which consists of the occipital bone and all layers superficial to it. Examples: There is only one occipital part of head."
+    },
+    {
+      "id": "49443",
+      "iri": "http://purl.org/sig/ont/fma/fma49443",
+      "label": "Anatomical cluster",
+      "definition": "Postnatal anatomical structure, each instance of which has as it direct parts a heterogeneous collection of some instances of two or more subclasses of anatomcial structure, which are spatially related to one another; the collections as a whole does not satisfy the definition of any other subclass of anatomical structure. Eaxmples: root of lung, back, anatomical snuffbox, motor unit, juxtaglomerular complex."
+    },
+    {
+      "id": "50801",
+      "iri": "http://purl.org/sig/ont/fma/fma50801",
+      "label": "Brain",
+      "definition": ""
+    },
+    {
+      "id": "54545",
+      "iri": "http://purl.org/sig/ont/fma/fma54545",
+      "label": "Head proper",
+      "definition": ""
+    },
+    {
+      "id": "55652",
+      "iri": "http://purl.org/sig/ont/fma/fma55652",
+      "label": "Anatomical set",
+      "definition": "Material anatomical entity which consists of a maximum number of some instances of discontinuous members of the same class. Examples: set of cranial nerves, ventral branches of aorta, set of mammary arteries, set of thoracic viscera, dentition."
+    },
+    {
+      "id": "55671",
+      "iri": "http://purl.org/sig/ont/fma/fma55671",
+      "label": "Cavitated organ",
+      "definition": "Organ, each instance of which has as its direct parts instances of some organ cavity and organ wall. Examples: stomach, urinary bladder, gall bladder."
+    },
+    {
+      "id": "55672",
+      "iri": "http://purl.org/sig/ont/fma/fma55672",
+      "label": "Organ with organ cavity",
+      "definition": "Cavitated organ in which its unshared parts surround one continuous anatomical space. Examples: stomach, urinary bladder, esophagus, uterine tube."
+    },
+    {
+      "id": "55675",
+      "iri": "http://purl.org/sig/ont/fma/fma55675",
+      "label": "Neuraxis",
+      "definition": ""
+    },
+    {
+      "id": "55676",
+      "iri": "http://purl.org/sig/ont/fma/fma55676",
+      "label": "Segment of brain",
+      "definition": "Segment of neuraxis with one or more fixed or anchored fiat boundaries. Examples: thalamus, midbrain, pons, cerebellum, and spinal cord."
+    },
+    {
+      "id": "58817",
+      "iri": "http://purl.org/sig/ont/fma/fma58817",
+      "label": "Subdivision of head proper",
+      "definition": ""
+    },
+    {
+      "id": "58895",
+      "iri": "http://purl.org/sig/ont/fma/fma58895",
+      "label": "Compartment of head",
+      "definition": "Anatomical compartment which is located in head."
+    },
+    {
+      "id": "61775",
+      "iri": "http://purl.org/sig/ont/fma/fma61775",
+      "label": "Physical anatomical entity",
+      "definition": "Anatomical entity, each instance of which has three or fewer spatial dimensions. Examples: hemoglobin molecule, mitochondrion, hepatocyte, erythrocyte, heart, head, blood, urine, peritoneal cavity, diaphragmatic surface of heart, inferior margin of liver, apex of lung."
+    },
+    {
+      "id": "61815",
+      "iri": "http://purl.org/sig/ont/fma/fma61815",
+      "label": "Cardinal segment of brain",
+      "definition": "Segment of brain with one or more fixed or anchored fiat boundaries. Examples: thalamus, midbrain, pons, cerebellum, and medulla oblongata."
+    },
+    {
+      "id": "61817",
+      "iri": "http://purl.org/sig/ont/fma/fma61817",
+      "label": "Cerebral hemisphere",
+      "definition": "Segment of telencephalon which has as its direct proper parts cerebral cortex and cerebral medulla."
+    },
+    {
+      "id": "61820",
+      "iri": "http://purl.org/sig/ont/fma/fma61820",
+      "label": "Segment of cerebral hemisphere",
+      "definition": ""
+    },
+    {
+      "id": "61821",
+      "iri": "http://purl.org/sig/ont/fma/fma61821",
+      "label": "Gray matter structure of cerebral hemisphere",
+      "definition": ""
+    },
+    {
+      "id": "61823",
+      "iri": "http://purl.org/sig/ont/fma/fma61823",
+      "label": "Lobe of cerebral hemisphere",
+      "definition": "Segment of cerebral hemisphere demarcated by both bonafide landmarks (sulci and fissures) and fiat boundaries."
+    },
+    {
+      "id": "61824",
+      "iri": "http://purl.org/sig/ont/fma/fma61824",
+      "label": "Frontal lobe",
+      "definition": ""
+    },
+    {
+      "id": "61825",
+      "iri": "http://purl.org/sig/ont/fma/fma61825",
+      "label": "Temporal lobe",
+      "definition": "Temporal lobe is the ventrolateral lobe of five lobes comprising each cerebral hemisphere.  It is bounded dorsally by the lateral fissure and posteriorly by an arbitrary border shared with the occipital lobe."
+    },
+    {
+      "id": "61826",
+      "iri": "http://purl.org/sig/ont/fma/fma61826",
+      "label": "Parietal lobe",
+      "definition": "Parietal lobe is the one of five lobes of the cerebral hemisphere which occupies the dorsal-posterior portion of the hemisphere.  It is bounded by the central sulcus on its anterior border and and by the longitudinal cerebral fissure on its medial border. Posteriorly it shares an arbitrary border with the occipital lobe."
+    },
+    {
+      "id": "61830",
+      "iri": "http://purl.org/sig/ont/fma/fma61830",
+      "label": "Cerebral cortex",
+      "definition": ""
+    },
+    {
+      "id": "61831",
+      "iri": "http://purl.org/sig/ont/fma/fma61831",
+      "label": "Subcortical gray matter structure",
+      "definition": ""
+    },
+    {
+      "id": "61833",
+      "iri": "http://purl.org/sig/ont/fma/fma61833",
+      "label": "Caudate nucleus",
+      "definition": "Nucleus of  brain which is an elongated crescent-shaped mass lying parallel and adjacent to the lateral ventricle throughout its extent."
+    },
+    {
+      "id": "61834",
+      "iri": "http://purl.org/sig/ont/fma/fma61834",
+      "label": "Putamen",
+      "definition": "Nucleus of  brain which lies ventral to the caudate nucleus and internal capsule and medial to the external capsule."
+    },
+    {
+      "id": "61835",
+      "iri": "http://purl.org/sig/ont/fma/fma61835",
+      "label": "Globus pallidus",
+      "definition": "Nucleus of  brain which is located medially to the putamen and laterally to the internal capsule."
+    },
+    {
+      "id": "61841",
+      "iri": "http://purl.org/sig/ont/fma/fma61841",
+      "label": "Amygdala",
+      "definition": "Basal ganglion of telencephalon  which is an almond-shaped gray mass in the dorsomedial part of the temporal lobe."
+    },
+    {
+      "id": "61857",
+      "iri": "http://purl.org/sig/ont/fma/fma61857",
+      "label": "Superior frontal gyrus",
+      "definition": ""
+    },
+    {
+      "id": "61859",
+      "iri": "http://purl.org/sig/ont/fma/fma61859",
+      "label": "Middle frontal gyrus",
+      "definition": ""
+    },
+    {
+      "id": "61860",
+      "iri": "http://purl.org/sig/ont/fma/fma61860",
+      "label": "Inferior frontal gyrus",
+      "definition": ""
+    },
+    {
+      "id": "61889",
+      "iri": "http://purl.org/sig/ont/fma/fma61889",
+      "label": "Nucleus accumbens",
+      "definition": ""
+    },
+    {
+      "id": "61893",
+      "iri": "http://purl.org/sig/ont/fma/fma61893",
+      "label": "Straight gyrus",
+      "definition": ""
+    },
+    {
+      "id": "61894",
+      "iri": "http://purl.org/sig/ont/fma/fma61894",
+      "label": "Precentral gyrus",
+      "definition": ""
+    },
+    {
+      "id": "61896",
+      "iri": "http://purl.org/sig/ont/fma/fma61896",
+      "label": "Postcentral gyrus",
+      "definition": ""
+    },
+    {
+      "id": "61897",
+      "iri": "http://purl.org/sig/ont/fma/fma61897",
+      "label": "Supramarginal gyrus",
+      "definition": ""
+    },
+    {
+      "id": "61898",
+      "iri": "http://purl.org/sig/ont/fma/fma61898",
+      "label": "Angular gyrus",
+      "definition": ""
+    },
+    {
+      "id": "61899",
+      "iri": "http://purl.org/sig/ont/fma/fma61899",
+      "label": "Superior parietal lobule",
+      "definition": ""
+    },
+    {
+      "id": "61900",
+      "iri": "http://purl.org/sig/ont/fma/fma61900",
+      "label": "Precuneus",
+      "definition": ""
+    },
+    {
+      "id": "61901",
+      "iri": "http://purl.org/sig/ont/fma/fma61901",
+      "label": "Superior occipital gyrus",
+      "definition": ""
+    },
+    {
+      "id": "61903",
+      "iri": "http://purl.org/sig/ont/fma/fma61903",
+      "label": "Cuneus",
+      "definition": ""
+    },
+    {
+      "id": "61904",
+      "iri": "http://purl.org/sig/ont/fma/fma61904",
+      "label": "Lingual gyrus",
+      "definition": ""
+    },
+    {
+      "id": "61905",
+      "iri": "http://purl.org/sig/ont/fma/fma61905",
+      "label": "Superior temporal gyrus",
+      "definition": ""
+    },
+    {
+      "id": "61906",
+      "iri": "http://purl.org/sig/ont/fma/fma61906",
+      "label": "Middle temporal gyrus",
+      "definition": ""
+    },
+    {
+      "id": "61907",
+      "iri": "http://purl.org/sig/ont/fma/fma61907",
+      "label": "Inferior temporal gyrus",
+      "definition": ""
+    },
+    {
+      "id": "61908",
+      "iri": "http://purl.org/sig/ont/fma/fma61908",
+      "label": "Fusiform gyrus",
+      "definition": ""
+    },
+    {
+      "id": "61918",
+      "iri": "http://purl.org/sig/ont/fma/fma61918",
+      "label": "Parahippocampal gyrus",
+      "definition": ""
+    },
+    {
+      "id": "61993",
+      "iri": "http://purl.org/sig/ont/fma/fma61993",
+      "label": "Midbrain",
+      "definition": ""
+    },
+    {
+      "id": "61996",
+      "iri": "http://purl.org/sig/ont/fma/fma61996",
+      "label": "Segment of forebrain",
+      "definition": ""
+    },
+    {
+      "id": "61997",
+      "iri": "http://purl.org/sig/ont/fma/fma61997",
+      "label": "Segment of midbrain",
+      "definition": ""
+    },
+    {
+      "id": "61998",
+      "iri": "http://purl.org/sig/ont/fma/fma61998",
+      "label": "Segment of hindbrain",
+      "definition": ""
+    },
+    {
+      "id": "62003",
+      "iri": "http://purl.org/sig/ont/fma/fma62003",
+      "label": "Metencephalon",
+      "definition": "Rostral segment of the hindbrain that has as its parts the pons and the cerebellum."
+    },
+    {
+      "id": "62007",
+      "iri": "http://purl.org/sig/ont/fma/fma62007",
+      "label": "Thalamus",
+      "definition": ""
+    },
+    {
+      "id": "62019",
+      "iri": "http://purl.org/sig/ont/fma/fma62019",
+      "label": "Anterior nuclear group of thalamus",
+      "definition": ""
+    },
+    {
+      "id": "62022",
+      "iri": "http://purl.org/sig/ont/fma/fma62022",
+      "label": "Ventral nuclear group of thalamus",
+      "definition": ""
+    },
+    {
+      "id": "62023",
+      "iri": "http://purl.org/sig/ont/fma/fma62023",
+      "label": "Metathalamus",
+      "definition": ""
+    },
+    {
+      "id": "62026",
+      "iri": "http://purl.org/sig/ont/fma/fma62026",
+      "label": "Thalamic reticular nucleus",
+      "definition": ""
+    },
+    {
+      "id": "62143",
+      "iri": "http://purl.org/sig/ont/fma/fma62143",
+      "label": "Anteroventral nucleus",
+      "definition": ""
+    },
+    {
+      "id": "62174",
+      "iri": "http://purl.org/sig/ont/fma/fma62174",
+      "label": "Lateral nuclear group of thalamus",
+      "definition": ""
+    },
+    {
+      "id": "62177",
+      "iri": "http://purl.org/sig/ont/fma/fma62177",
+      "label": "Lateral posterior nucleus",
+      "definition": ""
+    },
+    {
+      "id": "62178",
+      "iri": "http://purl.org/sig/ont/fma/fma62178",
+      "label": "Pulvinar",
+      "definition": ""
+    },
+    {
+      "id": "62180",
+      "iri": "http://purl.org/sig/ont/fma/fma62180",
+      "label": "Oral pulvinar nucleus",
+      "definition": ""
+    },
+    {
+      "id": "62181",
+      "iri": "http://purl.org/sig/ont/fma/fma62181",
+      "label": "Lateral pulvinar nucleus",
+      "definition": ""
+    },
+    {
+      "id": "62182",
+      "iri": "http://purl.org/sig/ont/fma/fma62182",
+      "label": "Medial pulvinar nucleus",
+      "definition": ""
+    },
+    {
+      "id": "62183",
+      "iri": "http://purl.org/sig/ont/fma/fma62183",
+      "label": "Inferior pulvinar nucleus",
+      "definition": ""
+    },
+    {
+      "id": "62184",
+      "iri": "http://purl.org/sig/ont/fma/fma62184",
+      "label": "Ventral anterior nucleus",
+      "definition": ""
+    },
+    {
+      "id": "62186",
+      "iri": "http://purl.org/sig/ont/fma/fma62186",
+      "label": "Ventral lateral nucleus",
+      "definition": ""
+    },
+    {
+      "id": "62187",
+      "iri": "http://purl.org/sig/ont/fma/fma62187",
+      "label": "Ventral posterior nucleus",
+      "definition": ""
+    },
+    {
+      "id": "62200",
+      "iri": "http://purl.org/sig/ont/fma/fma62200",
+      "label": "Ventral posterolateral nucleus",
+      "definition": ""
+    },
+    {
+      "id": "62209",
+      "iri": "http://purl.org/sig/ont/fma/fma62209",
+      "label": "Lateral geniculate body",
+      "definition": ""
+    },
+    {
+      "id": "62211",
+      "iri": "http://purl.org/sig/ont/fma/fma62211",
+      "label": "Medial geniculate body",
+      "definition": ""
+    },
+    {
+      "id": "62374",
+      "iri": "http://purl.org/sig/ont/fma/fma62374",
+      "label": "Segment of telencephalon",
+      "definition": ""
+    },
+    {
+      "id": "62393",
+      "iri": "http://purl.org/sig/ont/fma/fma62393",
+      "label": "Midbrain tegmentum",
+      "definition": "Subdivision of the midbrain lying anterior to the tectum and posterior to the substantia nigra and cerebral peduncle."
+    },
+    {
+      "id": "62394",
+      "iri": "http://purl.org/sig/ont/fma/fma62394",
+      "label": "Cerebral peduncle",
+      "definition": ""
+    },
+    {
+      "id": "62407",
+      "iri": "http://purl.org/sig/ont/fma/fma62407",
+      "label": "Red nucleus",
+      "definition": ""
+    },
+    {
+      "id": "62418",
+      "iri": "http://purl.org/sig/ont/fma/fma62418",
+      "label": "Lateral orbital gyrus",
+      "definition": ""
+    },
+    {
+      "id": "62419",
+      "iri": "http://purl.org/sig/ont/fma/fma62419",
+      "label": "Medial orbital gyrus",
+      "definition": ""
+    },
+    {
+      "id": "62429",
+      "iri": "http://purl.org/sig/ont/fma/fma62429",
+      "label": "Neocortex",
+      "definition": ""
+    },
+    {
+      "id": "62434",
+      "iri": "http://purl.org/sig/ont/fma/fma62434",
+      "label": "Cingulate gyrus",
+      "definition": ""
+    },
+    {
+      "id": "62514",
+      "iri": "http://purl.org/sig/ont/fma/fma62514",
+      "label": "Basal ganglion of telencephalon",
+      "definition": ""
+    },
+    {
+      "id": "62955",
+      "iri": "http://purl.org/sig/ont/fma/fma62955",
+      "label": "Anatomical entity",
+      "definition": "Organismal continuant entity which is enclosed by the bona fide boundary of an organism or is an attribute of its structural organization. Examples: cell, heart, head, peritoneal cavity, apex of lung, anatomical term, sagittal plane."
+    },
+    {
+      "id": "64989",
+      "iri": "http://purl.org/sig/ont/fma/fma64989",
+      "label": "Heterogeneous anatomical cluster",
+      "definition": "Anatomical cluster which has as its direct parts all or some members of two or more organ subclasses and one or more organ part subclasses which are grouped together according to some shared attributes. Examples: larynx, internal ear, pharynx."
+    },
+    {
+      "id": "64990",
+      "iri": "http://purl.org/sig/ont/fma/fma64990",
+      "label": "Organ part cluster",
+      "definition": "Anatomical cluster which has as its direct parts all or some members of one or more organ part types which are grouped together according to some shared attributes. Examples: root of lung, internal nose, soft palate, wall of gut, periorbita."
+    },
+    {
+      "id": "67135",
+      "iri": "http://purl.org/sig/ont/fma/fma67135",
+      "label": "Postnatal anatomical structure",
+      "definition": "Anatomical structure present after birth."
+    },
+    {
+      "id": "67165",
+      "iri": "http://purl.org/sig/ont/fma/fma67165",
+      "label": "Material anatomical entity",
+      "definition": "Physical anatomical entity, each instance of which has mass. Examples: hemoglobin molecule, mitochondrion, hepatocyte, erythrocyte, heart, head, blood, urine."
+    },
+    {
+      "id": "67242",
+      "iri": "http://purl.org/sig/ont/fma/fma67242",
+      "label": "Gray matter of neuraxis",
+      "definition": "Cell part cluster consisting predominantly of somas of neurons in the brain and the spinal cord."
+    },
+    {
+      "id": "67325",
+      "iri": "http://purl.org/sig/ont/fma/fma67325",
+      "label": "Occipital lobe",
+      "definition": "Occipital lobe is the one of five lobes of the cerebral hemisphere which occupies the posterior-most portion of the hemisphere.  Anteriorly, it shares an arbitrary border with the parietal lobe and temporal lobe.  Medially, it is bounded by the longitudinal cerebral fissure."
+    },
+    {
+      "id": "67329",
+      "iri": "http://purl.org/sig/ont/fma/fma67329",
+      "label": "Insula",
+      "definition": "Lobe of cerebral hemispheere located in the depths of the lateral fissure and is covered by portions of the frontal, parietal and temporal lobes."
+    },
+    {
+      "id": "67504",
+      "iri": "http://purl.org/sig/ont/fma/fma67504",
+      "label": "Subdivision of cardinal body part",
+      "definition": "anatomical structure, each instance of which is a regional part of some cardinal body part; it has as its constitutional part some subdivision of the integument, such that for each instance of cardinal body part the meronymic sum of its cardinal subdivisions constitutes the instance of cardinal body part. Examples: thorax, perineum, back of neck, forearm, hand, phalanx, nose, auricle of ear, scrotum."
+    },
+    {
+      "id": "67619",
+      "iri": "http://purl.org/sig/ont/fma/fma67619",
+      "label": "Organ region",
+      "definition": "Cardinal organ part, each instance of which is a fiat subdivision of some organ. Examples: lingula of left lung, tail of pancreas, artery, trochanter, nodulus of semilunar valvule, right side of heart, duodenum, fundus of stomach."
+    },
+    {
+      "id": "67687",
+      "iri": "http://purl.org/sig/ont/fma/fma67687",
+      "label": "Hindbrain",
+      "definition": "Organ component of neuraxis that has as its parts the pons, cerebellum and medulla oblongata . Examples: There is only one hindbrain."
+    },
+    {
+      "id": "67942",
+      "iri": "http://purl.org/sig/ont/fma/fma67942",
+      "label": "Segment of metencephalon",
+      "definition": ""
+    },
+    {
+      "id": "67943",
+      "iri": "http://purl.org/sig/ont/fma/fma67943",
+      "label": "Pons",
+      "definition": "Organ component of neuraxis that has as its parts the pontine tegmentum and basal part of pons. Examples: There is only one pons."
+    },
+    {
+      "id": "67944",
+      "iri": "http://purl.org/sig/ont/fma/fma67944",
+      "label": "Cerebellum",
+      "definition": ""
+    },
+    {
+      "id": "67947",
+      "iri": "http://purl.org/sig/ont/fma/fma67947",
+      "label": "Substantia nigra",
+      "definition": "Subdivision of the midbrain anterior to the midbrain tegmentum which contains darkly pigmented neurons."
+    },
+    {
+      "id": "67957",
+      "iri": "http://purl.org/sig/ont/fma/fma67957",
+      "label": "Segment of gyrus of brain",
+      "definition": ""
+    },
+    {
+      "id": "68462",
+      "iri": "http://purl.org/sig/ont/fma/fma68462",
+      "label": "Dorsal raphe nucleus",
+      "definition": ""
+    },
+    {
+      "id": "68596",
+      "iri": "http://purl.org/sig/ont/fma/fma68596",
+      "label": "Brodmann area",
+      "definition": ""
+    },
+    {
+      "id": "68634",
+      "iri": "http://purl.org/sig/ont/fma/fma68634",
+      "label": "Brodmann area 37",
+      "definition": ""
+    },
+    {
+      "id": "71108",
+      "iri": "http://purl.org/sig/ont/fma/fma71108",
+      "label": "Pontine tegmentum",
+      "definition": "Dorsal subdivision of the pons. It contains cranial nerve nuclei, reticular and other nuclei and many descending and ascending fiber pathways."
+    },
+    {
+      "id": "7154",
+      "iri": "http://purl.org/sig/ont/fma/fma7154",
+      "label": "Head",
+      "definition": ""
+    },
+    {
+      "id": "71954",
+      "iri": "http://purl.org/sig/ont/fma/fma71954",
+      "label": "Set of cells",
+      "definition": "Anatomical set which has as its direct members cells of same type or of different types."
+    },
+    {
+      "id": "71990",
+      "iri": "http://purl.org/sig/ont/fma/fma71990",
+      "label": "Set of serotoninergic cells in median raphe nucleus [B6]",
+      "definition": ""
+    },
+    {
+      "id": "72251",
+      "iri": "http://purl.org/sig/ont/fma/fma72251",
+      "label": "Anterior lobe of cerebellum",
+      "definition": ""
+    },
+    {
+      "id": "72252",
+      "iri": "http://purl.org/sig/ont/fma/fma72252",
+      "label": "Posterior lobe of cerebellum",
+      "definition": ""
+    },
+    {
+      "id": "72253",
+      "iri": "http://purl.org/sig/ont/fma/fma72253",
+      "label": "Flocculonodular lobe of cerebellum",
+      "definition": ""
+    },
+    {
+      "id": "72255",
+      "iri": "http://purl.org/sig/ont/fma/fma72255",
+      "label": "Vermis part of anterior lobe of cerebellum",
+      "definition": ""
+    },
+    {
+      "id": "72256",
+      "iri": "http://purl.org/sig/ont/fma/fma72256",
+      "label": "Hemisphere of posterior lobe of cerebellum",
+      "definition": ""
+    },
+    {
+      "id": "72257",
+      "iri": "http://purl.org/sig/ont/fma/fma72257",
+      "label": "Ansiform lobule of cerebellum",
+      "definition": ""
+    },
+    {
+      "id": "72259",
+      "iri": "http://purl.org/sig/ont/fma/fma72259",
+      "label": "Vermis part of posterior lobe of cerebellum",
+      "definition": ""
+    },
+    {
+      "id": "72438",
+      "iri": "http://purl.org/sig/ont/fma/fma72438",
+      "label": "Ventral tegmental area",
+      "definition": ""
+    },
+    {
+      "id": "72478",
+      "iri": "http://purl.org/sig/ont/fma/fma72478",
+      "label": "Locus ceruleus",
+      "definition": ""
+    },
+    {
+      "id": "72522",
+      "iri": "http://purl.org/sig/ont/fma/fma72522",
+      "label": "Simple lobule of cerebellum",
+      "definition": ""
+    },
+    {
+      "id": "72523",
+      "iri": "http://purl.org/sig/ont/fma/fma72523",
+      "label": "Gracile lobule",
+      "definition": ""
+    },
+    {
+      "id": "72719",
+      "iri": "http://purl.org/sig/ont/fma/fma72719",
+      "label": "Limbic lobe",
+      "definition": ""
+    },
+    {
+      "id": "74882",
+      "iri": "http://purl.org/sig/ont/fma/fma74882",
+      "label": "Zone of telencephalon",
+      "definition": ""
+    },
+    {
+      "id": "74890",
+      "iri": "http://purl.org/sig/ont/fma/fma74890",
+      "label": "Temporal pole",
+      "definition": ""
+    },
+    {
+      "id": "76925",
+      "iri": "http://purl.org/sig/ont/fma/fma76925",
+      "label": "Hemisphere of cerebellum",
+      "definition": ""
+    },
+    {
+      "id": "76928",
+      "iri": "http://purl.org/sig/ont/fma/fma76928",
+      "label": "Vermis of cerebellum",
+      "definition": ""
+    },
+    {
+      "id": "77534",
+      "iri": "http://purl.org/sig/ont/fma/fma77534",
+      "label": "Paracentral lobule",
+      "definition": ""
+    },
+    {
+      "id": "77536",
+      "iri": "http://purl.org/sig/ont/fma/fma77536",
+      "label": "Inferior parietal lobule",
+      "definition": ""
+    },
+    {
+      "id": "77615",
+      "iri": "http://purl.org/sig/ont/fma/fma77615",
+      "label": "Lentiform nucleus",
+      "definition": ""
+    },
+    {
+      "id": "77618",
+      "iri": "http://purl.org/sig/ont/fma/fma77618",
+      "label": "Striatum",
+      "definition": ""
+    },
+    {
+      "id": "78546",
+      "iri": "http://purl.org/sig/ont/fma/fma78546",
+      "label": "Set of serotoninergic cells",
+      "definition": ""
+    },
+    {
+      "id": "79876",
+      "iri": "http://purl.org/sig/ont/fma/fma79876",
+      "label": "Brainstem",
+      "definition": ""
+    },
+    {
+      "id": "80184",
+      "iri": "http://purl.org/sig/ont/fma/fma80184",
+      "label": "Posterior orbital gyrus",
+      "definition": ""
+    },
+    {
+      "id": "82472",
+      "iri": "http://purl.org/sig/ont/fma/fma82472",
+      "label": "Cardinal organ part",
+      "definition": "Anatomical structure, each instance of which has as its direct parts some instance of portions of two or more types of tissue and is continuous with some instance of one or more anatomical structures, likewise constituted by some portions of two or more tissues distinct from those of their complement."
+    },
+    {
+      "id": "83115",
+      "iri": "http://purl.org/sig/ont/fma/fma83115",
+      "label": "Cell part cluster",
+      "definition": "Anatomical cluster which has as direct parts cell parts from two or more cells."
+    },
+    {
+      "id": "83142",
+      "iri": "http://purl.org/sig/ont/fma/fma83142",
+      "label": "Gray matter layer of neuraxis",
+      "definition": ""
+    },
+    {
+      "id": "83143",
+      "iri": "http://purl.org/sig/ont/fma/fma83143",
+      "label": "Cell part cluster of neuraxis",
+      "definition": ""
+    },
+    {
+      "id": "83153",
+      "iri": "http://purl.org/sig/ont/fma/fma83153",
+      "label": "Organ component of neuraxis",
+      "definition": "Organ component which is part of the brain or spinal cord."
+    },
+    {
+      "id": "83464",
+      "iri": "http://purl.org/sig/ont/fma/fma83464",
+      "label": "Tonsil of cerebellum",
+      "definition": ""
+    },
+    {
+      "id": "83465",
+      "iri": "http://purl.org/sig/ont/fma/fma83465",
+      "label": "Segment of white matter of neuraxis",
+      "definition": ""
+    },
+    {
+      "id": "83683",
+      "iri": "http://purl.org/sig/ont/fma/fma83683",
+      "label": "Striatum of neuraxis",
+      "definition": ""
+    },
+    {
+      "id": "83686",
+      "iri": "http://purl.org/sig/ont/fma/fma83686",
+      "label": "Nucleus of neuraxis",
+      "definition": "Subcortical gray matter which has as its direct proper parts predominantly discrete aggregate of somas of neurons. Example:  dentate nucleus, red nucleus."
+    },
+    {
+      "id": "83840",
+      "iri": "http://purl.org/sig/ont/fma/fma83840",
+      "label": "Nucleus of brain",
+      "definition": "Nucleus of neuraxis which is located within the brain. Example: pontobulbar nucleus, globose nucleus."
+    },
+    {
+      "id": "83843",
+      "iri": "http://purl.org/sig/ont/fma/fma83843",
+      "label": "Ganglion of neuraxis",
+      "definition": ""
+    },
+    {
+      "id": "83860",
+      "iri": "http://purl.org/sig/ont/fma/fma83860",
+      "label": "Peduncle of neuraxis",
+      "definition": ""
+    },
+    {
+      "id": "83874",
+      "iri": "http://purl.org/sig/ont/fma/fma83874",
+      "label": "Gyrus of brain",
+      "definition": "Segment of cerebral hemisphere which has as its direct proper parts cortical gray matter bounded by sulcal and surface fiat anatomical boundaries."
+    },
+    {
+      "id": "83880",
+      "iri": "http://purl.org/sig/ont/fma/fma83880",
+      "label": "Lobule of hemisphere of cerebellum",
+      "definition": ""
+    },
+    {
+      "id": "83881",
+      "iri": "http://purl.org/sig/ont/fma/fma83881",
+      "label": "Flocculus of cerebellum",
+      "definition": ""
+    },
+    {
+      "id": "83882",
+      "iri": "http://purl.org/sig/ont/fma/fma83882",
+      "label": "Nodule of vermis of cerebellum",
+      "definition": ""
+    },
+    {
+      "id": "83883",
+      "iri": "http://purl.org/sig/ont/fma/fma83883",
+      "label": "Uvula of vermis of cerebellum",
+      "definition": ""
+    },
+    {
+      "id": "83884",
+      "iri": "http://purl.org/sig/ont/fma/fma83884",
+      "label": "Lingula of vermis of cerebellum",
+      "definition": ""
+    },
+    {
+      "id": "83886",
+      "iri": "http://purl.org/sig/ont/fma/fma83886",
+      "label": "Culmen of vermis of cerebellum",
+      "definition": ""
+    },
+    {
+      "id": "83887",
+      "iri": "http://purl.org/sig/ont/fma/fma83887",
+      "label": "Declive of vermis of cerebellum",
+      "definition": ""
+    },
+    {
+      "id": "83888",
+      "iri": "http://purl.org/sig/ont/fma/fma83888",
+      "label": "Pyramis of vermis of cerebellum",
+      "definition": ""
+    },
+    {
+      "id": "83929",
+      "iri": "http://purl.org/sig/ont/fma/fma83929",
+      "label": "White matter of neuraxis",
+      "definition": "Cell part cluster consisting predominantly of neurites in the brain and the spinal cord."
+    },
+    {
+      "id": "84054",
+      "iri": "http://purl.org/sig/ont/fma/fma84054",
+      "label": "Zone of cell part cluster of neuraxis",
+      "definition": ""
+    },
+    {
+      "id": "84343",
+      "iri": "http://purl.org/sig/ont/fma/fma84343",
+      "label": "Medial nucleus of medial dorsal nucleus of thalamus",
+      "definition": ""
+    },
+    {
+      "id": "86103",
+      "iri": "http://purl.org/sig/ont/fma/fma86103",
+      "label": "Region of organ component",
+      "definition": "Cardinal organ part. each instance of which is a fiat subdivision of some organ component. Examples: wall of cervical part of esophagus, mucosa of body of stomach."
+    },
+    {
+      "id": "86140",
+      "iri": "http://purl.org/sig/ont/fma/fma86140",
+      "label": "Organ segment",
+      "definition": "Organ region, each instance of which has one or more anchored fiat boundaries. Examples: artery, cervical part of esophagus, pelvic part of vagina, horn of thyroid cartilage, anterior segment of eyeball."
+    },
+    {
+      "id": "9647",
+      "iri": "http://purl.org/sig/ont/fma/fma9647",
+      "label": "Anatomical compartment",
+      "definition": "Anatomical cluster which has as its parts one or more anatomical structures surrounding an anatomical compartment space and the contents of that space. Examples: mediastinum, anterior compartment of forearm, renal sinus, interscalene triangle"
+    }
+  ],
+  "edges": {
+    "is_a": [
+      [
+        "14065",
+        "82472"
+      ],
+      [
+        "223151",
+        "67242"
+      ],
+      [
+        "242000",
+        "42603"
+      ],
+      [
+        "242166",
+        "83860"
+      ],
+      [
+        "24218",
+        "67504"
+      ],
+      [
+        "242193",
+        "86103"
+      ],
+      [
+        "242392",
+        "256150"
+      ],
+      [
+        "256150",
+        "67942"
+      ],
+      [
+        "256194",
+        "274516"
+      ],
+      [
+        "256196",
+        "256194"
+      ],
+      [
+        "256204",
+        "61820"
+      ],
+      [
+        "256237",
+        "86140"
+      ],
+      [
+        "256693",
+        "83840"
+      ],
+      [
+        "258682",
+        "83153"
+      ],
+      [
+        "258685",
+        "258682"
+      ],
+      [
+        "258768",
+        "83840"
+      ],
+      [
+        "265482",
+        "71954"
+      ],
+      [
+        "269079",
+        "58895"
+      ],
+      [
+        "270201",
+        "64989"
+      ],
+      [
+        "271165",
+        "242193"
+      ],
+      [
+        "271203",
+        "271165"
+      ],
+      [
+        "273129",
+        "274522"
+      ],
+      [
+        "273600",
+        "271203"
+      ],
+      [
+        "273671",
+        "274518"
+      ],
+      [
+        "274337",
+        "256204"
+      ],
+      [
+        "274359",
+        "274337"
+      ],
+      [
+        "274366",
+        "274337"
+      ],
+      [
+        "274377",
+        "274337"
+      ],
+      [
+        "274516",
+        "83874"
+      ],
+      [
+        "274518",
+        "83874"
+      ],
+      [
+        "274520",
+        "83874"
+      ],
+      [
+        "274522",
+        "83874"
+      ],
+      [
+        "274528",
+        "83874"
+      ],
+      [
+        "274530",
+        "274573"
+      ],
+      [
+        "274534",
+        "61820"
+      ],
+      [
+        "274543",
+        "256204"
+      ],
+      [
+        "274545",
+        "274543"
+      ],
+      [
+        "274573",
+        "67957"
+      ],
+      [
+        "275020",
+        "274528"
+      ],
+      [
+        "275048",
+        "274528"
+      ],
+      [
+        "275054",
+        "274528"
+      ],
+      [
+        "275191",
+        "83874"
+      ],
+      [
+        "276694",
+        "242193"
+      ],
+      [
+        "276696",
+        "276694"
+      ],
+      [
+        "277763",
+        "83143"
+      ],
+      [
+        "277765",
+        "277763"
+      ],
+      [
+        "278629",
+        "256150"
+      ],
+      [
+        "278639",
+        "278629"
+      ],
+      [
+        "278651",
+        "278629"
+      ],
+      [
+        "278672",
+        "83880"
+      ],
+      [
+        "278683",
+        "83880"
+      ],
+      [
+        "278747",
+        "83880"
+      ],
+      [
+        "278790",
+        "83880"
+      ],
+      [
+        "305751",
+        "67165"
+      ],
+      [
+        "317760",
+        "58817"
+      ],
+      [
+        "322077",
+        "256693"
+      ],
+      [
+        "323279",
+        "74882"
+      ],
+      [
+        "42603",
+        "64990"
+      ],
+      [
+        "49187",
+        "58817"
+      ],
+      [
+        "49443",
+        "67135"
+      ],
+      [
+        "50801",
+        "256237"
+      ],
+      [
+        "54545",
+        "24218"
+      ],
+      [
+        "55652",
+        "67165"
+      ],
+      [
+        "55672",
+        "55671"
+      ],
+      [
+        "55675",
+        "55672"
+      ],
+      [
+        "55676",
+        "256237"
+      ],
+      [
+        "58817",
+        "24218"
+      ],
+      [
+        "58895",
+        "9647"
+      ],
+      [
+        "61775",
+        "62955"
+      ],
+      [
+        "61815",
+        "55676"
+      ],
+      [
+        "61817",
+        "61996"
+      ],
+      [
+        "61820",
+        "62374"
+      ],
+      [
+        "61821",
+        "67242"
+      ],
+      [
+        "61823",
+        "61820"
+      ],
+      [
+        "61824",
+        "61823"
+      ],
+      [
+        "61825",
+        "61823"
+      ],
+      [
+        "61826",
+        "61823"
+      ],
+      [
+        "61830",
+        "83142"
+      ],
+      [
+        "61831",
+        "61820"
+      ],
+      [
+        "61833",
+        "83840"
+      ],
+      [
+        "61834",
+        "83840"
+      ],
+      [
+        "61835",
+        "83840"
+      ],
+      [
+        "61841",
+        "62514"
+      ],
+      [
+        "61857",
+        "274516"
+      ],
+      [
+        "61859",
+        "274516"
+      ],
+      [
+        "61860",
+        "274516"
+      ],
+      [
+        "61889",
+        "83840"
+      ],
+      [
+        "61893",
+        "274516"
+      ],
+      [
+        "61894",
+        "274516"
+      ],
+      [
+        "61896",
+        "274520"
+      ],
+      [
+        "61897",
+        "274530"
+      ],
+      [
+        "61898",
+        "274530"
+      ],
+      [
+        "61899",
+        "274520"
+      ],
+      [
+        "61900",
+        "274520"
+      ],
+      [
+        "61901",
+        "274522"
+      ],
+      [
+        "61903",
+        "274522"
+      ],
+      [
+        "61904",
+        "274522"
+      ],
+      [
+        "61905",
+        "274518"
+      ],
+      [
+        "61906",
+        "274518"
+      ],
+      [
+        "61907",
+        "274518"
+      ],
+      [
+        "61908",
+        "274518"
+      ],
+      [
+        "61918",
+        "274528"
+      ],
+      [
+        "61993",
+        "61815"
+      ],
+      [
+        "61996",
+        "55676"
+      ],
+      [
+        "61997",
+        "55676"
+      ],
+      [
+        "61998",
+        "55676"
+      ],
+      [
+        "62003",
+        "61998"
+      ],
+      [
+        "62007",
+        "83153"
+      ],
+      [
+        "62019",
+        "256693"
+      ],
+      [
+        "62022",
+        "256693"
+      ],
+      [
+        "62023",
+        "256693"
+      ],
+      [
+        "62026",
+        "256693"
+      ],
+      [
+        "62143",
+        "256693"
+      ],
+      [
+        "62174",
+        "256693"
+      ],
+      [
+        "62177",
+        "83840"
+      ],
+      [
+        "62178",
+        "256693"
+      ],
+      [
+        "62180",
+        "256693"
+      ],
+      [
+        "62181",
+        "256693"
+      ],
+      [
+        "62182",
+        "256693"
+      ],
+      [
+        "62183",
+        "256693"
+      ],
+      [
+        "62184",
+        "83840"
+      ],
+      [
+        "62186",
+        "83840"
+      ],
+      [
+        "62187",
+        "83840"
+      ],
+      [
+        "62200",
+        "256693"
+      ],
+      [
+        "62209",
+        "322077"
+      ],
+      [
+        "62211",
+        "322077"
+      ],
+      [
+        "62374",
+        "61996"
+      ],
+      [
+        "62393",
+        "61997"
+      ],
+      [
+        "62394",
+        "83860"
+      ],
+      [
+        "62407",
+        "258768"
+      ],
+      [
+        "62418",
+        "256194"
+      ],
+      [
+        "62419",
+        "256194"
+      ],
+      [
+        "62429",
+        "242193"
+      ],
+      [
+        "62434",
+        "274528"
+      ],
+      [
+        "62514",
+        "83843"
+      ],
+      [
+        "64989",
+        "49443"
+      ],
+      [
+        "64990",
+        "49443"
+      ],
+      [
+        "67135",
+        "305751"
+      ],
+      [
+        "67165",
+        "61775"
+      ],
+      [
+        "67242",
+        "83143"
+      ],
+      [
+        "67325",
+        "61823"
+      ],
+      [
+        "67329",
+        "61823"
+      ],
+      [
+        "67504",
+        "67135"
+      ],
+      [
+        "67619",
+        "82472"
+      ],
+      [
+        "67687",
+        "61815"
+      ],
+      [
+        "67942",
+        "277765"
+      ],
+      [
+        "67943",
+        "67942"
+      ],
+      [
+        "67944",
+        "67942"
+      ],
+      [
+        "67947",
+        "83840"
+      ],
+      [
+        "67957",
+        "61820"
+      ],
+      [
+        "68462",
+        "258768"
+      ],
+      [
+        "68596",
+        "242193"
+      ],
+      [
+        "68634",
+        "68596"
+      ],
+      [
+        "71108",
+        "83153"
+      ],
+      [
+        "71954",
+        "55652"
+      ],
+      [
+        "71990",
+        "78546"
+      ],
+      [
+        "72251",
+        "242392"
+      ],
+      [
+        "72252",
+        "242392"
+      ],
+      [
+        "72253",
+        "242392"
+      ],
+      [
+        "72255",
+        "256150"
+      ],
+      [
+        "72256",
+        "256150"
+      ],
+      [
+        "72257",
+        "83880"
+      ],
+      [
+        "72259",
+        "256150"
+      ],
+      [
+        "72438",
+        "258768"
+      ],
+      [
+        "72478",
+        "83840"
+      ],
+      [
+        "72522",
+        "83880"
+      ],
+      [
+        "72523",
+        "83880"
+      ],
+      [
+        "72719",
+        "61823"
+      ],
+      [
+        "74882",
+        "84054"
+      ],
+      [
+        "74890",
+        "74882"
+      ],
+      [
+        "76925",
+        "256150"
+      ],
+      [
+        "76928",
+        "256150"
+      ],
+      [
+        "77534",
+        "83874"
+      ],
+      [
+        "77536",
+        "274520"
+      ],
+      [
+        "77615",
+        "83840"
+      ],
+      [
+        "77618",
+        "83683"
+      ],
+      [
+        "78546",
+        "265482"
+      ],
+      [
+        "79876",
+        "55676"
+      ],
+      [
+        "80184",
+        "256194"
+      ],
+      [
+        "82472",
+        "67135"
+      ],
+      [
+        "83115",
+        "49443"
+      ],
+      [
+        "83142",
+        "67242"
+      ],
+      [
+        "83143",
+        "83115"
+      ],
+      [
+        "83153",
+        "14065"
+      ],
+      [
+        "83464",
+        "256150"
+      ],
+      [
+        "83465",
+        "83929"
+      ],
+      [
+        "83683",
+        "223151"
+      ],
+      [
+        "83686",
+        "223151"
+      ],
+      [
+        "83840",
+        "83686"
+      ],
+      [
+        "83843",
+        "223151"
+      ],
+      [
+        "83860",
+        "83465"
+      ],
+      [
+        "83874",
+        "61820"
+      ],
+      [
+        "83880",
+        "256150"
+      ],
+      [
+        "83881",
+        "83880"
+      ],
+      [
+        "83882",
+        "278629"
+      ],
+      [
+        "83883",
+        "278629"
+      ],
+      [
+        "83884",
+        "278629"
+      ],
+      [
+        "83886",
+        "278629"
+      ],
+      [
+        "83887",
+        "278629"
+      ],
+      [
+        "83888",
+        "278629"
+      ],
+      [
+        "83929",
+        "83143"
+      ],
+      [
+        "84054",
+        "277763"
+      ],
+      [
+        "84343",
+        "256693"
+      ],
+      [
+        "86103",
+        "82472"
+      ],
+      [
+        "86140",
+        "67619"
+      ],
+      [
+        "9647",
+        "49443"
+      ]
+    ],
+    "part_of": [
+      [
+        "256196",
+        "274377"
+      ],
+      [
+        "256196",
+        "61824"
+      ],
+      [
+        "256196",
+        "61830"
+      ],
+      [
+        "269079",
+        "317760"
+      ],
+      [
+        "269079",
+        "54545"
+      ],
+      [
+        "273129",
+        "61830"
+      ],
+      [
+        "273129",
+        "67325"
+      ],
+      [
+        "273600",
+        "61830"
+      ],
+      [
+        "273600",
+        "67325"
+      ],
+      [
+        "273600",
+        "68634"
+      ],
+      [
+        "273671",
+        "61825"
+      ],
+      [
+        "273671",
+        "61830"
+      ],
+      [
+        "273671",
+        "61905"
+      ],
+      [
+        "274377",
+        "61824"
+      ],
+      [
+        "275020",
+        "223151"
+      ],
+      [
+        "275020",
+        "242000"
+      ],
+      [
+        "275020",
+        "275054"
+      ],
+      [
+        "275020",
+        "72719"
+      ],
+      [
+        "276696",
+        "61830"
+      ],
+      [
+        "276696",
+        "67325"
+      ],
+      [
+        "278639",
+        "67944"
+      ],
+      [
+        "278651",
+        "67944"
+      ],
+      [
+        "278672",
+        "67944"
+      ],
+      [
+        "278683",
+        "67944"
+      ],
+      [
+        "278747",
+        "67944"
+      ],
+      [
+        "278790",
+        "67944"
+      ],
+      [
+        "317760",
+        "54545"
+      ],
+      [
+        "323279",
+        "61826"
+      ],
+      [
+        "323279",
+        "61830"
+      ],
+      [
+        "49187",
+        "317760"
+      ],
+      [
+        "50801",
+        "269079"
+      ],
+      [
+        "50801",
+        "55675"
+      ],
+      [
+        "50801",
+        "7154"
+      ],
+      [
+        "61824",
+        "61817"
+      ],
+      [
+        "61825",
+        "61817"
+      ],
+      [
+        "61826",
+        "61817"
+      ],
+      [
+        "61831",
+        "61821"
+      ],
+      [
+        "61833",
+        "223151"
+      ],
+      [
+        "61833",
+        "61831"
+      ],
+      [
+        "61833",
+        "77618"
+      ],
+      [
+        "61834",
+        "223151"
+      ],
+      [
+        "61834",
+        "61831"
+      ],
+      [
+        "61834",
+        "77615"
+      ],
+      [
+        "61834",
+        "77618"
+      ],
+      [
+        "61835",
+        "223151"
+      ],
+      [
+        "61835",
+        "61831"
+      ],
+      [
+        "61835",
+        "77615"
+      ],
+      [
+        "61841",
+        "223151"
+      ],
+      [
+        "61841",
+        "242000"
+      ],
+      [
+        "61841",
+        "61831"
+      ],
+      [
+        "61841",
+        "72719"
+      ],
+      [
+        "61857",
+        "274359"
+      ],
+      [
+        "61857",
+        "61824"
+      ],
+      [
+        "61857",
+        "61830"
+      ],
+      [
+        "61857",
+        "62429"
+      ],
+      [
+        "61859",
+        "274359"
+      ],
+      [
+        "61859",
+        "61824"
+      ],
+      [
+        "61859",
+        "61830"
+      ],
+      [
+        "61859",
+        "62429"
+      ],
+      [
+        "61860",
+        "274359"
+      ],
+      [
+        "61860",
+        "61824"
+      ],
+      [
+        "61860",
+        "61830"
+      ],
+      [
+        "61860",
+        "62429"
+      ],
+      [
+        "61889",
+        "223151"
+      ],
+      [
+        "61889",
+        "242000"
+      ],
+      [
+        "61889",
+        "61831"
+      ],
+      [
+        "61889",
+        "77618"
+      ],
+      [
+        "61893",
+        "274366"
+      ],
+      [
+        "61893",
+        "274377"
+      ],
+      [
+        "61893",
+        "61824"
+      ],
+      [
+        "61893",
+        "61830"
+      ],
+      [
+        "61893",
+        "62429"
+      ],
+      [
+        "61894",
+        "274359"
+      ],
+      [
+        "61894",
+        "61824"
+      ],
+      [
+        "61894",
+        "61830"
+      ],
+      [
+        "61894",
+        "62429"
+      ],
+      [
+        "61896",
+        "61826"
+      ],
+      [
+        "61896",
+        "61830"
+      ],
+      [
+        "61896",
+        "62429"
+      ],
+      [
+        "61897",
+        "61826"
+      ],
+      [
+        "61897",
+        "61830"
+      ],
+      [
+        "61897",
+        "62429"
+      ],
+      [
+        "61897",
+        "77536"
+      ],
+      [
+        "61898",
+        "61826"
+      ],
+      [
+        "61898",
+        "61830"
+      ],
+      [
+        "61898",
+        "62429"
+      ],
+      [
+        "61898",
+        "77536"
+      ],
+      [
+        "61899",
+        "61826"
+      ],
+      [
+        "61899",
+        "61830"
+      ],
+      [
+        "61899",
+        "62429"
+      ],
+      [
+        "61900",
+        "274534"
+      ],
+      [
+        "61900",
+        "274545"
+      ],
+      [
+        "61900",
+        "61826"
+      ],
+      [
+        "61900",
+        "61830"
+      ],
+      [
+        "61900",
+        "62429"
+      ],
+      [
+        "61901",
+        "61830"
+      ],
+      [
+        "61901",
+        "62429"
+      ],
+      [
+        "61901",
+        "67325"
+      ],
+      [
+        "61903",
+        "274534"
+      ],
+      [
+        "61903",
+        "61830"
+      ],
+      [
+        "61903",
+        "62429"
+      ],
+      [
+        "61903",
+        "67325"
+      ],
+      [
+        "61904",
+        "274534"
+      ],
+      [
+        "61904",
+        "275191"
+      ],
+      [
+        "61904",
+        "61830"
+      ],
+      [
+        "61904",
+        "62429"
+      ],
+      [
+        "61904",
+        "67325"
+      ],
+      [
+        "61905",
+        "61825"
+      ],
+      [
+        "61905",
+        "61830"
+      ],
+      [
+        "61905",
+        "62429"
+      ],
+      [
+        "61906",
+        "61825"
+      ],
+      [
+        "61906",
+        "61830"
+      ],
+      [
+        "61906",
+        "62429"
+      ],
+      [
+        "61907",
+        "61825"
+      ],
+      [
+        "61907",
+        "61830"
+      ],
+      [
+        "61907",
+        "62429"
+      ],
+      [
+        "61908",
+        "61825"
+      ],
+      [
+        "61908",
+        "61830"
+      ],
+      [
+        "61908",
+        "62429"
+      ],
+      [
+        "61918",
+        "223151"
+      ],
+      [
+        "61918",
+        "242000"
+      ],
+      [
+        "61918",
+        "274534"
+      ],
+      [
+        "61918",
+        "275191"
+      ],
+      [
+        "61918",
+        "72719"
+      ],
+      [
+        "62003",
+        "67687"
+      ],
+      [
+        "62019",
+        "62007"
+      ],
+      [
+        "62022",
+        "62007"
+      ],
+      [
+        "62023",
+        "62007"
+      ],
+      [
+        "62026",
+        "62007"
+      ],
+      [
+        "62143",
+        "62007"
+      ],
+      [
+        "62143",
+        "62019"
+      ],
+      [
+        "62174",
+        "62007"
+      ],
+      [
+        "62177",
+        "62174"
+      ],
+      [
+        "62178",
+        "62174"
+      ],
+      [
+        "62180",
+        "62007"
+      ],
+      [
+        "62180",
+        "62178"
+      ],
+      [
+        "62181",
+        "62007"
+      ],
+      [
+        "62181",
+        "62178"
+      ],
+      [
+        "62182",
+        "62007"
+      ],
+      [
+        "62182",
+        "62178"
+      ],
+      [
+        "62183",
+        "62007"
+      ],
+      [
+        "62183",
+        "62178"
+      ],
+      [
+        "62184",
+        "62022"
+      ],
+      [
+        "62186",
+        "62022"
+      ],
+      [
+        "62187",
+        "62022"
+      ],
+      [
+        "62200",
+        "258685"
+      ],
+      [
+        "62200",
+        "62007"
+      ],
+      [
+        "62200",
+        "62187"
+      ],
+      [
+        "62209",
+        "62007"
+      ],
+      [
+        "62209",
+        "62023"
+      ],
+      [
+        "62211",
+        "62007"
+      ],
+      [
+        "62211",
+        "62023"
+      ],
+      [
+        "62393",
+        "61993"
+      ],
+      [
+        "62393",
+        "62394"
+      ],
+      [
+        "62407",
+        "62393"
+      ],
+      [
+        "62407",
+        "79876"
+      ],
+      [
+        "62418",
+        "274377"
+      ],
+      [
+        "62418",
+        "61824"
+      ],
+      [
+        "62418",
+        "61830"
+      ],
+      [
+        "62419",
+        "274377"
+      ],
+      [
+        "62419",
+        "61824"
+      ],
+      [
+        "62419",
+        "61830"
+      ],
+      [
+        "62434",
+        "242000"
+      ],
+      [
+        "62434",
+        "274534"
+      ],
+      [
+        "62434",
+        "275048"
+      ],
+      [
+        "62434",
+        "61830"
+      ],
+      [
+        "62434",
+        "72719"
+      ],
+      [
+        "67325",
+        "49187"
+      ],
+      [
+        "67325",
+        "61817"
+      ],
+      [
+        "67329",
+        "61817"
+      ],
+      [
+        "67329",
+        "61830"
+      ],
+      [
+        "67687",
+        "50801"
+      ],
+      [
+        "67943",
+        "62003"
+      ],
+      [
+        "67943",
+        "79876"
+      ],
+      [
+        "67947",
+        "242166"
+      ],
+      [
+        "67947",
+        "79876"
+      ],
+      [
+        "68462",
+        "62393"
+      ],
+      [
+        "68462",
+        "79876"
+      ],
+      [
+        "71108",
+        "67943"
+      ],
+      [
+        "71990",
+        "79876"
+      ],
+      [
+        "72255",
+        "72251"
+      ],
+      [
+        "72255",
+        "76928"
+      ],
+      [
+        "72256",
+        "76925"
+      ],
+      [
+        "72257",
+        "72256"
+      ],
+      [
+        "72259",
+        "72252"
+      ],
+      [
+        "72259",
+        "76928"
+      ],
+      [
+        "72438",
+        "62393"
+      ],
+      [
+        "72438",
+        "79876"
+      ],
+      [
+        "72478",
+        "71108"
+      ],
+      [
+        "72478",
+        "79876"
+      ],
+      [
+        "72522",
+        "67944"
+      ],
+      [
+        "72522",
+        "72256"
+      ],
+      [
+        "72523",
+        "67944"
+      ],
+      [
+        "72523",
+        "72256"
+      ],
+      [
+        "72523",
+        "72257"
+      ],
+      [
+        "72719",
+        "61817"
+      ],
+      [
+        "74890",
+        "61825"
+      ],
+      [
+        "76928",
+        "67944"
+      ],
+      [
+        "77534",
+        "274534"
+      ],
+      [
+        "77534",
+        "67944"
+      ],
+      [
+        "77536",
+        "61826"
+      ],
+      [
+        "77536",
+        "61830"
+      ],
+      [
+        "79876",
+        "270201"
+      ],
+      [
+        "80184",
+        "274377"
+      ],
+      [
+        "80184",
+        "61824"
+      ],
+      [
+        "80184",
+        "61830"
+      ],
+      [
+        "83464",
+        "67944"
+      ],
+      [
+        "83881",
+        "67944"
+      ],
+      [
+        "83881",
+        "72253"
+      ],
+      [
+        "83882",
+        "67944"
+      ],
+      [
+        "83882",
+        "72253"
+      ],
+      [
+        "83882",
+        "72259"
+      ],
+      [
+        "83883",
+        "67944"
+      ],
+      [
+        "83883",
+        "72259"
+      ],
+      [
+        "83884",
+        "67944"
+      ],
+      [
+        "83884",
+        "72255"
+      ],
+      [
+        "83886",
+        "67944"
+      ],
+      [
+        "83886",
+        "72255"
+      ],
+      [
+        "83887",
+        "67944"
+      ],
+      [
+        "83887",
+        "72259"
+      ],
+      [
+        "83887",
+        "72522"
+      ],
+      [
+        "83888",
+        "67944"
+      ],
+      [
+        "83888",
+        "72259"
+      ],
+      [
+        "84343",
+        "62007"
+      ]
+    ]
+  },
+  "roi_to_entity": {
+    "1": "61894",
+    "2": "61894",
+    "3": "61857",
+    "4": "61857",
+    "5": "61859",
+    "6": "61859",
+    "7": "61860",
+    "8": "61860",
+    "9": "61860",
+    "10": "61860",
+    "11": "61860",
+    "12": "61860",
+    "13": "323279",
+    "14": "323279",
+    "15": "61857",
+    "16": "61857",
+    "17": "61893",
+    "18": "61893",
+    "19": "61857",
+    "20": "61857",
+    "21": "62419",
+    "22": "62419",
+    "23": "61893",
+    "24": "61893",
+    "25": "62419",
+    "26": "62419",
+    "27": "256196",
+    "28": "256196",
+    "29": "80184",
+    "30": "80184",
+    "31": "62418",
+    "32": "62418",
+    "33": "67329",
+    "34": "67329",
+    "35": "62434",
+    "36": "62434",
+    "37": "62434",
+    "38": "62434",
+    "39": "62434",
+    "40": "62434",
+    "41": "275020",
+    "42": "275020",
+    "43": "61918",
+    "44": "61918",
+    "45": "61841",
+    "46": "61841",
+    "47": "276696",
+    "48": "276696",
+    "49": "61903",
+    "50": "61903",
+    "51": "61904",
+    "52": "61904",
+    "53": "61901",
+    "54": "61901",
+    "55": "273600",
+    "56": "273600",
+    "57": "273129",
+    "58": "273129",
+    "59": "61908",
+    "60": "61908",
+    "61": "61896",
+    "62": "61896",
+    "63": "61899",
+    "64": "61899",
+    "65": "77536",
+    "66": "77536",
+    "67": "61897",
+    "68": "61897",
+    "69": "61898",
+    "70": "61898",
+    "71": "61900",
+    "72": "61900",
+    "73": "77534",
+    "74": "77534",
+    "75": "61833",
+    "76": "61833",
+    "77": "61834",
+    "78": "61834",
+    "79": "61835",
+    "80": "61835",
+    "81": "62007",
+    "82": "62007",
+    "83": "273671",
+    "84": "273671",
+    "85": "61905",
+    "86": "61905",
+    "87": "74890",
+    "88": "74890",
+    "89": "61906",
+    "90": "61906",
+    "91": "74890",
+    "92": "74890",
+    "93": "61907",
+    "94": "61907",
+    "95": "278747",
+    "96": "278747",
+    "97": "72523",
+    "98": "72523",
+    "99": "278672",
+    "100": "278672",
+    "101": "278683",
+    "102": "278683",
+    "103": "72522",
+    "104": "72522",
+    "105": "72523",
+    "106": "72523",
+    "107": "83464",
+    "108": "83464",
+    "109": "278790",
+    "110": "278790",
+    "111": "83881",
+    "112": "83881",
+    "113": "83884",
+    "114": "278639",
+    "115": "83886",
+    "116": "83887",
+    "117": "278651",
+    "118": "83888",
+    "119": "83883",
+    "120": "83882",
+    "121": "62143",
+    "122": "62143",
+    "123": "62177",
+    "124": "62177",
+    "125": "62184",
+    "126": "62184",
+    "127": "62186",
+    "128": "62186",
+    "129": "62200",
+    "130": "62200",
+    "133": "62026",
+    "134": "62026",
+    "135": "84343",
+    "136": "84343",
+    "137": "84343",
+    "138": "84343",
+    "139": "62209",
+    "140": "62209",
+    "141": "62211",
+    "142": "62211",
+    "143": "62183",
+    "144": "62183",
+    "145": "62182",
+    "146": "62182",
+    "147": "62180",
+    "148": "62180",
+    "149": "62181",
+    "150": "62181",
+    "151": "62434",
+    "152": "62434",
+    "153": "62434",
+    "154": "62434",
+    "155": "62434",
+    "156": "62434",
+    "157": "61889",
+    "158": "61889",
+    "159": "72438",
+    "160": "72438",
+    "161": "67947",
+    "162": "67947",
+    "163": "67947",
+    "164": "67947",
+    "165": "62407",
+    "166": "62407",
+    "167": "72478",
+    "168": "72478",
+    "169": "68462",
+    "170": "71990"
+  },
+  "stats": {
+    "mapped_rois": 168,
+    "entities": 209,
+    "is_a_edges": 206,
+    "part_of_edges": 224,
+    "inferred_category_edges": 101
+  }
+}
