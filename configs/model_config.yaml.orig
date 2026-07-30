@@ -1,0 +1,27 @@
+experiment:
+  seed: 42
+  n_splits: 5 # Stratified Group K-Fold
+  max_folds: 5 # set to 1 for a quick smoke test
+  test_mode: false # true runs only one multigraph configuration
+
+data:
+  features_path: "data/04_final/all_features.csv"
+  labels_path: "data/01_raw/mci_classification_results.txt"
+  coords_path: "data/03_features/aal3_coordinates.csv"
+  batch_size: 64
+
+model:
+  type: "GCN_KAN"
+  hidden_dim: 64 # Aumentato perché abbiamo meno layer
+  dropout: 0.4
+  learning_rate: 0.0005
+  epochs: 200 # set to 1-2 for a quick smoke test
+  early_stopping_patience: 15
+  sigma_graph: 15.0
+  hybrid_alpha: 0.5 # 1.0=solo Zhang, 0.0=solo grafo statico
+  node_semantics_mode: "fma_ontology" # "none" | "spatial_basic" | "fma_ontology" | "fma_spatial"
+  fma_graph_path: "configs/fma_knowledge_graph.json"
+  fma_embedding_backend: "pubmedbert" # "pubmedbert" for experiments | "hash" for offline smoke tests
+  fma_embedding_model: "NeuML/pubmedbert-base-embeddings"
+  fma_embedding_dim: 128 # used only by the hash backend
+  fma_embedding_cache_dir: "data/cache/fma_embeddings"

@@ -1,0 +1,80 @@
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*__pycache__*
+*.pyc
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Pyre type checker
+.pyre/
+
+# MyPy
+.mypy_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.*
+
+# Alternate Data Streams metadata from Windows
+*:Zone.Identifier
+
+# Logs
+*.log
+
+# Ignore top-level data directory but keep src/data/
+# Use `/data/` to ignore only the repository root `data/` directory.
+/data/
+# If you ever have a broader `data/` pattern that hides `src/data/`,
+# these negations will un-ignore the folder and its contents.
+!src/data/
+!src/data/**
+
+reports/*
+wandb/*
+models/*
+
+# Re-ignore python bytecode and __pycache__ in un-ignored directories (e.g. src/data/)
+**/__pycache__/
+**/*.py[cod]
+**/*.pyc
+
+# Ignore other directories and files
+**/Swin_dMRI_public/
+**/test/
+**/Results/
+f1_order.py
+**/docs
+**/configs/FMA/fma.owl
