@@ -131,6 +131,8 @@ class AlzheimerGraphDataset(Dataset):
                 print("    🔀 Building one heterogeneous graph: relations=proximity, codeviation")
             elif self.graph_type == 'zhang' and self.use_fma_graph:
                 print("    ⚡ Building codeviation directly as PyG edges for heterogeneous Zhang+FMA")
+            elif self.graph_type == 'knn' and self.use_fma_graph:
+                print("    ⚡ Building KNN directly as PyG edges for heterogeneous KNN+FMA")
             self.adj_matrices = []
             static_adj = self._build_static_adjacency(self.coords_xyz, sigma) if self.graph_type in ('hybrid', 'multigraph') else None
             static_edges = self._dense_to_edges(static_adj) if self.graph_type == 'multigraph' else None
@@ -155,7 +157,10 @@ class AlzheimerGraphDataset(Dataset):
                     }
                 else:  # knn
                     x_patient = np.stack([gm_data[i], wm_data[i], csf_data[i], pet_data[i]], axis=1)
-                    adj = self._build_knn_adjacency(x_patient)
+                    if self.use_fma_graph:
+                        adj = self._build_knn_edges(x_patient)
+                    else:
+                        adj = self._build_knn_adjacency(x_patient)
                 
                 self.adj_matrices.append(adj)
             
@@ -191,6 +196,25 @@ class AlzheimerGraphDataset(Dataset):
         d_inv = torch.pow(row_sum, -1.0)
         d_mat = torch.diag(d_inv)
         return torch.matmul(d_mat, adj)
+
+    def _build_knn_edges(self, features):
+        """Build normalized PyG KNN edges without creating a dense tensor."""
+        adjacency = kneighbors_graph(
+            features,
+            self.k_neighbors,
+            mode='connectivity',
+            include_self=True,
+        )
+        adjacency = adjacency.maximum(adjacency.T).tocsr()
+        adjacency.sort_indices()
+        row_sum = np.asarray(adjacency.sum(axis=1)).ravel() + 1e-6
+        source, target = adjacency.nonzero()
+        edge_weight = adjacency[source, target].A1 / row_sum[source]
+        edge_index = torch.from_numpy(np.stack((source, target))).long()
+        edge_weight = torch.from_numpy(
+            edge_weight.astype(np.float32, copy=False)
+        )
+        return edge_index, edge_weight
 
     def _build_zhang_affinity(self, features_flat):
         """Build the thresholded, unnormalized patient-specific affinity."""
@@ -270,7 +294,7 @@ class AlzheimerGraphDataset(Dataset):
             'knn': 'feature_similarity',
         }
         relation = relation_names[self.graph_type]
-        if self.graph_type == 'zhang' and self.use_fma_graph:
+        if self.graph_type in ('zhang', 'knn') and self.use_fma_graph:
             return {relation: adjacency}
         return {relation: self._dense_to_edges(adjacency)}
 

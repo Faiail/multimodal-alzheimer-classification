@@ -101,10 +101,13 @@ class RobustGraphAttentionLayer(nn.Module):
         self.leakyrelu = nn.LeakyReLU(alpha)
         self.norm = nn.LayerNorm(out_features * n_heads)
         self.dropout = dropout
+        self.capture_attention = False
+        self.last_attention = None
 
     def forward(self, h, adj=None):
         B, N, _ = h.size()
         head_outs = []
+        captured_attention = []
         for i in range(self.n_heads):
             Wh = self.heads[i](h)
             a_input = torch.cat([Wh.repeat_interleave(N, dim=1), Wh.repeat(1, N, 1)], dim=2)
@@ -116,8 +119,12 @@ class RobustGraphAttentionLayer(nn.Module):
             else:
                 attention = e
                 
-            attention = F.dropout(F.softmax(attention, dim=2), self.dropout, training=self.training)
+            attention = F.softmax(attention, dim=2)
+            if self.capture_attention:
+                captured_attention.append(attention.detach())
+            attention = F.dropout(attention, self.dropout, training=self.training)
             head_outs.append(torch.matmul(attention, Wh))
+        self.last_attention = captured_attention if self.capture_attention else None
         return self.norm(torch.cat(head_outs, dim=2))
 
 class KANGraphConvLayer(nn.Module):
@@ -149,10 +156,13 @@ class KANRobustGraphAttentionLayer(nn.Module):
         self.leakyrelu = nn.LeakyReLU(alpha)
         self.norm = nn.LayerNorm(out_features * n_heads)
         self.dropout = dropout
+        self.capture_attention = False
+        self.last_attention = None
 
     def forward(self, h, adj=None):
         B, N, _ = h.size()
         head_outs = []
+        captured_attention = []
         for i in range(self.n_heads):
             Wh = self.kan_heads[i](h.reshape(-1, h.shape[-1])).reshape(B, N, -1)
             
@@ -165,8 +175,12 @@ class KANRobustGraphAttentionLayer(nn.Module):
             else:
                 attention = e
             
-            attention = F.dropout(F.softmax(attention, dim=2), self.dropout, training=self.training)
+            attention = F.softmax(attention, dim=2)
+            if self.capture_attention:
+                captured_attention.append(attention.detach())
+            attention = F.dropout(attention, self.dropout, training=self.training)
             head_outs.append(torch.matmul(attention, Wh))
+        self.last_attention = captured_attention if self.capture_attention else None
         return self.norm(torch.cat(head_outs, dim=2))
 
 class FocalLoss(nn.Module):

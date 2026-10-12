@@ -9,31 +9,31 @@ DL_MODELS = [
 
 # Mapping models to architectural flags
 DL_ARCHITECTURES = {
-    # 'base':        {'use_kan_backbone': false
-    # 'headkan':     {'use_kan_backbone': false
-    # 'backbonekan': {'use_kan_backbone': true
-    'FullKAN':     {'use_kan_backbone': True,  'use_kan_head': True},  # kan completo
+    # 'FullKAN':     {'use_kan_backbone': True,  'use_kan_head': True},  # kan completo
+    'backbonekan': {'use_kan_backbone': True, 'use_kan_head': False},
+    # 'headkan':     {'use_kan_backbone': False, 'use_kan_head': True},
+    # 'base':        {'use_kan_backbone': False, 'use_kan_head': False},
 }
 
 N_LAYERS_OPTIONS = [
-    3,
+    # 3,
     2
 ]  # Network depth test
 
 MODALITIES = ['Imaging', 'Multimodal']
 
 GRAPH_TYPES = [
-    'multigraph',
-    'zhang',
-    # 'static',
-    # 'knn',
+    # 'multigraph', #1
+    # 'zhang',      #2
+    # 'knn',        #3
+    'static',     #4
     # 'hybrid'
 ]
 
 # Reference for Zhang statistics calculation
 ZHANG_REFERENCE_OPTIONS = [
-    'all_train',
-    'cn_only',
+    # 'all_train',
+    # 'cn_only',
     'mci_only'
 ]
 

@@ -9,10 +9,10 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
-import html
 import json
-import re
 import time
+import xml.etree.ElementTree as ET
+from decimal import Decimal, InvalidOperation
 from collections import deque
 from pathlib import Path
 
@@ -42,15 +42,56 @@ DIVISION_ENTITY_LABELS = {
     "Cerebellum": "Cerebellum",
 }
 
-IRI_RE = re.compile(r'<owl:Class rdf:about="([^"]+)"')
-LABEL_RE = re.compile(r'<rdfs:label[^>]*>([^<]+)</rdfs:label>')
-DEFINITION_RE = re.compile(r'<fma:definition[^>]*>(.*?)</fma:definition>')
-RESOURCE_RE = re.compile(r'rdf:resource="([^"]+)"')
+OWL_NS = "http://www.w3.org/2002/07/owl#"
+RDF_NS = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+RDFS_NS = "http://www.w3.org/2000/01/rdf-schema#"
+OWL_CLASS = f"{{{OWL_NS}}}Class"
+OWL_RESTRICTION = f"{{{OWL_NS}}}Restriction"
+OWL_ON_PROPERTY = f"{{{OWL_NS}}}onProperty"
+OWL_SOME_VALUES_FROM = f"{{{OWL_NS}}}someValuesFrom"
+RDFS_LABEL = f"{{{RDFS_NS}}}label"
+RDFS_SUBCLASS_OF = f"{{{RDFS_NS}}}subClassOf"
+FMA_DEFINITION = f"{{{FMA_PREFIX}}}definition"
+RDF_ABOUT = f"{{{RDF_NS}}}about"
+RDF_RESOURCE = f"{{{RDF_NS}}}resource"
 
 
 def fma_id(iri: str) -> str:
     local = iri.rsplit("/", 1)[-1]
     return local[3:] if local.startswith("fma") else local
+
+
+def canonical_numeric_id(value: str) -> str:
+    """Normalize CSV/FMA numeric IDs without assuming fixed zero padding."""
+    raw = str(value).strip()
+    try:
+        numeric = Decimal(raw)
+    except InvalidOperation as exc:
+        raise ValueError(f"Invalid numeric FMA ID: {value!r}") from exc
+    if not numeric.is_finite() or numeric != numeric.to_integral_value():
+        raise ValueError(f"Invalid integral FMA ID: {value!r}")
+    return str(int(numeric))
+
+
+def build_numeric_iri_index(nodes: dict[str, dict]) -> dict[str, tuple[str, ...]]:
+    """Index actual OWL IRIs by canonical numeric ID, preserving collisions."""
+    grouped: dict[str, list[str]] = {}
+    for iri in nodes:
+        if not iri.startswith(FMA_PREFIX):
+            continue
+        local_id = fma_id(iri)
+        if not local_id.isdigit():
+            continue
+        canonical = str(int(local_id))
+        grouped.setdefault(canonical, []).append(iri)
+    return {
+        canonical: tuple(sorted(iris))
+        for canonical, iris in grouped.items()
+    }
+
+
+def normalize_label(value: str | None) -> str:
+    return " ".join((value or "").split()).casefold()
 
 
 def file_sha256(path: Path) -> str:
@@ -70,69 +111,73 @@ def normalize_property(iri: str | None) -> str | None:
     return None
 
 
+def _element_text(element: ET.Element) -> str:
+    return "".join(element.itertext()).strip()
+
+
+def _parse_named_class(
+    element: ET.Element,
+    nodes: dict[str, dict],
+    edges: dict[str, set[tuple[str, str]]],
+    label_index: dict[str, str],
+):
+    iri = element.get(RDF_ABOUT)
+    if not iri:
+        return
+    info = nodes.setdefault(iri, {"label": None, "definition": None})
+
+    for child in element:
+        if child.tag == RDFS_LABEL and info["label"] is None:
+            label = _element_text(child)
+            if label:
+                info["label"] = label
+                label_index.setdefault(label.lower(), iri)
+        elif child.tag == FMA_DEFINITION and info["definition"] is None:
+            definition = _element_text(child)
+            if definition:
+                info["definition"] = definition
+        elif child.tag == RDFS_SUBCLASS_OF:
+            target = child.get(RDF_RESOURCE)
+            if target and target.startswith(FMA_PREFIX):
+                edges["is_a"].add((iri, target))
+
+            for restriction in child.iter(OWL_RESTRICTION):
+                on_property = restriction.find(OWL_ON_PROPERTY)
+                property_iri = (
+                    on_property.get(RDF_RESOURCE)
+                    if on_property is not None else None
+                )
+                relation = normalize_property(property_iri)
+                if relation is None:
+                    continue
+                for value in restriction.iter(OWL_SOME_VALUES_FROM):
+                    target = value.get(RDF_RESOURCE)
+                    if target and target.startswith(FMA_PREFIX):
+                        edges[relation].add((iri, target))
+
+
 def parse_fma_owl(path: Path):
-    """Stream labels, definitions and the hierarchy needed by the GNN."""
+    """Structurally stream named FMA classes and the selected hierarchy."""
     nodes: dict[str, dict] = {}
     edges: dict[str, set[tuple[str, str]]] = {"is_a": set(), "part_of": set()}
     label_index: dict[str, str] = {}
-    current = None
-    in_subclass = False
-    restriction_property = None
+    stack: list[ET.Element] = []
 
     started = time.time()
-    with path.open(encoding="utf-8", errors="replace") as handle:
-        for line in handle:
-            class_match = IRI_RE.search(line)
-            if class_match:
-                current = class_match.group(1)
-                nodes.setdefault(current, {"label": None, "definition": None})
-                in_subclass = False
-                restriction_property = None
-                continue
-            if current is None:
-                continue
+    for event, element in ET.iterparse(path, events=("start", "end")):
+        if event == "start":
+            stack.append(element)
+            continue
 
-            if "<rdfs:label" in line:
-                match = LABEL_RE.search(line)
-                if match and nodes[current]["label"] is None:
-                    label = html.unescape(match.group(1).strip())
-                    nodes[current]["label"] = label
-                    label_index.setdefault(label.lower(), current)
+        if element.tag == OWL_CLASS and element.get(RDF_ABOUT):
+            _parse_named_class(element, nodes, edges, label_index)
 
-            if "<fma:definition" in line:
-                match = DEFINITION_RE.search(line)
-                if match and nodes[current]["definition"] is None:
-                    nodes[current]["definition"] = html.unescape(match.group(1).strip())
-
-            if "<rdfs:subClassOf" in line:
-                resource = RESOURCE_RE.search(line)
-                if resource:
-                    target = resource.group(1)
-                    if target.startswith(FMA_PREFIX):
-                        edges["is_a"].add((current, target))
-                    in_subclass = False
-                    restriction_property = None
-                else:
-                    in_subclass = True
-                    restriction_property = None
-            elif in_subclass and "<owl:onProperty" in line:
-                resource = RESOURCE_RE.search(line)
-                restriction_property = resource.group(1) if resource else None
-            elif in_subclass and "<owl:someValuesFrom" in line:
-                resource = RESOURCE_RE.search(line)
-                relation = normalize_property(restriction_property)
-                if resource and relation:
-                    target = resource.group(1)
-                    if target.startswith(FMA_PREFIX):
-                        edges[relation].add((current, target))
-
-            if "</rdfs:subClassOf>" in line:
-                in_subclass = False
-                restriction_property = None
-            if "</owl:Class>" in line:
-                current = None
-                in_subclass = False
-                restriction_property = None
+        # Clear complete top-level RDF elements only after their nested content
+        # has been consumed. This keeps streaming memory bounded without erasing
+        # anonymous classes/restrictions before their named parent is processed.
+        if len(stack) == 2:
+            element.clear()
+        stack.pop()
 
     print(
         f"Parsed {len(nodes):,} FMA classes and "
@@ -140,7 +185,6 @@ def parse_fma_owl(path: Path):
         f"in {time.time() - started:.1f}s"
     )
     return nodes, edges, label_index
-
 
 def load_roi_mapping(path: Path):
     with path.open(newline="", encoding="utf-8") as handle:
@@ -178,14 +222,52 @@ def build_compact_graph(owl_path: Path, lookup_path: Path, max_depth: int):
     nodes, all_edges, label_index = parse_fma_owl(owl_path)
     rows = load_roi_mapping(lookup_path)
 
+    numeric_iri_index = build_numeric_iri_index(nodes)
     roi_to_iri = {}
+    unresolved = []
+    label_mismatches = []
+    seen_roi_ids = set()
     for row in rows:
+        roi_id = str(row["label_id"])
+        if roi_id in seen_roi_ids:
+            raise ValueError(f"Duplicate ROI label_id in lookup: {roi_id}")
+        seen_roi_ids.add(roi_id)
+
         raw_id = (row.get("fma_id") or "").strip()
         if not raw_id:
             continue
-        iri = FMA_PREFIX + "fma" + raw_id.removesuffix(".0")
-        if iri in nodes:
-            roi_to_iri[str(row["label_id"])] = iri
+        canonical_id = canonical_numeric_id(raw_id)
+        candidates = numeric_iri_index.get(canonical_id, ())
+        expected_label = normalize_label(row.get("fma_label"))
+        if len(candidates) == 1:
+            iri = candidates[0]
+        elif len(candidates) > 1:
+            label_matches = [
+                candidate for candidate in candidates
+                if normalize_label(nodes[candidate].get("label")) == expected_label
+            ]
+            if len(label_matches) != 1:
+                unresolved.append((roi_id, raw_id, tuple(candidates)))
+                continue
+            iri = label_matches[0]
+        else:
+            unresolved.append((roi_id, raw_id))
+            continue
+
+        actual_label = normalize_label(nodes[iri].get("label"))
+        if expected_label and actual_label != expected_label:
+            label_mismatches.append(
+                (roi_id, raw_id, row.get("fma_label"), nodes[iri].get("label"))
+            )
+        roi_to_iri[roi_id] = iri
+
+    if unresolved:
+        raise ValueError(f"Unresolved FMA mappings ({len(unresolved)}): {unresolved}")
+    if label_mismatches:
+        raise ValueError(
+            f"FMA mapping label mismatches ({len(label_mismatches)}): "
+            f"{label_mismatches}"
+        )
 
     category_edges, category_iris = resolve_category_edges(rows, label_index, roi_to_iri)
     adjacency = {relation: {} for relation in all_edges}

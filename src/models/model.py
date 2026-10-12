@@ -53,10 +53,14 @@ class PyGGraphAttentionConv(MessagePassing):
         self.leaky_relu = nn.LeakyReLU(0.2)
         self.norm = nn.LayerNorm(out_features * n_heads)
         self.dropout = dropout
+        self.capture_attention = False
+        self.last_attention = None
+        self._last_message_coefficients = None
 
     def forward(self, x, edge_index, edge_weight):
         del edge_weight  # GAT uses relation membership; weights remain available to GCN.
         outputs = []
+        captured_attention = []
         for projection, attention in zip(self.heads, self.attentions):
             if isinstance(x, tuple):
                 source_x, target_x = x
@@ -70,11 +74,19 @@ class PyGGraphAttentionConv(MessagePassing):
                     edge_index, x=projected, attention=attention, size=size
                 )
             )
+            if self.capture_attention:
+                captured_attention.append({
+                    'edge_index': edge_index.detach(),
+                    'coefficients': self._last_message_coefficients,
+                })
+        self.last_attention = captured_attention if self.capture_attention else None
         return self.norm(torch.cat(outputs, dim=-1))
 
     def message(self, x_i, x_j, attention, index, ptr, size_i):
         scores = self.leaky_relu((torch.cat([x_i, x_j], dim=-1) * attention).sum(dim=-1))
         coefficients = softmax(scores, index, ptr, size_i)
+        if self.capture_attention:
+            self._last_message_coefficients = coefficients.detach()
         coefficients = F.dropout(coefficients, self.dropout, training=self.training)
         return x_j * coefficients.unsqueeze(-1)
 

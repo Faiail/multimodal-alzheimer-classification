@@ -8,7 +8,7 @@ data:
   features_path: "data/04_final/all_features.csv"
   labels_path: "data/01_raw/mci_classification_results.txt"
   coords_path: "data/03_features/aal3_coordinates.csv"
-  batch_size: 896 # 64 if using FMA for additional knowledge, 160 if not using it
+  batch_size: 512
 
 model:
   type: "GCN_KAN"
