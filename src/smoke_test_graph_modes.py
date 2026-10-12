@@ -25,16 +25,16 @@ CLINICAL_COLS = [
     "AGE", "Gender_Male", "PTEDUCAT", "APOE4", "MMSE",
     "ABETA_final", "TAU_final", "PTAU_final", "CSF_Available",
 ]
-ROI_IDS = (1, 2, 131, 999)  # two mapped, two deliberately unmapped
+ROI_IDS = (1, 2, 131, 132, 999)  # four mapped, one deliberately unmapped
 
 
 def synthetic_inputs(root: Path):
     coords_path = root / "coords.csv"
     pd.DataFrame({
         "label_id": ROI_IDS,
-        "x": [0.0, 10.0, 20.0, 30.0],
-        "y": [0.0] * 4,
-        "z": [0.0] * 4,
+        "x": [float(index * 10) for index in range(len(ROI_IDS))],
+        "y": [0.0] * len(ROI_IDS),
+        "z": [0.0] * len(ROI_IDS),
     }).to_csv(coords_path, index=False)
     rows = []
     for sample_index in range(4):
@@ -114,6 +114,52 @@ def normalize_and_validate(frame, coords_path):
     assert zhang_edge_type in zhang_fma_sample.edge_types
     assert zhang_fma_sample[zhang_edge_type].edge_index is stored_zhang_edges[0]
     assert zhang_fma_sample[zhang_edge_type].edge_weight is stored_zhang_edges[1]
+    mapping_edges = zhang_fma_sample[
+        "brain_region", "maps_to", "fma_entity"
+    ].edge_index
+    roi_to_entity = {
+        int(source): int(target)
+        for source, target in mapping_edges.t().tolist()
+    }
+    roi_positions = {roi_id: index for index, roi_id in enumerate(ROI_IDS)}
+    assert roi_positions[131] in roi_to_entity
+    assert roi_positions[132] in roi_to_entity
+    assert roi_to_entity[roi_positions[131]] == roi_to_entity[roi_positions[132]]
+    assert (
+        zhang_fma.fma_graph.entity_ids[roi_to_entity[roi_positions[131]]]
+        == "0327261"
+    )
+
+    knn_dense = AlzheimerGraphDataset(
+        frame,
+        coords_path,
+        graph_type="knn",
+        k_neighbors=2,
+    )
+    dense_knn_adjacency = knn_dense.adj_matrices[0]
+    assert torch.is_tensor(dense_knn_adjacency)
+    expected_knn_edges = knn_dense._dense_to_edges(dense_knn_adjacency)
+    knn_fma = AlzheimerGraphDataset(
+        frame,
+        coords_path,
+        graph_type="knn",
+        k_neighbors=2,
+        node_semantics_mode="fma_ontology",
+        fma_embedding_backend="hash",
+        fma_embedding_dim=24,
+        fma_embedding_cache_dir=coords_path.parent / "cache",
+    )
+    stored_knn_edges = knn_fma.adj_matrices[0]
+    assert isinstance(stored_knn_edges, tuple)
+    assert torch.equal(expected_knn_edges[0], stored_knn_edges[0])
+    assert torch.allclose(
+        expected_knn_edges[1], stored_knn_edges[1], atol=2e-7, rtol=1e-6
+    )
+    knn_fma_sample = knn_fma[0]
+    knn_edge_type = ("brain_region", "feature_similarity", "brain_region")
+    assert knn_edge_type in knn_fma_sample.edge_types
+    assert knn_fma_sample[knn_edge_type].edge_index is stored_knn_edges[0]
+    assert knn_fma_sample[knn_edge_type].edge_weight is stored_knn_edges[1]
 
     cached_proximity = optimized_graph.adj_matrices[0]["proximity"]
     for relations in optimized_graph.adj_matrices[1:]:
@@ -165,7 +211,7 @@ def normalize_and_validate(frame, coords_path):
     ).all()
     print(
         "PASS fold-safe normalization, dense/direct edge equivalence, "
-        "cached proximity, sparse Zhang+FMA and multigraph relations"
+        "cached proximity, sparse Zhang+FMA, sparse KNN+FMA and multigraph relations"
     )
     return normalized
 
@@ -186,7 +232,7 @@ def exercise_dataset(frame, coords_path, root, graph_type, semantics, backend):
     sample = dataset[0]
     if semantics == "fma_ontology":
         assert sample["brain_region"].x.size(1) == 4
-        assert sample["brain_region", "maps_to", "fma_entity"].edge_index.size(1) == 2
+        assert sample["brain_region", "maps_to", "fma_entity"].edge_index.size(1) == 4
         assert ("fma_entity", "part_of", "fma_entity") in sample.edge_types
         assert ("fma_entity", "is_a", "fma_entity") in sample.edge_types
 

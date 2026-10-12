@@ -76,5 +76,5 @@ models/*
 **/test/
 **/Results/
 f1_order.py
-**/docs
+**/Documentation/
 **/configs/FMA/fma.owl

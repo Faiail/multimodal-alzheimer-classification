@@ -148,6 +148,7 @@ class FMAKnowledgeGraph:
 
         ordered_ids = [node["id"] for node in all_nodes if node["id"] in included]
         self.entity_ids = ordered_ids
+        self.entity_labels = [node["label"] for node in all_nodes if node["id"] in included]
         self.entity_index = {entity_id: index for index, entity_id in enumerate(ordered_ids)}
         full_cache_key = (
             str(self.graph_path), self.graph_path.stat().st_mtime_ns,
