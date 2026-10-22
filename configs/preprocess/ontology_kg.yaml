@@ -1,0 +1,7 @@
+ontology:
+  mode: kg
+  owl_path: configs/FMA/fma.owl
+  lookup_path: configs/aal3_ontology_lookup.csv
+  output_path: configs/fma_knowledge_graph.json
+  max_depth: 8
+

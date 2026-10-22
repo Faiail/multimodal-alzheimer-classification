@@ -1,0 +1,4 @@
+atlas:
+  aal_file: configs/AAL3/AAL3v1.nii
+  output_file: configs/aal3_coordinates.csv
+

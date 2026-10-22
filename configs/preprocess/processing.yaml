@@ -1,0 +1,51 @@
+paths:
+  raw_dicom: /media/BarraCuda/dcirilli2/raw_dicom
+  processed: /media/BarraCuda/dcirilli2
+  features: /media/BarraCuda/dcirilli2/features
+  logs: logs
+
+spm:
+  mcr_path: /opt/mcr/R2025a
+  script_path: /opt/spm25/run_spm25.sh
+  tpm_file: /opt/spm25/spm_exec/spm25_mcr/spm25/spm25/tpm/TPM.nii
+
+n4:
+  bspline_fitting_distance: 200
+  shrink_factor: 2
+  n_iterations: [50, 50, 50, 50]
+
+atlas:
+  aal_file: configs/AAL3/AAL3v1.nii
+  aal_labels: configs/AAL3/AAL3v1.nii.txt
+  cerebellum_labels:
+    - 95
+    - 96
+    - 97
+    - 98
+    - 99
+    - 100
+    - 101
+    - 102
+    - 103
+    - 104
+    - 105
+    - 106
+    - 107
+    - 108
+    - 109
+    - 110
+    - 111
+    - 112
+
+processing:
+  n_workers: 6
+  skip_existing: true
+  save_intermediate: false
+  checkpoint_interval: 15
+  spm_timeout: 1800
+
+cleanup:
+  delete_intermediate_n4_unzipped: false
+  delete_temp_atlas: true
+  keep_only_modulated: false
+

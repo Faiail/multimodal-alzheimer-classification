@@ -1,0 +1,5 @@
+preprocess:
+  adnimerge_path: /media/BarraCuda/dcirilli2/ADNIMERGE_31Dec2025.csv
+  upenn_path: /media/BarraCuda/dcirilli2/UPENNBIOMK_ROCHE_ELECSYS_31Dec2025.csv
+  output_file: data/processed/clinical_features.csv
+

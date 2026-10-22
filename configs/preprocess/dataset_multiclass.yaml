@@ -1,0 +1,5 @@
+preprocess:
+  mci_file: data/processed/clinical_features.csv
+  cn_ad_file: data/processed/cn_ad_features.csv
+  output_file: data/processed/multiclass_cn_mci_ad_features.csv
+

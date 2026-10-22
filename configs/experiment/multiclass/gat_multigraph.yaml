@@ -1,0 +1,68 @@
+general:
+  out_dir: models/multiclass/gat_multigraph
+  device: cuda:0
+  pbar: true
+  num_epochs: 200
+  n_splits: 5
+  seed: 42
+  task: multiclass
+  save_plots: true
+
+data:
+  features_file: data/processed/all_features.csv
+  clinical_file: data/processed/multiclass_cn_mci_ad_features.csv
+  coords_file: configs/aal3_coordinates.csv
+  ontology_lookup_file: configs/aal3_ontology_lookup.csv
+  ontology_kg_file: configs/fma_knowledge_graph.json
+  target_col: target
+  tabular_cols: [AGE, Gender_Male, PTEDUCAT, APOE4, MMSE, ABETA_final, TAU_final, PTAU_final, CSF_Available]
+  sigma: 25.0
+  graph_mode: multigraph
+  knn_k: 10
+  zhang_threshold: 0.5
+  graph_mix_alpha: 0.5
+  use_semantic_features: true
+  use_fma_graph: true
+  fma_embedding_model: pritamdeka/S-PubMedBert-MS-MARCO
+  fma_embedding_dim: 768
+  fma_embedding_cache_dir: models/embeddings
+
+loader:
+  batch_size: 16
+  num_workers: 4
+
+model:
+  name: GAT_KAN_Classifier
+  config:
+    num_nodes: 166
+    hidden_dim: 64
+    out_classes: 3
+    dropout: 0.3
+    grid_size: 5
+    spline_order: 3
+    num_gnn_layers: 2
+    head_type: kan
+    gnn_layer_type: standard
+    use_hierarchical_pooling: true
+    pooling_clusters: [50, 15]
+    pooling_type: signature
+    tabular_dim: 9
+    tabular_hidden: 32
+
+optimizer:
+  name: AdamW
+  config:
+    lr: 0.0005
+    weight_decay: 0.0001
+
+criterion:
+  name: FocalLoss
+  config:
+    gamma: 2.0
+
+early_stop:
+  name: EarlyStopping
+  config:
+    patience: 30
+    mode: max
+

@@ -1,0 +1,13 @@
+general:
+  out_dir: reports/explanations/cohort
+  device: cuda:0
+
+explainer:
+  checkpoints:
+    - models/multiclass/gat_multigraph/*_best.pt
+  csv_path: null
+  coords_path: configs/aal3_coordinates.csv
+  max_samples: 20
+  ig_steps: 32
+  only_correct: false
+

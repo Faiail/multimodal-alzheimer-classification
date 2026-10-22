@@ -1,0 +1,14 @@
+general:
+  out_dir: reports/explanations/single
+  device: cuda:0
+
+explainer:
+  checkpoint: models/multiclass/gat_multigraph/GAT_KAN_Classifier_multigraph_fold1_best.pt
+  csv_path: null
+  coords_path: configs/aal3_coordinates.csv
+  sample_index: 0
+  subject_id: null
+  target_class: null
+  ig_steps: 64
+  top_k: 15
+
