@@ -12,12 +12,26 @@ DEFAULT_DATA_ROOT = "/media/BarraCuda/dcirilli2"
 
 
 def resolve_data_path(path: Union[str, Path, None]) -> Union[str, None]:
-    """Resolve data paths, automatically normalizing `/media/barractuda/dcirilli2` to `/media/BarraCuda/dcirilli2`."""
+    """Resolve data paths, automatically normalizing BarraCuda paths and local fallbacks."""
     if path is None:
         return None
     path_str = str(path)
+    if os.path.exists(path_str):
+        return path_str
     if "/media/barractuda/dcirilli2" in path_str and os.path.exists(DEFAULT_DATA_ROOT):
         path_str = path_str.replace("/media/barractuda/dcirilli2", DEFAULT_DATA_ROOT)
+        if os.path.exists(path_str):
+            return path_str
+    basename = os.path.basename(path_str)
+    for candidate in [
+        os.path.join("data/raw", basename),
+        os.path.join("data/processed", basename),
+        os.path.join("data/interim", basename),
+        os.path.join("data/external", basename),
+        os.path.join(DEFAULT_DATA_ROOT, basename),
+    ]:
+        if os.path.exists(candidate):
+            return candidate
     return path_str
 
 

@@ -22,42 +22,50 @@ def main(
     output_file=OUTPUT_DIR / "clinical_features.csv",
 ):
     print("--- 1. Caricamento Dati ---")
-    adni = pd.read_csv(resolve_data_path(adnimerge_path), low_memory=False)
-    upenn = pd.read_csv(resolve_data_path(upenn_path), low_memory=False)
-    
+    adni_resolved = resolve_data_path(adnimerge_path)
+    if not adni_resolved or not Path(adni_resolved).exists():
+        raise FileNotFoundError(f"File ADNIMERGE non trovato: {adnimerge_path}")
+    adni = pd.read_csv(adni_resolved, low_memory=False)
     print(f"ADNIMERGE shape: {adni.shape}")
-    print(f"UPENN shape: {upenn.shape}")
 
     baseline_mci = adni[
         (adni['VISCODE'] == 'bl') & 
         (adni['DX_bl'].isin(['LMCI', 'EMCI', 'MCI']))
     ].copy()
-    
     print(f"\nSoggetti MCI alla baseline: {len(baseline_mci)}")
 
-    upenn_bl = upenn[upenn['VISCODE2'] == 'bl'].copy()
-    
-    for col in ['ABETA42', 'TAU', 'PTAU']:
-        upenn_bl[col] = upenn_bl[col].apply(clean_biomarker)
-    
-    upenn_bl = upenn_bl.rename(columns={
-        'ABETA42': 'ABETA_upenn', 
-        'TAU': 'TAU_upenn', 
-        'PTAU': 'PTAU_upenn'
-    })
-    
-    merged = pd.merge(baseline_mci, upenn_bl[['RID', 'ABETA_upenn', 'TAU_upenn', 'PTAU_upenn']], 
-                      on='RID', how='left')
-    
-    for bio in ['ABETA', 'TAU', 'PTAU']:
-        merged[bio] = merged[bio].apply(clean_biomarker)
-        
-        upenn_col = f"{bio}_upenn" if bio != 'ABETA' else 'ABETA_upenn'
-        
-        merged[f'{bio}_final'] = merged[bio].fillna(merged[upenn_col])
-        
+    upenn_resolved = resolve_data_path(upenn_path) if upenn_path else None
+    if upenn_resolved and Path(upenn_resolved).exists():
+        upenn = pd.read_csv(upenn_resolved, low_memory=False)
+        print(f"UPENN shape: {upenn.shape}")
+        upenn_bl = upenn[upenn['VISCODE2'] == 'bl'].copy()
+        for col in ['ABETA42', 'TAU', 'PTAU']:
+            upenn_bl[col] = upenn_bl[col].apply(clean_biomarker)
+        upenn_bl = upenn_bl.rename(columns={
+            'ABETA42': 'ABETA_upenn', 
+            'TAU': 'TAU_upenn', 
+            'PTAU': 'PTAU_upenn'
+        })
+        merged = pd.merge(
+            baseline_mci,
+            upenn_bl[['RID', 'ABETA_upenn', 'TAU_upenn', 'PTAU_upenn']], 
+            on='RID',
+            how='left',
+        )
+        for bio in ['ABETA', 'TAU', 'PTAU']:
+            merged[bio] = merged[bio].apply(clean_biomarker)
+            upenn_col = f"{bio}_upenn" if bio != 'ABETA' else 'ABETA_upenn'
+            merged[f'{bio}_final'] = merged[bio].fillna(merged[upenn_col])
+    else:
+        print("Note: UPENN biomarker CSV not found. Using ADNIMERGE native biomarkers.")
+        merged = baseline_mci.copy()
+        for bio in ['ABETA', 'TAU', 'PTAU']:
+            if bio in merged.columns:
+                merged[f'{bio}_final'] = merged[bio].apply(clean_biomarker)
+            else:
+                merged[f'{bio}_final'] = np.nan
+
     merged['CSF_Available'] = (~merged['ABETA_final'].isna()).astype(int)
-    
     for bio in ['ABETA_final', 'TAU_final', 'PTAU_final']:
         merged[bio] = merged[bio].fillna(-1)
 
