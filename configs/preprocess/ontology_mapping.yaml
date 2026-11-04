@@ -1,0 +1,6 @@
+ontology:
+  mode: mapping
+  owl_path: configs/FMA/fma.owl
+  aal3_txt: configs/AAL3/AAL3v1.nii.txt
+  output_csv: configs/aal3_ontology_lookup.csv
+

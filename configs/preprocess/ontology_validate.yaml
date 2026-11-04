@@ -1,0 +1,6 @@
+ontology:
+  mode: validate
+  owl_path: configs/FMA/fma.owl
+  lookup_path: configs/aal3_ontology_lookup.csv
+  artifact_path: configs/fma_knowledge_graph.json
+

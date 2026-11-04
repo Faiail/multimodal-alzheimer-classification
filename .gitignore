@@ -1,80 +1,38 @@
-# Virtual environments
-.venv/
-venv/
-env/
-ENV/
-
-# Python bytecode
+.venv
+/data/*
+!/data/external/
+/data/external/*
+!/data/external/.gitkeep
+!/data/interim/
+/data/interim/*
+!/data/interim/.gitkeep
+!/data/processed/
+/data/processed/*
+!/data/processed/.gitkeep
+!/data/raw/
+/data/raw/*
+!/data/raw/.gitkeep
+/models/*
+!/models/.gitkeep
 __pycache__/
 *.py[cod]
 *$py.class
-*__pycache__*
-*.pyc
-
-# Distribution / packaging
-build/
-dist/
-*.egg-info/
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage
-.pytest_cache/
-.coverage
-htmlcov/
-
-# Pyre type checker
-.pyre/
-
-# MyPy
-.mypy_cache/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# IDEs and editors
-.vscode/
-.idea/
-*.sublime-project
-*.sublime-workspace
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# Environment files
-.env
-.env.*
-
-# Alternate Data Streams metadata from Windows
-*:Zone.Identifier
-
-# Logs
-*.log
-
-# Ignore top-level data directory but keep src/data/
-# Use `/data/` to ignore only the repository root `data/` directory.
-/data/
-# If you ever have a broader `data/` pattern that hides `src/data/`,
-# these negations will un-ignore the folder and its contents.
-!src/data/
-!src/data/**
-
-reports/*
-wandb/*
-models/*
-
-# Re-ignore python bytecode and __pycache__ in un-ignored directories (e.g. src/data/)
-**/__pycache__/
-**/*.py[cod]
-**/*.pyc
-
-# Ignore other directories and files
-**/Swin_dMRI_public/
-**/test/
-**/Results/
-f1_order.py
-**/Documentation/
-**/configs/FMA/fma.owl
+notebooks/test
+/.vscode/
+outs/
+/reports/*
+!/reports/.gitkeep
+!/reports/figures/
+/reports/figures/*
+!/reports/figures/.gitkeep
+/results/
+/visualizations/
+/figures/
+/benchmarks/
+/tuning_results/
+pyscript*.m
+*.nii
+*.nii.gz
+!configs/AAL3/*.nii.gz
+configs/trash
+scripts/trash

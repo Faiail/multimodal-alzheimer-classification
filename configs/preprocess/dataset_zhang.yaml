@@ -1,0 +1,5 @@
+preprocess:
+  features_file: data/processed/all_features.csv
+  adnimerge_file: /media/BarraCuda/dcirilli2/ADNIMERGE_31Dec2025.csv
+  output_dir: data/processed
+
