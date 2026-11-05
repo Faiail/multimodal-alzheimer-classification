@@ -15,9 +15,6 @@ class CoregistrationProcessor:
     def __init__(
         self,
         parameters: dict,
-        nifti_dir: str | Path,
-        output_dir: str | Path,
-        skip_existing: bool = True,
     ):
         self.parameters = parameters
         self.init()
