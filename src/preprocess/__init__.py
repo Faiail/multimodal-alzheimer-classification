@@ -1,6 +1,7 @@
 from .split_processor import SplitProcessor
 from .coregistration_processor import CoregistrationProcessor
 from .mri_atlas_registration_processor import MRIAtlasRegistrationProcessor
+from .pet_atlas_registration_processor import PETAtlasRegistrationProcessor
 
 
 def exe_preprocess_command(

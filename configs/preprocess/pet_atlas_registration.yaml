@@ -1,0 +1,5 @@
+in_dir: /media/BarraCuda/dcirilli2/pet_coregistered
+mapping: /media/BarraCuda/dcirilli2/mri_mni
+out_dir: /media/BarraCuda/dcirilli2/pet_mni
+template: data/processed/MNI152_T1_1mm.nii.gz
+skip: true
