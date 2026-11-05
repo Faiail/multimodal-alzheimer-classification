@@ -1,9 +1,9 @@
 #!/bin/bash
 
 #SBATCH -A IscrC_BRIDGEV
-#SBATCH -p boost_usr_prod
-#SBATCH --qos boost_qos_lprod
-#SBATCH --time 24:00:00
+#SBATCH -p lrd_all_serial
+#SBATCH --qos normal
+#SBATCH --time 04:00:00
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=4

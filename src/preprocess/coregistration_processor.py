@@ -1,9 +1,10 @@
 from pathlib import Path
-import subprocess
 import nibabel as nib
 import numpy as np
+import SimpleITK as sitk
 from tqdm import tqdm
 from src.utils import ParameterKeys
+import os
 
 
 class CoregistrationProcessor:
@@ -20,10 +21,12 @@ class CoregistrationProcessor:
         self.init()
 
     def init(self):
+        print("Init genereal parameters...")
         self.nifti_dir = self.parameters.get(ParameterKeys.IN_DIR)
         self.out_dir = self.parameters.get(ParameterKeys.OUT_DIR, "./")
-        self.out_dir.mkdir(parents=True, exist_ok=True)
+        os.makedirs(self.out_dir, exist_ok=True)
         self.skip_existing = self.parameters.get(ParameterKeys.SKIP, True)
+        print("Done!")
 
     def _get_ptid(self, filename: str) -> str:
         """Estrae il PTID (es. '002_S_0295') dai primi 3 token separati da '_'."""
@@ -42,27 +45,59 @@ class CoregistrationProcessor:
         img = nib.load(str(pet_path))
         if img.ndim == 4 and img.shape[-1] > 1:
             data_3d = np.mean(img.get_fdata(), axis=-1).astype(np.float32)
-            out_3d = self.out_dir / f"temp_{pet_path.name}"
-            nib.save(nib.Nifti1Image(data_3d, img.affine, img.header), str(out_3d))
-            return out_3d
+            out_3d = f"{self.out_dir}/temp_{pet_path.name}"
+            nib.save(nib.Nifti1Image(data_3d, img.affine, img.header), out_3d)
+            return Path(out_3d)
         return pet_path
 
     def _run_flirt(self, in_pet: Path, ref_mri: Path, out_pet: Path):
-        """Esegue FSL FLIRT (6-DOF, mutual information)."""
-        cmd = [
-            "flirt",
-            "-in", str(in_pet),
-            "-ref", str(ref_mri),
-            "-out", str(out_pet),
-            "-dof", "6",
-            "-cost", "mutualinfo",
-            "-interp", "trilinear",
-        ]
-        subprocess.run(cmd, check=True)
+        """Esegue co-registrazione rigida 6-DOF (Mutual Information, trilinear) tramite SimpleITK."""
+        fixed = sitk.ReadImage(str(ref_mri), sitk.sitkFloat32)
+        moving = sitk.ReadImage(str(in_pet), sitk.sitkFloat32)
+
+        initial_tx = sitk.CenteredTransformInitializer(
+            fixed,
+            moving,
+            sitk.Euler3DTransform(),
+            sitk.CenteredTransformInitializerFilter.GEOMETRY,
+        )
+
+        reg = sitk.ImageRegistrationMethod()
+        reg.SetMetricAsMattesMutualInformation(numberOfHistogramBins=50)
+        reg.SetMetricSamplingStrategy(reg.RANDOM)
+        reg.SetMetricSamplingPercentage(0.10, seed=42)
+        reg.SetInterpolator(sitk.sitkLinear)
+
+        reg.SetOptimizerAsGradientDescent(
+            learningRate=1.0,
+            numberOfIterations=100,
+            convergenceMinimumValue=1e-6,
+            convergenceWindowSize=10,
+        )
+        reg.SetOptimizerScalesFromPhysicalShift()
+
+        # Multi-resolution framework (piramide a 3 livelli)
+        reg.SetShrinkFactorsPerLevel(shrinkFactors=[4, 2, 1])
+        reg.SetSmoothingSigmasPerLevel(smoothingSigmas=[2, 1, 0])
+        reg.SmoothingSigmasAreSpecifiedInPhysicalUnitsOn()
+
+        reg.SetInitialTransform(initial_tx, inPlace=False)
+
+        final_tx = reg.Execute(fixed, moving)
+        resampled = sitk.Resample(
+            moving,
+            fixed,
+            final_tx,
+            sitk.sitkLinear,
+            0.0,
+            moving.GetPixelID(),
+        )
+        sitk.WriteImage(resampled, str(out_pet))
 
     def launch(self):
-        all_files = sorted(list(self.nifti_dir.glob("*.nii*")))
-        print(f"[Scanner] Trovati {len(all_files)} volumi in {self.nifti_dir}")
+        print("Starting...")
+        all_files = sorted(list(Path(self.nifti_dir).glob("*.nii*")))
+        print(f"[Scanner] Found {len(all_files)} volumes in {self.nifti_dir}")
 
         # 1. Separa e indicizza le sMRI per PTID
         mri_dict = {}
@@ -76,18 +111,18 @@ class CoregistrationProcessor:
             elif self._is_pet(f.name):
                 pet_files.append(f)
 
-        print(f"[Analisi] sMRI indicizzate: {len(mri_dict)} soggetti | PET da processare: {len(pet_files)}")
+        print(f"[Analysis] sMRI indexed: {len(mri_dict)} patients | PET to process: {len(pet_files)}")
 
         count_done = 0
         count_skipped = 0
         count_missing = 0
 
         # 2. Itera sulle PET e co-registra sull'sMRI del corrispondente PTID
-        for pet_file in tqdm(pet_files, desc="Co-registrazione PET -> sMRI"):
+        for pet_file in tqdm(pet_files, desc="Co-registration PET -> sMRI"):
             clean_name = pet_file.name.replace(".nii.gz", "").replace(".nii", "")
-            out_file = self.out_dir / f"{clean_name}_coreg.nii.gz"
+            out_file = f"{self.out_dir}/{clean_name}_coreg.nii.gz"
 
-            if self.skip_existing and out_file.exists():
+            if self.skip_existing and Path(out_file).exists():
                 count_skipped += 1
                 continue
 
@@ -109,8 +144,8 @@ class CoregistrationProcessor:
             if pet_3d != pet_file and pet_3d.exists():
                 pet_3d.unlink()
 
-        print("\n[Riepilogo Co-registrazione]")
-        print(f"  • Scansioni completate:        {count_done}")
-        print(f"  • Scansioni gia' fatte (skip): {count_skipped}")
-        print(f"  • PET senza sMRI trovata:      {count_missing}")
-        print(f"  • Cartella output:             {self.out_dir}")
+        print("\n[Summary]")
+        print(f"  • Volumes completed:        {count_done}")
+        print(f"  • Volumes already processed (skip): {count_skipped}")
+        print(f"  • PET without sMRI found:      {count_missing}")
+        print(f"  • Output folder:             {self.out_dir}")
