@@ -1,3 +1,6 @@
+from .split_processor import SplitProcessor
+
+
 def exe_preprocess_command(
     parameters: dict,
     cls: str,

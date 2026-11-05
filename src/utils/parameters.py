@@ -67,4 +67,6 @@ class ParameterKeys(StrEnum):
     SLURM = "slurm"
     ONTOLOGY = "ontology"
     PREPROCESS = "preprocess"
+    CLASSES = "classes"
+    PATIENT = "patient"
 

@@ -1,0 +1,14 @@
+general:
+  out_dir: data/processed/splits/mci_ad
+  seed: 42
+  n_splits: 5
+  test_size: 10
+  classes:
+    - MCI
+    - AD
+
+data:
+  data_root: data/processed/multiclass_cn_mci_ad_features.csv
+  patient: PTID
+  classes: original_class
+
