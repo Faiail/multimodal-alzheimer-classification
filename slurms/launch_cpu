@@ -11,6 +11,27 @@
 #SBATCH --job-name=preprocess
 #SBATCH --out=outs/preprocess.out
 #SBATCH --err=outs/preprocess.out
+#SBATCH --open-mode=append
 
-srun ./slurms/exe $@
+# Automatically queue the next continuation job (triggered ONLY if this job times out)
+STDOUT_PATH=$(scontrol show job "$SLURM_JOB_ID" | awk -F= '/StdOut=/{print $2}')
+STDERR_PATH=$(scontrol show job "$SLURM_JOB_ID" | awk -F= '/StdErr=/{print $2}')
+
+NEXT_JOB=$(sbatch --parsable \
+    --dependency=afternotok:"$SLURM_JOB_ID" \
+    --open-mode=append \
+    --job-name="$SLURM_JOB_NAME" \
+    -o "$STDOUT_PATH" \
+    -e "$STDERR_PATH" \
+    slurms/launch_cpu "$@")
+
+srun ./slurms/exe "$@"
+EXIT_CODE=$?
+
+# If all volumes finished cleanly, cancel the unused continuation job
+if [ $EXIT_CODE -eq 0 ] && [ -n "$NEXT_JOB" ]; then
+    scancel "$NEXT_JOB"
+fi
+exit $EXIT_CODE
+
 
