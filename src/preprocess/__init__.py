@@ -1,4 +1,5 @@
 from .split_processor import SplitProcessor
+from .coregistration_processor import CoregistrationProcessor
 
 
 def exe_preprocess_command(

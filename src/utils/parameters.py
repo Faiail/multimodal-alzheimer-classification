@@ -69,4 +69,5 @@ class ParameterKeys(StrEnum):
     PREPROCESS = "preprocess"
     CLASSES = "classes"
     PATIENT = "patient"
+    SKIP = "skip"
 
