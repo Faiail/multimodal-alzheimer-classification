@@ -70,4 +70,5 @@ class ParameterKeys(StrEnum):
     CLASSES = "classes"
     PATIENT = "patient"
     SKIP = "skip"
+    TEMPLATE = "template"
 

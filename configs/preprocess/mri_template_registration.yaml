@@ -1,0 +1,4 @@
+in_dir: data/raw/nifti
+out_dir: data/processed/mri_atlas_registered
+template: data/processed/MNI152_T1_1mm.nii.gz
+skip: True
