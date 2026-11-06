@@ -1,4 +1,5 @@
 from pathlib import Path
+import scipy.io
 import SimpleITK as sitk
 from tqdm import tqdm
 from src.utils import ParameterKeys
@@ -42,6 +43,28 @@ class PETAtlasRegistrationProcessor:
         parts = filename.split("_")
         return f"{parts[0]}_{parts[1]}_{parts[2]}"
 
+    def _load_transform(self, in_mat: Path) -> sitk.Transform:
+        """
+        Loads the 12-DOF affine transformation from the saved .mat file.
+        Reconstructs sitk.AffineTransform(3) directly from the MATLAB v4 arrays
+        ('CompositeTransform_double_3_3' and 'fixed') when SimpleITK's
+        ReadTransform fails on CompositeTransform .mat files.
+        """
+        try:
+            return sitk.ReadTransform(str(in_mat))
+        except RuntimeError:
+            mat_data = scipy.io.loadmat(str(in_mat))
+            tx = sitk.AffineTransform(3)
+            for key, val in mat_data.items():
+                if key.startswith("__"):
+                    continue
+                flat_val = val.flatten().astype(float).tolist()
+                if key == "fixed":
+                    tx.SetFixedParameters(flat_val)
+                else:
+                    tx.SetParameters(flat_val)
+            return tx
+
     def _apply_transform(
         self,
         in_pet: Path,
@@ -59,7 +82,7 @@ class PETAtlasRegistrationProcessor:
             fixed = sitk.ReadImage(str(ref_template), sitk.sitkFloat32)
 
         moving = sitk.ReadImage(str(in_pet), sitk.sitkFloat32)
-        tx = sitk.ReadTransform(str(in_mat))
+        tx = self._load_transform(in_mat)
 
         resampled = sitk.Resample(
             moving,
@@ -79,9 +102,16 @@ class PETAtlasRegistrationProcessor:
 
         all_pet_files = sorted(list(self.pet_coreg_dir.glob("*.nii*")))
 
+        # Pre-index sMRI -> Atlas .mat files by PTID (sorted to match CoregistrationProcessor)
+        mat_dict = {}
+        for mat_file in sorted(self.mri_mni_dir.glob("*mri2atlas.mat")):
+            ptid = self._get_ptid(mat_file.name)
+            if ptid not in mat_dict:
+                mat_dict[ptid] = mat_file
+
         print(f"[PET Atlas Warp] Found {len(all_pet_files)} co-registered PET scans to warp...")
         print(f"  • Reference template: {self.template_path.name}")
-        print(f"  • sMRI .mat directory:{self.mri_mni_dir}")
+        print(f"  • sMRI .mat indexed:  {len(mat_dict)} patients from {self.mri_mni_dir}")
         print(f"  • Output directory:   {self.output_dir}")
 
         # Pre-load fixed reference template once
@@ -103,12 +133,11 @@ class PETAtlasRegistrationProcessor:
             ptid = self._get_ptid(pet_file.name)
 
             # Match corresponding .mat file from MRIAtlasRegistrationProcessor
-            mat_candidates = list(self.mri_mni_dir.glob(f"{ptid}*mri2atlas.mat"))
-            if not mat_candidates:
+            if ptid not in mat_dict:
                 count_missing += 1
                 continue
 
-            in_mat = mat_candidates[0]
+            in_mat = mat_dict[ptid]
 
             self._apply_transform(
                 in_pet=pet_file,

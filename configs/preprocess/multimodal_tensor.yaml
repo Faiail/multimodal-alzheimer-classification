@@ -1,0 +1,9 @@
+raw_dataset: data/processed/multimodal_raw_dataset.csv
+mri_dir: data/processed/mri_atlas_registered
+pet_dir: data/processed/pet_atlas_registered
+out_dir: data/processed/multimodal-tensors
+out_csv: data/processed/all_features_multimodal.csv
+target_size: [128, 128, 128]
+normalize_pet: true
+skip: true
+only_paired: false

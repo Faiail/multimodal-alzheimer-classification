@@ -71,4 +71,11 @@ class ParameterKeys(StrEnum):
     PATIENT = "patient"
     SKIP = "skip"
     TEMPLATE = "template"
+    TARGET_SIZE = "target_size"
+    MRI_DIR = "mri_dir"
+    PET_DIR = "pet_dir"
+    RAW_DATASET = "raw_dataset"
+    OUT_CSV = "out_csv"
+    NORMALIZE_PET = "normalize_pet"
+    ONLY_PAIRED = "only_paired"
 

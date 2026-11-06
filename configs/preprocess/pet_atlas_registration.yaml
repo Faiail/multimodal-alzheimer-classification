@@ -1,5 +1,5 @@
-in_dir: /media/BarraCuda/dcirilli2/pet_coregistered
-mapping: /media/BarraCuda/dcirilli2/mri_mni
-out_dir: /media/BarraCuda/dcirilli2/pet_mni
+in_dir: data/processed/pet_coregistered
+mapping: data/processed/mri_atlas_registered
+out_dir: data/processed/pet_atlas_registered
 template: data/processed/MNI152_T1_1mm.nii.gz
 skip: true
