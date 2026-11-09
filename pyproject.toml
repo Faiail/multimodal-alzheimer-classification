@@ -8,6 +8,7 @@ dependencies = [
     "accelerate>=1.2.0",
     "captum>=0.7.0",
     "click>=8.1.7",
+    "einops>=0.8.2",
     "jupyter>=1.1.1",
     "matplotlib>=3.8.0",
     "monai>=1.4.0",
