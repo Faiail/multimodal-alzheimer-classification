@@ -9,7 +9,7 @@ general:
     - AD
 
 data:
-  data_root: data/processed/multiclass_cn_mci_ad_features.csv
+  data_root: data/processed/all_features_multimodal.csv
   patient: PTID
   classes: original_class
 
