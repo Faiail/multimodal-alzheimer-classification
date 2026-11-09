@@ -78,4 +78,6 @@ class ParameterKeys(StrEnum):
     OUT_CSV = "out_csv"
     NORMALIZE_PET = "normalize_pet"
     ONLY_PAIRED = "only_paired"
+    FOLD = "fold"
+    EPOCH = "epoch"
 

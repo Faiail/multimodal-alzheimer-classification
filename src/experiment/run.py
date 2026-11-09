@@ -42,7 +42,8 @@ class Run:
     def _init_general(self):
         general_parameters = self.parameters.get(ParameterKeys.GENERAL, {})
         self.out_dir = general_parameters.get(ParameterKeys.OUT_DIR, "models/default")
-        os.makedirs(self.out_dir, exist_ok=True)
+        self.fold_id = general_parameters.get(ParameterKeys.FOLD)
+        os.makedirs(f"{self.out_dir}/{self.fold_id}", exist_ok=True)
         device_str = general_parameters.get(ParameterKeys.DEVICE, "cpu")
         if str(device_str).startswith("cuda") and not torch.cuda.is_available():
             device_str = "cpu"
@@ -51,6 +52,15 @@ class Run:
         self.num_epochs = general_parameters.get(ParameterKeys.NUM_EPOCHS, 1)
         self.seed = general_parameters.get(ParameterKeys.SEED, None)
         self.set_seed()
+        self.run_state_fname = f"{self.out_dir}/run_state.pt"
+        self.run_state = (
+            torch.load(
+                self.run_state_fname, map_location=self.device, weights_only=False
+            )
+            if os.path.exists(self.run_state_fname)
+            else {}
+        )
+        self.start_epoch = self.run_state.get(ParameterKeys.EPOCH, 0) + 1
 
     def set_seed(self):
         if self.seed is not None:
@@ -61,7 +71,9 @@ class Run:
         train_dataset, val_dataset, test_dataset = (
             self._init_dataset(dataset_parameters.get(ParameterKeys.TRAIN)),
             self._init_dataset(dataset_parameters.get(ParameterKeys.VAL)),
-            self._init_dataset(dataset_parameters.get(ParameterKeys.TEST)),
+            self._init_dataset(
+                dataset_parameters.get(ParameterKeys.TEST), is_test=True
+            ),
         )
         loader_params = deepcopy(self.parameters.get(ParameterKeys.LOADER, {}))
         val_loader_params = deepcopy(loader_params)
@@ -92,10 +104,12 @@ class Run:
             **val_loader_params,
         )
 
-    def _init_dataset(self, dataset_parameters: dict) -> Dataset:
+    def _init_dataset(self, dataset_parameters: dict, is_test: bool = False) -> Dataset:
         dataset_name = dataset_parameters.get(ParameterKeys.NAME)
         dataset_cfg = dataset_parameters.get(ParameterKeys.CFG, {})
-        return datasets.__dict__[dataset_name](**dataset_cfg)
+        return datasets.__dict__[dataset_name](
+            **dataset_cfg, fold_id=(self.fold_id if not is_test else None)
+        )
 
     def _init_model(self):
         model_parameters = self.parameters.get(ParameterKeys.MODEL)
@@ -103,6 +117,9 @@ class Run:
         model_config = deepcopy(model_parameters.get(ParameterKeys.CFG, {}))
         self.model = models.__dict__[model_name](**model_config)
         self.model = self.model.to(self.device)
+        if self.run_state.get(ParameterKeys.MODEL) is not None:
+            print("Restoring model weights from previous run")
+            self.model.load_state_dict(self.run_state.get(ParameterKeys.MODEL))
 
     def _init_metrics(self):
         raise NotImplementedError()
@@ -127,12 +144,18 @@ class Run:
         self.optimizer = optimizers.__dict__[optimizer_name](
             params=self.model.parameters(), **optimizer_cfg
         )
+        if self.run_state.get(ParameterKeys.OPTIMIZER) is not None:
+            print("Restoring optimizer state from previous run")
+            self.optimizer.load_state_dict(self.run_state.get(ParameterKeys.OPTIMIZER))        
 
     def _init_criterion(self):
         criterion_parameters = self.parameters.get(ParameterKeys.CRITERION, {})
         criterion_name = criterion_parameters.get(ParameterKeys.NAME)
         criterion_cfg = criterion_parameters.get(ParameterKeys.CFG, {})
         self.criterion = losses.__dict__[criterion_name](**criterion_cfg)
+        if self.run_state.get(ParameterKeys.CRITERION) is not None:
+            print("Restoring criterion state from previous run")
+            self.criterion.load_state_dict(self.run_state.get(ParameterKeys.CRITERION))        
 
     def _init_early_stop(self):
         early_stop_parameters = self.parameters.get(ParameterKeys.EARLY_STOP, None)
@@ -143,6 +166,12 @@ class Run:
         early_stop_cfg = deepcopy(early_stop_parameters.get(ParameterKeys.CFG, {}))
         early_stop_cfg.setdefault("out_dir", self.out_dir)
         self.early_stop = early_stops.__dict__[early_stop_name](**early_stop_cfg)
+        if self.run_state.get(ParameterKeys.EARLY_STOP) is not None:
+            print("Restoring early stop state from previous run")
+            self.early_stop.__dict__.update(
+                self.run_state.get(ParameterKeys.EARLY_STOP)
+            )
+            self.trigger = self.early_stop.early_stop        
 
     def _init_scheduler(self):
         scheduler_parameters = self.parameters.get(ParameterKeys.SCHEDULER, None)
@@ -159,6 +188,9 @@ class Run:
         self.scheduler = schedulers.__dict__[scheduler_name](
             optimizer=self.optimizer, **scheduler_cfg
         )
+        if self.run_state.get(ParameterKeys.SCHEDULER) is not None:
+            print("Restoring scheduler state from previous run")
+            self.scheduler.load_state_dict(self.run_state.get(ParameterKeys.SCHEDULER))        
 
     def _init_cosine_scheduler_params(self, params: dict) -> dict:
         total_steps = max(1, self.num_epochs * len(self.train_loader))
@@ -197,6 +229,26 @@ class Run:
             return
         bar.set_postfix({ParameterKeys.CRITERION: loss, **kwargs})
 
+    def save_run_state(self, epoch: int):
+        early_stop_state = (
+            {
+                "counter": self.early_stop.counter,
+                "best_score": self.early_stop.best_score,
+                "early_stop": self.early_stop.early_stop,
+                "val_loss_min": self.early_stop.val_loss_min,
+            }
+            if self.early_stop is not None
+            else None
+        )
+        self.run_state[ParameterKeys.EPOCH] = epoch
+        self.run_state[ParameterKeys.MODEL] = self.model.state_dict()
+        self.run_state[ParameterKeys.OPTIMIZER] = self.optimizer.state_dict()
+        self.run_state[ParameterKeys.CRITERION] = self.criterion.state_dict()
+        self.run_state[ParameterKeys.EARLY_STOP] = early_stop_state
+        if self.scheduler is not None:
+            self.run_state[ParameterKeys.SCHEDULER] = self.scheduler.state_dict()
+        torch.save(self.run_state, self.run_state_fname)
+
     def train_epoch(self, epoch: int):
         raise NotImplementedError()
 
@@ -209,11 +261,14 @@ class Run:
     def launch(self):
         print("Start experiment!")
         self.model = self.model.to(self.device)
-        for epoch in range(1, self.num_epochs + 1):
+        if self.start_epoch > self.num_epochs or self.trigger:
+            print("Training was already completed. Proceeding directly to test...")
+            return self.test()        
+        for epoch in range(self.start_epoch, self.num_epochs + 1):
             self.train_epoch(epoch=epoch)
             self.validate_epoch(epoch=epoch)
+            self.save_run_state(epoch=epoch)            
             if self.trigger:
                 print(f"Early stopping at epoch {epoch}/{self.num_epochs}")
                 break
         return self.test()
-
