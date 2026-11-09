@@ -250,7 +250,9 @@ class Run:
 
     def save_metrics(self, metrics: dict = {}, loss=None):
         metric_dict = deepcopy(metrics)
+        metric_dict = {k: v.item() for k, v in metric_dict.items()}
         metric_dict.update(dict(loss=f"{loss:.4f}") if loss is not None else dict())
+        print(metric_dict)
         save_json(f"{self.out_dir}/test_metrics.json", metric_dict)
 
     def train_epoch(self, epoch: int):

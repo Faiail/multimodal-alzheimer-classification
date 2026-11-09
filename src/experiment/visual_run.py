@@ -46,6 +46,7 @@ class VisualRun(Run):
             cumulated_loss += batch_loss
             self.update_bar(bar, loss=batch_loss)
             self.schedule(phase=ParameterKeys.TRAIN)
+            break
         cumulated_loss /= len(self.train_loader)
         metric_dict = self.metrics.compute()
         self.metrics.reset()

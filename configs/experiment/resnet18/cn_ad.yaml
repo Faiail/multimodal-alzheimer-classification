@@ -52,7 +52,7 @@ early_stop:
 scheduler:
   name: HuggingFaceCosineScheduler  
   config: 
-    num_warmup_steps: 1000
+    num_warmup_steps: 198
 metrics:
   acc:
     name: BinaryAccuracy
