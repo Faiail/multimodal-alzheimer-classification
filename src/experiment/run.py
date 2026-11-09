@@ -274,6 +274,7 @@ class Run:
             self.train_epoch(epoch=epoch)
             self.validate_epoch(epoch=epoch)
             self.save_run_state(epoch=epoch)
+            torch.cuda.empty_cache()
             if self.trigger:
                 print(f"Early stopping at epoch {epoch}/{self.num_epochs}")
                 break
