@@ -1,0 +1,10 @@
+from src.utils import StrEnum
+
+
+class BatchKeys(StrEnum):
+    IMAGE = "image"
+    GT = "gt"
+    SAFETENSOR_PTH = "safetensor_file"
+    LABEL = "label"
+    MRI = "mri"
+    PET = "pet"
