@@ -52,7 +52,7 @@ class VisualRun(Run):
         self.print_stats(
             epoch=epoch,
             phase=ParameterKeys.TRAIN,
-            loss=cumulated_loss,
+            cumulated_loss=cumulated_loss,
             metrics=metric_dict,
         )
 
@@ -77,10 +77,11 @@ class VisualRun(Run):
         self.schedule(phase=ParameterKeys.VAL, loss=cumulated_loss)
         metric_dict = self.metrics.compute()
         self.metrics.reset()
+        self.trigger = self.early_stop_callback(monitored_value=cumulated_loss)
         self.print_stats(
             epoch=epoch,
             phase=ParameterKeys.VAL,
-            loss=cumulated_loss,
+            cumulated_loss=cumulated_loss,
             metrics=metric_dict,
         )
 
@@ -88,7 +89,7 @@ class VisualRun(Run):
     def test(self):
         if not self.test_loader:
             return {}
-        self.model.load_state_dict(torch.load(self.early_stop.path))
+        self.model.load_state_dict(torch.load(f"{self.out_dir}/{self.early_stop.path}"))
         self.model = self.model.to(self.device)
         bar = self.get_bar(
             loader=self.test_loader,

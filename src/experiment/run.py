@@ -39,9 +39,10 @@ class Run:
 
     def _init_general(self):
         general_parameters = self.parameters.get(ParameterKeys.GENERAL, {})
-        self.out_dir = general_parameters.get(ParameterKeys.OUT_DIR, "models/default")
+        self.out_dir = general_parameters.get(ParameterKeys.OUT_DIR, "./")
         self.fold_id = general_parameters.get(ParameterKeys.FOLD)
-        os.makedirs(f"{self.out_dir}/{self.fold_id}", exist_ok=True)
+        self.out_dir = f"{self.out_dir}/{self.fold_id}"
+        os.makedirs(self.out_dir, exist_ok=True)
         device_str = general_parameters.get(ParameterKeys.DEVICE, "cpu")
         if str(device_str).startswith("cuda") and not torch.cuda.is_available():
             device_str = "cpu"
@@ -233,7 +234,7 @@ class Run:
                 "counter": self.early_stop.counter,
                 "best_score": self.early_stop.best_score,
                 "early_stop": self.early_stop.early_stop,
-                "val_loss_min": self.early_stop.val_loss_min,
+                "val_best": self.early_stop.val_best,
             }
             if self.early_stop is not None
             else None
