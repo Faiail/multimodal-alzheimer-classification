@@ -15,7 +15,7 @@ class VisualDataset(Dataset):
     ):
         super().__init__()
         self.multimodal_root = multimodal_root
-        fold = f"fold/{fold_id}" if fold_id is not None else ""
+        fold = f"folds/{fold_id}" if fold_id is not None else ""
         self.dataset = pd.read_csv(f"{fold_root}/{fold}/{split}.csv")
 
     def __len__(self):
@@ -26,6 +26,9 @@ class VisualDataset(Dataset):
         file_pth = f"{self.multimodal_root}/{row[BatchKeys.SAFETENSOR_PTH]}"
         label = row[BatchKeys.LABEL]
         data = load_file(file_pth)
-        x = torch.cat([data[BatchKeys.MRI], data[BatchKeys.PET]], dim=0)
+        mri = data[BatchKeys.MRI]
+        pet = data[BatchKeys.PET] if BatchKeys.PET in data else mri * 0.0
+
+        x = torch.cat([mri, pet], dim=0)
         return {BatchKeys.IMAGE: x, BatchKeys.GT: label}
 

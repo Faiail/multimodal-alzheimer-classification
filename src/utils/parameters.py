@@ -31,7 +31,7 @@ class ParameterKeys(StrEnum):
     EARLY_STOP = "early_stop"
     NUM_EPOCHS = "num_epochs"
     SCHEDULER = "scheduler"
-    HF_COSINE_SCHEDULER = "HFCosineScheduler"
+    HF_COSINE_SCHEDULER = "HuggingFaceCosineScheduler"
     COSINE_WARM_RESTARTS = "CosineAnnealingWarmRestarts"
     NODE = "node"
     IMG = "image"

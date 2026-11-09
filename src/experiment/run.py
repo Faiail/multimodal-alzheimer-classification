@@ -1,18 +1,16 @@
 import os
 from copy import deepcopy
-
 import torch
 import torch.optim as optimizers
 from torch.utils.data import DataLoader, Dataset
 from tqdm import tqdm
-
 import src.data as datasets
 import src.early_stop as early_stops
 import src.losses as losses
 import src.models as models
 import src.scheduler as schedulers
 from src.utils import ParameterKeys
-from src.utils.general import set_seed
+from src.utils.general import set_seed, save_json
 
 
 class Run:
@@ -128,13 +126,13 @@ class Run:
         self,
         epoch: int,
         phase: str,
-        metrics: dict = None,
+        metrics: dict = {},
         cumulated_loss: float = 0.0,
     ):
         print(f"Epoch {epoch}/{self.num_epochs}: {phase} loss: {cumulated_loss:.4f}")
-        self.print_metrics(metrics or {})
+        self.print_metrics(phase=phase, metrics=metrics)
 
-    def print_metrics(self, metrics: dict = None):
+    def print_metrics(self, phase: str, metrics: dict = None):
         raise NotImplementedError()
 
     def _init_optimizer(self):
@@ -146,7 +144,7 @@ class Run:
         )
         if self.run_state.get(ParameterKeys.OPTIMIZER) is not None:
             print("Restoring optimizer state from previous run")
-            self.optimizer.load_state_dict(self.run_state.get(ParameterKeys.OPTIMIZER))        
+            self.optimizer.load_state_dict(self.run_state.get(ParameterKeys.OPTIMIZER))
 
     def _init_criterion(self):
         criterion_parameters = self.parameters.get(ParameterKeys.CRITERION, {})
@@ -155,7 +153,7 @@ class Run:
         self.criterion = losses.__dict__[criterion_name](**criterion_cfg)
         if self.run_state.get(ParameterKeys.CRITERION) is not None:
             print("Restoring criterion state from previous run")
-            self.criterion.load_state_dict(self.run_state.get(ParameterKeys.CRITERION))        
+            self.criterion.load_state_dict(self.run_state.get(ParameterKeys.CRITERION))
 
     def _init_early_stop(self):
         early_stop_parameters = self.parameters.get(ParameterKeys.EARLY_STOP, None)
@@ -171,7 +169,7 @@ class Run:
             self.early_stop.__dict__.update(
                 self.run_state.get(ParameterKeys.EARLY_STOP)
             )
-            self.trigger = self.early_stop.early_stop        
+            self.trigger = self.early_stop.early_stop
 
     def _init_scheduler(self):
         scheduler_parameters = self.parameters.get(ParameterKeys.SCHEDULER, None)
@@ -190,7 +188,7 @@ class Run:
         )
         if self.run_state.get(ParameterKeys.SCHEDULER) is not None:
             print("Restoring scheduler state from previous run")
-            self.scheduler.load_state_dict(self.run_state.get(ParameterKeys.SCHEDULER))        
+            self.scheduler.load_state_dict(self.run_state.get(ParameterKeys.SCHEDULER))
 
     def _init_cosine_scheduler_params(self, params: dict) -> dict:
         total_steps = max(1, self.num_epochs * len(self.train_loader))
@@ -249,6 +247,11 @@ class Run:
             self.run_state[ParameterKeys.SCHEDULER] = self.scheduler.state_dict()
         torch.save(self.run_state, self.run_state_fname)
 
+    def save_metrics(self, metrics: dict = {}, loss=None):
+        metric_dict = deepcopy(metrics)
+        metric_dict.update(dict(loss=f"{loss:.4f}") if loss is not None else dict())
+        save_json(f"{self.out_dir}/test_metrics.json", metric_dict)
+
     def train_epoch(self, epoch: int):
         raise NotImplementedError()
 
@@ -263,11 +266,11 @@ class Run:
         self.model = self.model.to(self.device)
         if self.start_epoch > self.num_epochs or self.trigger:
             print("Training was already completed. Proceeding directly to test...")
-            return self.test()        
+            return self.test()
         for epoch in range(self.start_epoch, self.num_epochs + 1):
             self.train_epoch(epoch=epoch)
             self.validate_epoch(epoch=epoch)
-            self.save_run_state(epoch=epoch)            
+            self.save_run_state(epoch=epoch)
             if self.trigger:
                 print(f"Early stopping at epoch {epoch}/{self.num_epochs}")
                 break

@@ -1,5 +1,5 @@
 import click
-from src.utils import load_ruamel
+from src.utils import load_ruamel, ParameterKeys
 
 
 @click.group()
@@ -29,10 +29,14 @@ def preprocess(
 @click.option(
     "--cls", help="Class to be used for running the experiment", required=True
 )
-def experiment(parameters, cls):
+@click.option("--fold", help="Fold id (for cross validation)", default=0, type=int, required=False)
+def experiment(parameters, cls, fold=0):
     from src.experiment import exe_experiment
 
-    exe_experiment(load_ruamel(parameters), cls)
+    parameters = load_ruamel(parameters)
+    parameters[ParameterKeys.GENERAL][ParameterKeys.FOLD] = fold
+    exe_experiment(parameters, cls)
+
 
 @main.command("test")
 @click.option("--parameters", help="Path to the parameters file", required=True)

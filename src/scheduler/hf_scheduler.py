@@ -3,7 +3,7 @@ from torch.optim.lr_scheduler import LRScheduler
 from transformers import get_cosine_schedule_with_warmup
 
 
-class HFCosineScheduler(LRScheduler):
+class HuggingFaceCosineScheduler(LRScheduler):
     def __new__(
         cls,
         optimizer: Optimizer,
