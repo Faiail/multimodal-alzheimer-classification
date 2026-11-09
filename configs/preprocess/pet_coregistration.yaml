@@ -1,0 +1,3 @@
+in_dir: data/raw/nifti
+out_dir: data/processed/pet_coregistered
+skip: true

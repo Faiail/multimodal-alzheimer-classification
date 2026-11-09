@@ -1,0 +1,5 @@
+in_dir: data/processed/pet_coregistered
+mapping: data/processed/mri_atlas_registered
+out_dir: data/processed/pet_atlas_registered
+template: data/processed/MNI152_T1_1mm.nii.gz
+skip: true

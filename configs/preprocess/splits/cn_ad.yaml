@@ -1,0 +1,14 @@
+general:
+  out_dir: data/processed/splits/cn_ad
+  seed: 42
+  n_splits: 5
+  test_size: 10
+  classes:
+    - CN
+    - AD
+
+data:
+  data_root: data/processed/all_features_multimodal.csv
+  patient: PTID
+  classes: original_class
+
