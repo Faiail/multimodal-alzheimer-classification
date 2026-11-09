@@ -36,7 +36,11 @@ class SplitProcessor:
         self.class_col = dataset_parameters.get(ParameterKeys.CLASSES)
 
     def launch(self):
-        cons_dataset = self.df[self.df[self.class_col].isin(self.classes)].reset_index(drop=True)
+        cons_dataset = self.df[self.df[self.class_col].isin(self.classes)].copy().reset_index(drop=True)
+        # Remap labels to 0 .. C - 1 based on the ordering in self.classes
+        class_to_label = {cls_name: idx for idx, cls_name in enumerate(self.classes)}
+        cons_dataset["label"] = cons_dataset[self.class_col].map(class_to_label).astype(int)
+
         # 1. Split holdout
         train_val_idx, test_idx = next(
             StratifiedGroupKFold(n_splits=self.test_size, shuffle=True, random_state=self.seed).split(
