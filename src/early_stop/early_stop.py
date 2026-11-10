@@ -13,7 +13,7 @@ class EarlyStopping:
         delta: float = 0.0,
         out_dir: str = "./",
         mode: str = "min",
-        filename: str = "model.pt",
+        path: str = "model.pt",
         trace_func=print,
     ):
         self.patience = patience
@@ -25,7 +25,7 @@ class EarlyStopping:
         self.delta = delta
         self.out_dir = out_dir
         self.mode = mode
-        self.filename = filename
+        self.path = path
         self.trace_func = trace_func
 
     def __call__(self, val_metric: float, model: torch.nn.Module, extra_payload: dict = None):
@@ -51,7 +51,7 @@ class EarlyStopping:
             self.trace_func(
                 f"Monitored metric improved ({self.val_best:.6f} --> {val_metric:.6f}). Saving model ..."
             )
-        save_path = os.path.join(self.out_dir, self.filename)
+        save_path = os.path.join(self.out_dir, self.path)
         if extra_payload is not None:
             payload = {"state_dict": model.state_dict(), **extra_payload}
             torch.save(payload, save_path)

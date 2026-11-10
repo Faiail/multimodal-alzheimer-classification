@@ -1,5 +1,5 @@
 from .run import Run
-
+from .visual_run import VisualRun
 
 def exe_experiment(parameters: dict, cls: str):
     run_cls = globals()[cls]

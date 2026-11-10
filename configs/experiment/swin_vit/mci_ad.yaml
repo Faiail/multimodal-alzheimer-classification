@@ -1,0 +1,61 @@
+general:
+  out_dir: models/swin_vit/mci_ad
+  device: cuda
+  pbar: True
+  num_epochs: 150
+data:
+  train:
+    name: &data_cls VisualDataset
+    config:
+      multimodal_root: &multimodal_root data/processed/multimodal-tensors
+      fold_root: &fold_root data/processed/splits/mci_ad
+      split: train
+  val:
+    name: *data_cls
+    config:
+      multimodal_root: *multimodal_root
+      fold_root: *fold_root
+      split: val
+  test:
+    name: *data_cls
+    config:
+      multimodal_root: *multimodal_root
+      fold_root: *fold_root
+      split: test
+loader:
+  batch_size: 4
+  shuffle: True
+  drop_last: False
+  num_workers: 8
+model:
+  name: SwinViT
+  config:
+    spatial_dims: 3
+    in_channels: 2
+    num_classes: 1
+criterion:
+  name: FocalLoss
+  config:
+    alpha: 0.799
+    gamma: 2
+optimizer:
+  name: AdamW
+  config: 
+    lr: 5e-5
+early_stop:
+  name: EarlyStopping
+  config:
+    verbose: True
+    patience: 10
+    path: model.pt
+scheduler:
+  name: HuggingFaceCosineScheduler  
+  config: 
+    num_warmup_epochs: 1
+metrics:
+  acc:
+    name: BinaryAccuracy
+  f1-score:
+    name: BinaryF1Score
+  auc:
+    name: BinaryAUROC

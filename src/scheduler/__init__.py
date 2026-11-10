@@ -5,12 +5,12 @@ from torch.optim.lr_scheduler import (
     ReduceLROnPlateau,
 )
 
-from .hf_scheduler import HFCosineScheduler
+from .hf_scheduler import HuggingFaceCosineScheduler
 
 __all__ = [
     "CosineAnnealingLR",
     "CosineAnnealingWarmRestarts",
-    "HFCosineScheduler",
+    "HuggingFaceCosineScheduler",
     "LambdaLR",
     "ReduceLROnPlateau",
 ]

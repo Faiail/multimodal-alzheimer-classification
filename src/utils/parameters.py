@@ -31,7 +31,7 @@ class ParameterKeys(StrEnum):
     EARLY_STOP = "early_stop"
     NUM_EPOCHS = "num_epochs"
     SCHEDULER = "scheduler"
-    HF_COSINE_SCHEDULER = "HFCosineScheduler"
+    HF_COSINE_SCHEDULER = "HuggingFaceCosineScheduler"
     COSINE_WARM_RESTARTS = "CosineAnnealingWarmRestarts"
     NODE = "node"
     IMG = "image"
@@ -78,4 +78,7 @@ class ParameterKeys(StrEnum):
     OUT_CSV = "out_csv"
     NORMALIZE_PET = "normalize_pet"
     ONLY_PAIRED = "only_paired"
+    FOLD = "fold"
+    EPOCH = "epoch"
+    NUM_WARMUP_EPOCHS = "num_warmup_epochs"
 
