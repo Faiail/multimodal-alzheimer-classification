@@ -1,4 +1,3 @@
-import argparse
 from pathlib import Path
 import nibabel as nib
 import numpy as np
@@ -6,7 +5,7 @@ from nibabel.processing import resample_from_to
 from src.utils import ParameterKeys
 
 
-class AtlasResamplerProcessor:
+class AtlasResampleProcessor:
     """
     Resamples a discrete NIfTI brain atlas (e.g., AAL3v1_1mm) onto the exact
     spatial grid, affine, and orientation of a target MNI152 reference scan
@@ -18,39 +17,44 @@ class AtlasResamplerProcessor:
         self.init()
 
     def init(self):
-        template_key = getattr(ParameterKeys, "TEMPLATE", "template") if ParameterKeys else "template"
-        skip_key = getattr(ParameterKeys, "SKIP", "skip") if ParameterKeys else "skip"
+        atlas_path = self.parameters.get(
+            ParameterKeys.ATLAS,
+            self.parameters.get("atlas_path", "configs/AAL3/AAL3v1_1mm.nii.gz"),
+        )
+        self.atlas_path = Path(atlas_path)
 
-        self.atlas_path = Path(
-            self.parameters.get("atlas_path", "configs/AAL3/AAL3v1_1mm.nii.gz")
+        template_path = self.parameters.get(
+            ParameterKeys.TEMPLATE,
+            self.parameters.get("reference_path", "data/processed/MNI152_T1_1mm.nii.gz"),
         )
-        self.reference_path = Path(
-            self.parameters.get(
-                "reference_path",
-                self.parameters.get(template_key, "data/processed/MNI152_T1_1mm.nii.gz"),
-            )
+        self.template_path = Path(template_path)
+
+        out_dir = self.parameters.get(ParameterKeys.OUT_DIR, "data/processed")
+        out_file = self.parameters.get(
+            ParameterKeys.OUT_FILE,
+            self.parameters.get("output_path", "AAL3v1_1mm_197x233x189.nii.gz"),
         )
-        self.output_path = Path(
-            self.parameters.get(
-                "output_path", "data/processed/AAL3v1_1mm_197x233x189.nii.gz"
-            )
-        )
-        self.skip_existing = bool(
-            self.parameters.get("skip_existing", self.parameters.get(skip_key, True))
-        )
+        out_file_path = Path(out_file)
+        if out_file_path.is_absolute() or len(out_file_path.parts) > 1:
+            self.output_path = out_file_path
+        else:
+            self.output_path = Path(out_dir) / out_file
+
+        self.output_path.parent.mkdir(parents=True, exist_ok=True)
+        self.skip_existing = self.parameters.get(ParameterKeys.SKIP, True)
 
     def launch(self) -> Path:
         if not self.atlas_path.exists():
             raise FileNotFoundError(f"Source atlas not found: {self.atlas_path}")
-        if not self.reference_path.exists():
-            raise FileNotFoundError(f"Reference MNI image not found: {self.reference_path}")
+        if not self.template_path.exists():
+            raise FileNotFoundError(f"Template image not found: {self.template_path}")
 
         if self.skip_existing and self.output_path.exists():
             print(f"[Atlas Resampler] Skipping (already exists): {self.output_path}")
             return self.output_path
 
         atlas_img = nib.load(str(self.atlas_path))
-        ref_img = nib.load(str(self.reference_path))
+        ref_img = nib.load(str(self.template_path))
 
         # Handle 4D reference volumes safely by taking the first 3D volume
         if ref_img.ndim > 3:
@@ -63,7 +67,7 @@ class AtlasResamplerProcessor:
             f"axes={nib.aff2axcodes(atlas_img.affine)}"
         )
         print(
-            f"  * Target grid:    {self.reference_path.name} "
+            f"  * Target grid:    {self.template_path.name} "
             f"| shape={ref_img.shape}, zooms={ref_img.header.get_zooms()[:3]}, "
             f"axes={nib.aff2axcodes(ref_img.affine)}"
         )
@@ -91,7 +95,11 @@ class AtlasResamplerProcessor:
 
         ref_data = ref_img.get_fdata()
         fg_mask = atlas_data > 0
-        brain_overlap = float(np.mean(ref_data[fg_mask] > 0) * 100.0) if np.any(fg_mask) else 0.0
+        brain_overlap = (
+            float(np.mean(ref_data[fg_mask] > 0) * 100.0)
+            if np.any(fg_mask)
+            else 0.0
+        )
 
         print("\n[Atlas Resampler Summary]")
         print(f"  * Output saved to:     {self.output_path}")
@@ -105,44 +113,3 @@ class AtlasResamplerProcessor:
         return self.output_path
 
 
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
-        description="Resample AAL3 atlas to match MNI-registered MRI/PET scan shape."
-    )
-    parser.add_argument(
-        "--atlas",
-        type=str,
-        default="configs/AAL3/AAL3v1_1mm.nii.gz",
-        help="Path to the source atlas NIfTI file.",
-    )
-    parser.add_argument(
-        "--reference",
-        type=str,
-        required=True,
-        help="Path to one registered *_mni.nii.gz scan (shape 197x233x189) or MNI template.",
-    )
-    parser.add_argument(
-        "--output",
-        type=str,
-        default="data/processed/AAL3v1_1mm_197x233x189.nii.gz",
-        help="Path where the resampled atlas will be saved.",
-    )
-    parser.add_argument(
-        "--overwrite",
-        action="store_true",
-        help="Overwrite output atlas if it already exists.",
-    )
-    return parser.parse_args()
-
-
-if __name__ == "__main__":
-    args = parse_args()
-    processor = AtlasResamplerProcessor(
-        {
-            "atlas_path": args.atlas,
-            "reference_path": args.reference,
-            "output_path": args.output,
-            "skip_existing": not args.overwrite,
-        }
-    )
-    processor.launch()

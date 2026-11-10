@@ -81,4 +81,6 @@ class ParameterKeys(StrEnum):
     FOLD = "fold"
     EPOCH = "epoch"
     NUM_WARMUP_EPOCHS = "num_warmup_epochs"
+    ATLAS = "atlas"
+    OUT_FILE = "out_file"
 

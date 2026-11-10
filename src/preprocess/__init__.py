@@ -3,6 +3,7 @@ from .coregistration_processor import CoregistrationProcessor
 from .mri_atlas_registration_processor import MRIAtlasRegistrationProcessor
 from .pet_atlas_registration_processor import PETAtlasRegistrationProcessor
 from .multimodal_tensor_processor import MultimodalTensorProcessor
+from .atlas_resample_processor import AtlasResampleProcessor
 
 
 def exe_preprocess_command(
@@ -19,6 +20,7 @@ __all__ = [
     "MRIAtlasRegistrationProcessor",
     "PETAtlasRegistrationProcessor",
     "MultimodalTensorProcessor",
+    "AtlasResampleProcessor",
     "exe_preprocess_command",
 ]
 
