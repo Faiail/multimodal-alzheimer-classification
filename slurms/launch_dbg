@@ -13,5 +13,5 @@
 #SBATCH --out=outs/experiment.out
 #SBATCH --err=outs/experiment.out
 
-srun ./slurms/exe $@
+srun ./slurms/exe experiment $@
 

@@ -14,5 +14,5 @@
 #SBATCH --out=outs/experiment.out
 #SBATCH --err=outs/experiment.out
 
-srun ./slurms/exe $@ --fold $SLURM_ARRAY_TASK_ID
+srun ./slurms/exe experiment $@ --fold $SLURM_ARRAY_TASK_ID
 
