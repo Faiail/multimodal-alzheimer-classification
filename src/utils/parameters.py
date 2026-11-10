@@ -80,4 +80,5 @@ class ParameterKeys(StrEnum):
     ONLY_PAIRED = "only_paired"
     FOLD = "fold"
     EPOCH = "epoch"
+    NUM_WARMUP_EPOCHS = "num_warmup_epochs"
 

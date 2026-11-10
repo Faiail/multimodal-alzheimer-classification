@@ -193,7 +193,18 @@ class Run:
 
     def _init_cosine_scheduler_params(self, params: dict) -> dict:
         total_steps = max(1, self.num_epochs * len(self.train_loader))
-        params.update({"num_training_steps": total_steps})
+        num_warmup_epochs = params.pop(
+            ParameterKeys.NUM_WARMUP_EPOCHS,
+            params.pop("number_warmup_epochs", params.pop("warmup_epochs", None)),
+        )
+        if num_warmup_epochs is not None:
+            num_warmup_steps = int(num_warmup_epochs * len(self.train_loader))
+        else:
+            num_warmup_steps = params.get("num_warmup_steps", len(self.train_loader))
+        params.update({
+            "num_training_steps": total_steps,
+            "num_warmup_steps": num_warmup_steps,
+        })
         return params
 
     def schedule(self, phase, **kwargs):

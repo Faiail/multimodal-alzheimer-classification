@@ -7,10 +7,11 @@ class HuggingFaceCosineScheduler(LRScheduler):
     def __new__(
         cls,
         optimizer: Optimizer,
-        num_warmup_steps: int,
-        num_training_steps: int,
+        num_warmup_steps: int = 0,
+        num_training_steps: int = 1,
         num_cycles: float = 0.5,
         last_epoch: int = -1,
+        **kwargs,
     ):
         return get_cosine_schedule_with_warmup(
             optimizer=optimizer,
