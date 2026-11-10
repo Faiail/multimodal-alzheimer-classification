@@ -7,11 +7,13 @@ class ViT(torch.nn.Module):
         self,
         in_channels: int,
         spatial_dims: int,
-        img_size: int | tuple[int],
-        patch_size: int | tuple[int],
+        img_size: int | tuple[int, ...],
+        patch_size: int | tuple[int, ...],
         num_classes: int,
+        **kwargs,
     ) -> None:
-        self.model = ViT(
+        super().__init__()
+        self.model = MonaiViT(
             in_channels=in_channels,
             img_size=img_size,
             patch_size=patch_size,
@@ -19,6 +21,7 @@ class ViT(torch.nn.Module):
             classification=True,
             num_classes=num_classes,
             post_activation=None,
+            **kwargs,
         )
 
     def forward(self, x):

@@ -4,7 +4,7 @@ import torch.nn as nn
 from monai.networks.nets.swin_unetr import SwinTransformer
 
 
-class Swin(nn.Module):
+class SwinViT(nn.Module):
     """
     Hierarchical 3D Swin Vision Transformer classifier for multiclass
     neuroimaging diagnosis (e.g., CN vs. MCI vs. AD).
