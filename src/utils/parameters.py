@@ -83,4 +83,8 @@ class ParameterKeys(StrEnum):
     NUM_WARMUP_EPOCHS = "num_warmup_epochs"
     ATLAS = "atlas"
     OUT_FILE = "out_file"
-
+    SEX = "sex"
+    APOE4 = "apoe4"
+    AGE = "age"
+    AGE_THRESHOLD = "age_threshold"
+    LAMBDA = "lambda"

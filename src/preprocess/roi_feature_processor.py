@@ -123,7 +123,15 @@ class ROIFeatureProcessor:
             atlas_tensor = atlas_tensor[..., 0]
         roi_labels = sorted([int(x) for x in np.unique(atlas) if x > 0])
         num_rois = len(roi_labels)
-        if not has_pet:
+        has_pet_flag = bool(has_pet) and not (isinstance(has_pet, str) and has_pet.lower() in ("false", "0", "none", "nan"))
+        pet_file_valid = (
+            has_pet_flag
+            and pet_pth is not None
+            and not pd.isna(pet_pth)
+            and str(pet_pth).strip().lower() not in ("nan", "none", "")
+            and os.path.exists(f"{self.pet_dir}/{pet_pth}")
+        )
+        if not pet_file_valid:
             return np.zeros((num_rois, 1), dtype=np.float32)
         pet_tensor = nib.load(f"{self.pet_dir}/{pet_pth}").get_fdata()
         pet = np.asarray(pet_tensor, dtype=np.float32)

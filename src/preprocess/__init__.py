@@ -5,6 +5,7 @@ from .pet_atlas_registration_processor import PETAtlasRegistrationProcessor
 from .multimodal_tensor_processor import MultimodalTensorProcessor
 from .atlas_resample_processor import AtlasResampleProcessor
 from .roi_feature_processor import ROIFeatureProcessor
+from .population_topology_processor import PopulationTopologyProcessor
 
 
 def exe_preprocess_command(
@@ -23,6 +24,7 @@ __all__ = [
     "MultimodalTensorProcessor",
     "AtlasResampleProcessor",
     "ROIFeatureProcessor",
+    "PopulationTopologyProcessor",
     "exe_preprocess_command",
 ]
 
