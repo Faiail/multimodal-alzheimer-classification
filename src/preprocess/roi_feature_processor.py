@@ -116,14 +116,14 @@ class ROIFeatureProcessor:
         return np.stack([gm, wm, csf], axis=1).astype(np.float32)
 
     def compute_pet_features(
-        self, pet_pth: str, atlas: np.ndarray, reference_labels: list[int] = None
+        self, pet_pth: str, atlas: np.ndarray, reference_labels: list[int] = None, has_pet: bool = True,
     ) -> np.ndarray:
         atlas_tensor = np.rint(atlas).astype(np.int16)
         if atlas_tensor.ndim == 4:
             atlas_tensor = atlas_tensor[..., 0]
         roi_labels = sorted([int(x) for x in np.unique(atlas) if x > 0])
         num_rois = len(roi_labels)
-        if pet_pth == "nan":
+        if not has_pet:
             return np.zeros((num_rois, 1), dtype=np.float32)
         pet_tensor = nib.load(f"{self.pet_dir}/{pet_pth}").get_fdata()
         pet = np.asarray(pet_tensor, dtype=np.float32)
@@ -170,17 +170,17 @@ class ROIFeatureProcessor:
 
     def launch(self):
         data_list = self.raw_dataset[
-            ["mri_file", "pet_file", "safetensor_file"]
+            ["mri_file", "pet_file", "safetensor_file", "has_pet"]
         ].values.tolist()
         bar = self.get_pbar(data_list)
         atlas = self.load_atlas()
         for item in bar:
-            mri_file, pet_file, out_fname = item
+            mri_file, pet_file, out_fname, has_pet = item
             if self.skip and os.path.exists(f"{self.out_dir}/{out_fname}"):
                 continue
             mri_tensor = self.compute_mri_features(mri_pth=mri_file, atlas=atlas)
             pet_tensor = self.compute_pet_features(
-                pet_pth=pet_file, atlas=atlas, reference_labels=self.reference_labels
+                pet_pth=pet_file, atlas=atlas, reference_labels=self.reference_labels, has_pet=has_pet,
             )
             scan_tensor = torch.cat([
                 torch.from_numpy(mri_tensor),
