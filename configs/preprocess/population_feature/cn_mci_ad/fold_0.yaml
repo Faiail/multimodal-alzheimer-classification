@@ -2,5 +2,5 @@ fold: data/processed/splits/cn_mci_ad/folds/0
 data: data/processed/population_topology/cn_mci_ad/population_dataset.csv
 test: data/processed/splits/cn_mci_ad/test.csv
 features: data/processed/roi-features
-out_dir: data/processed/population_features/cn_mci_ad/0
+out_dir: data/processed/population_topology/cn_mci_ad/0
 seed: 42
