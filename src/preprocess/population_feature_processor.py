@@ -25,6 +25,7 @@ class PopulationFeatureProcessor:
         self.test_set = pd.read_csv(self.parameters.get(ParameterKeys.TEST))
         self.feature_dir = self.parameters.get(ParameterKeys.FEATURES)
         self.out_dir = self.parameters.get(ParameterKeys.OUT_DIR, "./")
+        os.makedirs(self.out_dir, exist_ok=True)
         self.seed = self.parameters.get(ParameterKeys.SEED)
 
     def get_features(self, files: list[str]) -> np.ndarray:
@@ -58,5 +59,9 @@ class PopulationFeatureProcessor:
         # train feature selector
         pipeline.fit(X_train, y_train)
         joblib.dump(pipeline, f"{self.out_dir}/pipeline.pkl")
-        
+
+        dataset_sorted = self.dataset.sort_values("node_id", ascending=True).reset_index(drop=True)
+        all_features = self.get_features(dataset_sorted["safetensor_file"])
+        feature_selected = pipeline.transform(all_features)
+        torch.save(feature_selected, f"{self.out_dir}/features.pt")
 

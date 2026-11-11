@@ -1,0 +1,6 @@
+fold: data/processed/splits/cn_ad/folds/4
+data: data/processed/population_topology/cn_ad/population_dataset.csv
+test: data/processed/splits/cn_ad/test.csv
+features: data/processed/roi-features
+out_dir: data/processed/population_features/cn_ad/4
+seed: 42

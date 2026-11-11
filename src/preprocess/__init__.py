@@ -6,6 +6,7 @@ from .multimodal_tensor_processor import MultimodalTensorProcessor
 from .atlas_resample_processor import AtlasResampleProcessor
 from .roi_feature_processor import ROIFeatureProcessor
 from .population_topology_processor import PopulationTopologyProcessor
+from .population_feature_processor import PopulationFeatureProcessor
 
 
 def exe_preprocess_command(
@@ -25,6 +26,7 @@ __all__ = [
     "AtlasResampleProcessor",
     "ROIFeatureProcessor",
     "PopulationTopologyProcessor",
+    "PopulationFeatureProcessor",
     "exe_preprocess_command",
 ]
 
