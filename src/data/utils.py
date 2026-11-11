@@ -8,3 +8,4 @@ class BatchKeys(StrEnum):
     LABEL = "label"
     MRI = "mri"
     PET = "pet"
+    ROI = "roi"

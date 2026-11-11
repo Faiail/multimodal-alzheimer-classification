@@ -1,0 +1,26 @@
+data: data/processed/all_features_multimodal.csv
+mri_dir: data/processed/mri_atlas_registered
+pet_dir: data/processed/pet_atlas_registered
+atlas: data/processed/AAL3v1_1mm_197x233x189.nii.gz
+out_dir: data/processed/roi-features
+skip: true
+pbar: true
+label:
+  - 95
+  - 96
+  - 97
+  - 98
+  - 99
+  - 100
+  - 101
+  - 102
+  - 103
+  - 104
+  - 105
+  - 106
+  - 107
+  - 108
+  - 109
+  - 110
+  - 111
+  - 112
