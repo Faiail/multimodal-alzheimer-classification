@@ -19,7 +19,8 @@ class PopulationGraphDataset:
         topology = torch.load(f"{self.topology_root}/topology.pt")
         edge_index = topology[BatchKeys.EDGE_INDEX]
         edge_weight = topology[BatchKeys.EDGE_WEIGHT]
-        x = torch.load(f"{self.topology_root}/{self.fold_id}/features.pt")
+        x = torch.load(f"{self.topology_root}/{self.fold_id}/features.pt", weights_only=False)
+        x = torch.from_numpy(x)
         population_dataset = pd.read_csv(f"{self.topology_root}/population_dataset.csv")
         population_dataset = population_dataset.sort_values(
             by="node_id", ascending=True
@@ -45,15 +46,15 @@ class PopulationGraphDataset:
         test_dataset = pd.read_csv(f"{self.dataset_root}/test.csv")
         test_mask = (
             population_dataset["safetensor_file"]
-            .isin(val_dataset["safetensor_file"])
+            .isin(test_dataset["safetensor_file"])
             .values
         )
         test_mask = torch.from_numpy(test_mask).bool()
 
         return Data(
-            x=x,
-            edge_index=edge_index,
-            edge_weight=edge_weight,
+            x=x.float(),
+            edge_index=edge_index.long(),
+            edge_weight=edge_weight.float(),
             y=y,
             train_mask=train_mask,
             val_mask=val_mask,

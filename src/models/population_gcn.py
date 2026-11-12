@@ -22,5 +22,5 @@ class PopulationGCN(torch.nn.Module):
         edge_index: torch.Tensor,
         edge_weight: torch.Tensor,
     ) -> torch.Tensor:
-        node_embedddings = self.backbone(x, edge_index, edge_weight)
+        node_embedddings = self.backbone(x=x, edge_index=edge_index, edge_weight=edge_weight)
         return self.fc(self.dropout(node_embedddings))

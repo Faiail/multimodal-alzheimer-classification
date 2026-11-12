@@ -85,8 +85,8 @@ class PopulationRun(Run):
         gts = self.dataset.y[mask]
         loss = self.criterion(preds, gts)
         self.metrics.update(self._format_preds_for_metrics(preds), gts.cpu())
-        cumulated_loss = loss.detach().cpu.item()
+        cumulated_loss = loss.detach().cpu().item()
         metric_dict = self.metrics.compute()
         self.metrics.reset()
         self.print_metrics(phase=ParameterKeys.TEST, metrics=metric_dict)
-        self.save_metrics(metrics=metric_dict, cumulated_loss=cumulated_loss)
+        self.save_metrics(metrics=metric_dict, loss=cumulated_loss)

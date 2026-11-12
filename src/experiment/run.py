@@ -147,8 +147,9 @@ class Run:
         print(f"Epoch {epoch}/{self.num_epochs}: {phase} loss: {cumulated_loss:.4f}")
         self.print_metrics(phase=phase, metrics=metrics)
 
-    def print_metrics(self, phase: str, metrics: dict = None):
-        raise NotImplementedError()
+    def print_metrics(self, phase: str, metrics=None):
+        for k, v in metrics.items():
+            print(f"{phase} {k}: {v:.4f}")
 
     def _init_optimizer(self):
         optimizer_parameters = self.parameters.get(ParameterKeys.OPTIMIZER)
