@@ -1,0 +1,5 @@
+in_dir: data/processed/roi-features
+out_dir: data/processed/brain_graphs
+pbar: True
+topk: 0.1
+skip: True

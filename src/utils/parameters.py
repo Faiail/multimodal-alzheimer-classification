@@ -89,3 +89,4 @@ class ParameterKeys(StrEnum):
     AGE_THRESHOLD = "age_threshold"
     LAMBDA = "lambda"
     TOPOLOGY = "topology"
+    TOPK = "topk"
