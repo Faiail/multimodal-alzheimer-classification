@@ -12,3 +12,4 @@ class BatchKeys(StrEnum):
     X = "x"
     EDGE_INDEX = "edge_index"
     EDGE_WEIGHT = "edge_weight"
+    GRAPH = "graph"
