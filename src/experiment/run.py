@@ -11,6 +11,8 @@ import src.models as models
 import src.scheduler as schedulers
 from src.utils import ParameterKeys
 from src.utils.general import set_seed, save_json
+from torchmetrics import MetricCollection
+import src.metrics as metric_pkg
 
 
 class Run:
@@ -76,7 +78,7 @@ class Run:
         )
         loader_params = deepcopy(self.parameters.get(ParameterKeys.LOADER, {}))
         val_loader_params = deepcopy(loader_params)
-        val_loader_params["shuffle"] = False
+        val_loader_params["shuffle"] = True
         val_loader_params["drop_last"] = False
 
         self.train_loader = DataLoader(
@@ -121,7 +123,19 @@ class Run:
             self.model.load_state_dict(self.run_state.get(ParameterKeys.MODEL))
 
     def _init_metrics(self):
-        raise NotImplementedError()
+        metrics_parameters = self.parameters.get(ParameterKeys.METRICS, {})
+        self.metrics = MetricCollection(
+            {
+                k: metric_pkg.__dict__[v.get(ParameterKeys.NAME)](
+                    **(v.get(ParameterKeys.CFG) or {})
+                )
+                for k, v in metrics_parameters.items()
+            }
+        )
+
+    def _format_preds_for_metrics(self, preds: torch.Tensor) -> torch.Tensor:
+        preds = preds.detach().cpu()
+        return preds.squeeze(-1) if preds.ndim > 1 and preds.shape[-1] == 1 else preds
 
     def print_stats(
         self,

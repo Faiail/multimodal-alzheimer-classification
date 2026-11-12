@@ -1,5 +1,7 @@
 from .run import Run
 from .visual_run import VisualRun
+from .population_run import PopulationRun
+
 
 def exe_experiment(parameters: dict, cls: str):
     run_cls = globals()[cls]
@@ -15,4 +17,3 @@ __all__ = [
     "Run",
     "exe_experiment",
 ]
-

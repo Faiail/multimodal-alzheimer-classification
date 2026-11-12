@@ -9,3 +9,6 @@ class BatchKeys(StrEnum):
     MRI = "mri"
     PET = "pet"
     ROI = "roi"
+    X = "x"
+    EDGE_INDEX = "edge_index"
+    EDGE_WEIGHT = "edge_weight"
