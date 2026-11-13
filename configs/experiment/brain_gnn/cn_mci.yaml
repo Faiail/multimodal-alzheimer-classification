@@ -1,0 +1,69 @@
+general:
+  out_dir: models/brain_gnn/cn_mci
+  device: cuda
+  pbar: True
+  num_epochs: 150
+data:
+  train:
+    name: &data_cls BrainGraphDataset
+    config:
+      graph_root: &graph_root data/processed/brain_graphs
+      fold_root: &fold_root data/processed/splits/cn_mci
+      split: train
+  val:
+    name: *data_cls
+    config:
+      graph_root: *graph_root
+      fold_root: *fold_root
+      split: val
+  test:
+    name: *data_cls
+    config:
+      graph_root: *graph_root
+      fold_root: *fold_root
+      split: test
+loader:
+  batch_size: 128
+  shuffle: True
+  drop_last: False
+  num_workers: 8
+model:
+  name: BrainGNN
+  config:
+    num_nodes: 166
+    in_channels: 4
+    hidden_dim1: 32
+    hidden_dim2: 32
+    num_classes: 1
+    num_communities: 8
+    pooling_ratio: 0.5
+    mlp_hidden_dim: 8
+criterion:
+  name: BrainGNNLoss
+  config:
+    alpha: 0.345
+    gamma: 2
+    lambda1: 0.1
+    lambda2: 0.1
+    eps: 1e-7
+optimizer:
+  name: AdamW
+  config: 
+    lr: 1e-3
+early_stop:
+  name: EarlyStopping
+  config:
+    verbose: True
+    patience: 10
+    path: model.pt
+scheduler:
+  name: HuggingFaceCosineScheduler  
+  config: 
+    num_warmup_epochs: 1
+metrics:
+  acc:
+    name: BinaryAccuracy
+  f1-score:
+    name: BinaryF1Score
+  auc:
+    name: BinaryAUROC

@@ -118,12 +118,12 @@ class BrainGNNRun(Run):
                 batch=graphs.batch,
                 return_aux=True,
             )
-            loss = self.criterion(logits=logits, y=gts, aux=aux)
+            loss = self.criterion(logits=logits, y=gts, aux=aux)["loss"]
             self.metrics.update(self._format_preds_for_metrics(logits), gts.cpu())
             batch_loss = loss.detach().cpu().item()
             cumulated_loss += batch_loss
             self.update_bar(bar=bar, loss=batch_loss)
-        cumulated_loss /= len(self.val_loader)
+        cumulated_loss /= len(self.test_loader)
         metric_dict = self.metrics.compute()
         self.metrics.reset()
         self.print_metrics(phase=ParameterKeys.TEST, metrics=metric_dict)

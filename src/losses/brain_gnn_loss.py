@@ -58,7 +58,9 @@ class BrainGNNLoss(nn.Module):
                 s_list.append(norm_s1[idx])
         if len(s_list) > 0:
             s_mat = torch.stack(s_list, dim=0)
-            num_classes = logits.shape[1]
+            num_classes = (
+                2 if (logits.ndim == 1 or logits.shape[-1] == 1) else logits.shape[-1]
+            )
             for c in range(num_classes):
                 c_mask = y == c
                 m_c = int(c_mask.sum().item())
