@@ -1,6 +1,7 @@
 from .run import Run
 from .visual_run import VisualRun
 from .population_run import PopulationRun
+from .brain_gnn_run import BrainGNNRun
 
 
 def exe_experiment(parameters: dict, cls: str):

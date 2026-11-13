@@ -28,7 +28,7 @@ class BrainGraphDataset(TorchDataset):
         row = self.dataset.iloc[idx]
         file_pth = f"{self.graph_root}/{row[BatchKeys.SAFETENSOR_PTH]}"
         label = row[BatchKeys.LABEL]
-        graph = torch.load(file_pth)
+        graph = torch.load(file_pth, weights_only=False)
         return {BatchKeys.GRAPH: graph, BatchKeys.GT: label}
 
 
