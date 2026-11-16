@@ -11,7 +11,7 @@ class HiGNNRun(Run):
         dataset_parameters = self.parameters.get(ParameterKeys.DATA)
         dataset_name = dataset_parameters.get(ParameterKeys.NAME)
         dataset_config = dataset_parameters.get(ParameterKeys.CFG, dict())
-        self.dataset = data_pkg.__dict__[dataset_name](**dataset_config)
+        self.dataset = data_pkg.__dict__[dataset_name](**dataset_config, fold_id=self.fold_id)
         loader_parameters = self.parameters.get(ParameterKeys.LOADER)
         self.dataloader = BiGraphLoader(dataset=self.dataset, **loader_parameters)
         population_topology = self.dataset.get_base_topology()

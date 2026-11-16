@@ -14,12 +14,14 @@ class BiGraphDataset(Dataset):
         roi_feature_root: str,
         dataset_root: str,
         fold_id: int,
+        topk: int,
     ) -> None:
         super().__init__()
         self.topology_root = topology_root
         self.roi_feature_root = roi_feature_root
         self.dataset_root = dataset_root
         self.fold_id = fold_id
+        self.topk = topk
         self.dataset = pd.read_csv(
             f"{self.topology_root}/population_dataset.csv", index_col="node_id"
         )
@@ -34,7 +36,7 @@ class BiGraphDataset(Dataset):
         sim = torch.exp(-dist_sq / (2.0 * sigma_sq))
         sim.fill_diagonal_(0.0)  # no self-loops
         # Top-k strongest connections per ROI + symmetrize
-        vals, idx = torch.topk(sim, k=self.top_k, dim=1)
+        vals, idx = torch.topk(sim, k=self.topk, dim=1)
         adj = torch.zeros_like(sim).scatter_(1, idx, vals)
         adj = torch.maximum(adj, adj.t())
         # Extract COO edge_index and raw positive weights

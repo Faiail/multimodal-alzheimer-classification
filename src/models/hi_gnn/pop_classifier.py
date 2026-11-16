@@ -13,4 +13,4 @@ class PopulationClassfier(torch.nn.Module):
         edge_index: torch.Tensor,
         edge_weight: torch.Tensor,
     ) -> torch.Tensor:
-        return self.model(x=x, edge_index=edge_index, edge_weigt=edge_weight)
+        return self.model(x=x, edge_index=edge_index, edge_weight=edge_weight)
