@@ -1,0 +1,75 @@
+general:
+  out_dir: models/hi_gnn/cn_mci_ad
+  device: cuda
+  pbar: True
+  num_epochs: 150
+data:
+  name: BiGraphDataset
+  config:
+    topology_root: data/processed/population_topology/cn_mci_ad
+    roi_feature_root: data/processed/roi-features
+    dataset_root: data/processed/splits/cn_mci_ad
+    topk: 16
+loader:
+  batch_size: 128
+  drop_last: False
+  num_workers: 8
+model:
+  name: HiGNN
+  config:
+    backbone_params:  
+      gnn_name: GCN
+      gnn_params:
+        in_channels: 4
+        hidden_channels: 128
+        out_channels: &bbone_hidden_dim 128
+        num_layers: 2
+        dropout: 0.2
+        norm: batchnorm
+      hidden_dim: *bbone_hidden_dim
+      out_dim: *bbone_hidden_dim
+    classifier_params:
+      gnn_name: ChebNet
+      gnn_params:
+        in_channels: *bbone_hidden_dim
+        hidden_channels: 16
+        out_channels: &num_classes 3
+        num_layers: 2
+        K: 3
+        dropout: 0.5
+        act: relu
+criterion:
+  name: FocalLoss
+  config:
+    alpha: [0.276, 0.145, 0.579]
+    gamma: 2
+optimizer:
+  name: AdamW
+  config: 
+    lr: 5e-5
+early_stop:
+  name: EarlyStopping
+  config:
+    verbose: True
+    patience: 10
+    path: model.pt
+scheduler:
+  name: HuggingFaceCosineScheduler  
+  config: 
+    num_warmup_epochs: 1
+metrics:
+  acc:
+    name: MulticlassAccuracy
+    config:
+      num_classes: *num_classes
+      average: &average macro
+  f1-score:
+    name: MulticlassF1Score
+    config:
+      num_classes: *num_classes
+      average: *average
+  auc:
+    name: MulticlassAUROC
+    config: 
+      num_classes: *num_classes
+      average: *average
