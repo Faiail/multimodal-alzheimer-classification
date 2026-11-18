@@ -8,6 +8,7 @@ from .roi_feature_processor import ROIFeatureProcessor
 from .population_topology_processor import PopulationTopologyProcessor
 from .population_feature_processor import PopulationFeatureProcessor
 from .brain_gnn_processor import BrainGNNProcessor
+from .mm_gnn_processor import MMGraphProcessor
 
 
 def exe_preprocess_command(

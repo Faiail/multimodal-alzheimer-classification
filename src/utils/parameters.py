@@ -90,3 +90,5 @@ class ParameterKeys(StrEnum):
     LAMBDA = "lambda"
     TOPOLOGY = "topology"
     TOPK = "topk"
+    POPULATION = "population"
+    THRESHOLD = "threshold"
