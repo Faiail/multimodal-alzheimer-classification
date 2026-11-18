@@ -34,6 +34,6 @@ class MMGNN(torch.nn.Module):
             edge_index=pet_graph.edge_index,
             edge_weight=pet_graph.edge_weight,
         )
-        return ((mri_logits * mri_mask) + (pet_logits * pet_mask)) / (
-            mri_mask + pet_mask
+        return ((mri_logits * mri_mask.unsqueeze(-1)) + (pet_logits * pet_mask.unsqueeze(-1))) / (
+            mri_mask.unsqueeze(-1) + pet_mask.unsqueeze(-1)
         )

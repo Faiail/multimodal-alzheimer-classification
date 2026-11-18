@@ -63,6 +63,7 @@ class MMGNNRun(PopulationRun):
         self.metrics.update(self._format_preds_for_metrics(preds), gts.cpu())
         cumulated_loss = loss.detach().cpu().item()
         self.schedule(phase=ParameterKeys.VAL, loss=cumulated_loss)
+        self.trigger = self.early_stop_callback(monitored_value=cumulated_loss)
         metric_dict = self.metrics.compute()
         self.metrics.reset()
         self.print_stats(
