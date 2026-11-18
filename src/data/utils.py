@@ -13,3 +13,5 @@ class BatchKeys(StrEnum):
     EDGE_INDEX = "edge_index"
     EDGE_WEIGHT = "edge_weight"
     GRAPH = "graph"
+    HAS_MRI = "has_mri"
+    HAS_PET = "has_pet"
