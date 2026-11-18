@@ -12,7 +12,7 @@ model:
   name: MMGNN
   config:
     mri_branch_parameters:
-      gnn_name: &gnn_name ChebNet
+      gnn_name: &gnn_name FastChebNet
       gnn_config: &gnn_config
         num_layers: 2
         in_channels: 13695

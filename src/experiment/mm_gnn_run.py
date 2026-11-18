@@ -23,7 +23,7 @@ class MMGNNRun(PopulationRun):
     def train_epoch(self, epoch):
         self.model.train()
         self.optimizer.zero_grad()
-        train_mask = self.dataset.get_mask(split=ParameterKeys.TRAIN).to(self.device)
+        train_mask = self.dataset.get_mask(split=ParameterKeys.TRAIN)
         preds = self.model(
             mri_graph=self.mri_graph.to(self.device),
             pet_graph=self.pet_graph.to(self.device),
@@ -50,7 +50,7 @@ class MMGNNRun(PopulationRun):
     @torch.no_grad()
     def validate_epoch(self, epoch):
         self.model.eval()
-        val_mask = self.dataset.get_mask(split=ParameterKeys.VAL).to(self.device)
+        val_mask = self.dataset.get_mask(split=ParameterKeys.VAL)
         preds = self.model(
             mri_graph=self.mri_graph.to(self.device),
             pet_graph=self.pet_graph.to(self.device),
@@ -77,7 +77,7 @@ class MMGNNRun(PopulationRun):
         self.model.load_state_dict(torch.load(f"{self.out_dir}/{self.early_stop.path}"))
         self.model = self.model.to(self.device)
         self.model.eval()
-        test_mask = self.dataset.get_mask(split=ParameterKeys.TEST).to(self.device)
+        test_mask = self.dataset.get_mask(split=ParameterKeys.TEST)
         preds = self.model(
             mri_graph=self.mri_graph.to(self.device),
             pet_graph=self.pet_graph.to(self.device),
