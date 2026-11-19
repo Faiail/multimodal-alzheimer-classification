@@ -4,4 +4,3 @@ from .brain_gnn_loss import BrainGNNLoss
 
 
 __all__ = ["CrossEntropyLoss", "FocalLoss", "BrainGNNLoss"]
-

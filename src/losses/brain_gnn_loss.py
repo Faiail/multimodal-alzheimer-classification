@@ -1,7 +1,6 @@
 import torch
 from torch import nn
-from typing import Any
-from .focal_loss import FocalLoss
+from typing import Any, Optional, Sequence, Union
 
 
 class BrainGNNLoss(nn.Module):
@@ -9,18 +8,22 @@ class BrainGNNLoss(nn.Module):
 
     def __init__(
         self,
-        alpha: float = None,
-        gamma: float = 2.0,
+        weight: Optional[Union[torch.Tensor, Sequence[float]]] = None,
         reduction: str = "mean",
         lambda1: float = 0.1,
         lambda2: float = 0.1,
         eps: float = 1e-7,
+        alpha: Optional[Any] = None,
+        gamma: float = 2.0,
     ) -> None:
         super().__init__()
         self.lambda1 = lambda1
         self.lambda2 = lambda2
-        self.eps = eps
-        self.ce = FocalLoss(alpha=alpha, gamma=gamma, reduction=reduction)
+        self.eps = float(eps)
+        ce_weight = weight if weight is not None else alpha
+        if ce_weight is not None and not isinstance(ce_weight, torch.Tensor):
+            ce_weight = torch.tensor(ce_weight, dtype=torch.float32)
+        self.ce = nn.CrossEntropyLoss(weight=ce_weight, reduction=reduction)
 
     def forward(
         self,
@@ -28,7 +31,7 @@ class BrainGNNLoss(nn.Module):
         y: torch.Tensor,
         aux: dict[str, Any],
     ) -> dict[str, torch.Tensor]:
-        l_ce = self.ce(logits, y)
+        l_ce = self.ce(logits, y.long())
         # Eq. 7: Unit loss
         l_unit = (aux["pool1_w"].norm(p=2) - 1.0) ** 2 + (
             aux["pool2_w"].norm(p=2) - 1.0

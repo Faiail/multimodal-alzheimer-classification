@@ -1,7 +1,7 @@
 general:
   out_dir: models/hi_gnn/cn_mci_ad
   device: cuda
-  pbar: True
+  pbar: true
   num_epochs: 150
 data:
   name: BiGraphDataset
@@ -12,64 +12,68 @@ data:
     topk: 16
 loader:
   batch_size: 128
-  drop_last: False
+  drop_last: false
   num_workers: 8
 model:
   name: HiGNN
   config:
-    backbone_params:  
+    backbone_params:
       gnn_name: GCN
       gnn_params:
         in_channels: 4
         hidden_channels: 128
-        out_channels: &bbone_hidden_dim 128
+        out_channels: 128
         num_layers: 2
         dropout: 0.2
         norm: batchnorm
-      hidden_dim: *bbone_hidden_dim
-      out_dim: *bbone_hidden_dim
+      hidden_dim: 128
+      out_dim: 128
     classifier_params:
       gnn_name: ChebNet
       gnn_params:
-        in_channels: *bbone_hidden_dim
+        in_channels: 128
         hidden_channels: 16
-        out_channels: &num_classes 3
+        out_channels: 3
         num_layers: 2
         K: 3
         dropout: 0.5
         act: relu
 criterion:
-  name: FocalLoss
+  name: CrossEntropyLoss
   config:
-    alpha: [0.276, 0.145, 0.579]
-    gamma: 2
+    weight:
+    - 1.123
+    - 0.593
+    - 2.359
 optimizer:
   name: AdamW
-  config: 
-    lr: 5e-5
+  config:
+    lr: 0.001
+    weight_decay: 0.0005
 early_stop:
   name: EarlyStopping
   config:
-    verbose: True
+    verbose: true
     patience: 10
     path: model.pt
 scheduler:
-  name: HuggingFaceCosineScheduler  
-  config: 
-    num_warmup_epochs: 1
+  name: StepLR
+  config:
+    step_size: 20
+    gamma: 0.5
 metrics:
   acc:
     name: MulticlassAccuracy
     config:
-      num_classes: *num_classes
-      average: &average macro
+      num_classes: 3
+      average: macro
   f1-score:
     name: MulticlassF1Score
     config:
-      num_classes: *num_classes
-      average: *average
+      num_classes: 3
+      average: macro
   auc:
     name: MulticlassAUROC
-    config: 
-      num_classes: *num_classes
-      average: *average
+    config:
+      num_classes: 3
+      average: macro

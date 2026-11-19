@@ -13,48 +13,52 @@ model:
     gnn_name: ChebNet
     gnn_parameters:
       in_channels: 128
-      hidden_channels: &hidden_channels 16
+      hidden_channels: 16
       num_layers: 6
-      out_channels: *hidden_channels
-      dropout: &dropout 0.02
+      out_channels: 16
+      dropout: 0.02
       act: relu
       K: 3
       normalization: sym
-    hidden_size: *hidden_channels
-    dropout: *dropout
+    hidden_size: 16
+    dropout: 0.02
     num_classes: 3
 criterion:
-  name: FocalLoss
+  name: CrossEntropyLoss
   config:
-    alpha: [0.276, 0.145, 0.579]
-    gamma: 2
+    weight:
+    - 1.123
+    - 0.593
+    - 2.359
 optimizer:
   name: AdamW
-  config: 
+  config:
     lr: 0.01
+    weight_decay: 1.0e-05
 early_stop:
   name: EarlyStopping
   config:
-    verbose: True
+    verbose: true
     patience: 10
     path: model.pt
 scheduler:
-  name: HuggingFaceCosineScheduler  
-  config: 
-    num_warmup_epochs: 1
+  name: StepLR
+  config:
+    step_size: 25
+    gamma: 0.5
 metrics:
   acc:
     name: MulticlassAccuracy
     config:
-      num_classes: &num_classes 3
-      average: &average macro
+      num_classes: 3
+      average: macro
   f1-score:
     name: MulticlassF1Score
     config:
-      num_classes: *num_classes
-      average: *average
+      num_classes: 3
+      average: macro
   auc:
     name: MulticlassAUROC
-    config: 
-      num_classes: *num_classes
-      average: *average
+    config:
+      num_classes: 3
+      average: macro

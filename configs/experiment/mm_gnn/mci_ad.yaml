@@ -12,41 +12,53 @@ model:
   name: MMGNN
   config:
     mri_branch_parameters:
-      gnn_name: &gnn_name FastChebNet
-      gnn_config: &gnn_config
+      gnn_name: FastChebNet
+      gnn_config: &id001
         num_layers: 2
         in_channels: 13695
         hidden_channels: 32
-        out_channels: &num_classes 1
+        out_channels: 2
         act: relu
         K: 3
         dropout: 0.5
     pet_branch_parameters:
-      gnn_name: *gnn_name
-      gnn_config: *gnn_config
+      gnn_name: FastChebNet
+      gnn_config: *id001
 criterion:
-  name: FocalLoss
+  name: CrossEntropyLoss
   config:
-    alpha: 0.799
-    gamma: 2
+    weight:
+    - 0.626
+    - 2.488
 optimizer:
   name: AdamW
-  config: 
-    lr: 1e-4
+  config:
+    lr: 0.0001
+    weight_decay: 0.0001
 early_stop:
   name: EarlyStopping
   config:
-    verbose: True
+    verbose: true
     patience: 10
     path: model.pt
 scheduler:
-  name: HuggingFaceCosineScheduler  
-  config: 
-    num_warmup_epochs: 1
+  name: CosineAnnealingLR
+  config:
+    T_max: 50
+    eta_min: 1.0e-06
 metrics:
   acc:
-    name: BinaryAccuracy
+    name: MulticlassAccuracy
+    config:
+      num_classes: 2
+      average: macro
   f1-score:
-    name: BinaryF1Score
+    name: MulticlassF1Score
+    config:
+      num_classes: 2
+      average: macro
   auc:
-    name: BinaryAUROC
+    name: MulticlassAUROC
+    config:
+      num_classes: 2
+      average: macro

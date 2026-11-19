@@ -1,31 +1,31 @@
 general:
   out_dir: models/brain_gnn/cn_mci_ad
   device: cuda
-  pbar: True
+  pbar: true
   num_epochs: 150
 data:
   train:
-    name: &data_cls BrainGraphDataset
+    name: BrainGraphDataset
     config:
-      graph_root: &graph_root data/processed/brain_graphs
-      fold_root: &fold_root data/processed/splits/cn_mci_ad
+      graph_root: data/processed/brain_graphs
+      fold_root: data/processed/splits/cn_mci_ad
       split: train
   val:
-    name: *data_cls
+    name: BrainGraphDataset
     config:
-      graph_root: *graph_root
-      fold_root: *fold_root
+      graph_root: data/processed/brain_graphs
+      fold_root: data/processed/splits/cn_mci_ad
       split: val
   test:
-    name: *data_cls
+    name: BrainGraphDataset
     config:
-      graph_root: *graph_root
-      fold_root: *fold_root
+      graph_root: data/processed/brain_graphs
+      fold_root: data/processed/splits/cn_mci_ad
       split: test
 loader:
   batch_size: 128
-  shuffle: True
-  drop_last: False
+  shuffle: true
+  drop_last: false
   num_workers: 8
 model:
   name: BrainGNN
@@ -41,38 +41,42 @@ model:
 criterion:
   name: BrainGNNLoss
   config:
-    alpha: [0.276, 0.145, 0.579]
-    gamma: 2
+    weight:
+    - 1.123
+    - 0.593
+    - 2.359
     lambda1: 0.1
     lambda2: 0.1
     eps: 1e-7
 optimizer:
   name: AdamW
-  config: 
-    lr: 1e-3
+  config:
+    lr: 0.001
+    weight_decay: 0.005
 early_stop:
   name: EarlyStopping
   config:
-    verbose: True
+    verbose: true
     patience: 10
     path: model.pt
 scheduler:
-  name: HuggingFaceCosineScheduler  
-  config: 
-    num_warmup_epochs: 1
+  name: StepLR
+  config:
+    step_size: 20
+    gamma: 0.5
 metrics:
   acc:
     name: MulticlassAccuracy
     config:
-      num_classes: &num_classes 3
-      average: &average macro
+      num_classes: 3
+      average: macro
   f1-score:
     name: MulticlassF1Score
     config:
-      num_classes: *num_classes
-      average: *average
+      num_classes: 3
+      average: macro
   auc:
     name: MulticlassAUROC
-    config: 
-      num_classes: *num_classes
-      average: *average
+    config:
+      num_classes: 3
+      average: macro
