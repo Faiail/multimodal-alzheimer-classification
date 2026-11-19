@@ -1,0 +1,10 @@
+raw_dataset: data/processed/multimodal_raw_dataset.csv
+mri_dir: data/processed/mri_atlas_registered
+pet_dir: data/processed/pet_atlas_registered
+atlas_dir: data/processed/atlases_1mm_197x233x189
+out_dir: data/processed/multi_atlas_safetensors
+out_csv: data/processed/all_features_multiatlas.csv
+smri_metric: volume
+extract_pet: true
+only_paired: false
+skip: true

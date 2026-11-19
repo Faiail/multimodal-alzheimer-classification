@@ -92,3 +92,6 @@ class ParameterKeys(StrEnum):
     TOPK = "topk"
     POPULATION = "population"
     THRESHOLD = "threshold"
+    ATLAS_DIR = "atlas_dir"
+    EXTRACT_PET = "extract_pet"
+    SMRI_METRIC = "smri_metric"

@@ -10,6 +10,7 @@ from .population_feature_processor import PopulationFeatureProcessor
 from .brain_gnn_processor import BrainGNNProcessor
 from .mm_gnn_processor import MMGraphProcessor
 from .multi_atlas_processor import MultiAtlasProcessor
+from .multi_atlas_tensor_processor import MultiAtlasTensorProcessor
 
 
 def exe_preprocess_command(
@@ -33,6 +34,7 @@ __all__ = [
     "BrainGNNProcessor",
     "MMGraphProcessor",
     "MultiAtlasProcessor",
+    "MultiAtlasTensorProcessor",
     "exe_preprocess_command",
 ]
 
