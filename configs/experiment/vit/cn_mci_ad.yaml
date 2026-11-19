@@ -1,72 +1,82 @@
 general:
   out_dir: models/vit/cn_mci_ad
   device: cuda
-  pbar: True
+  pbar: true
   num_epochs: 150
 data:
   train:
-    name: &data_cls VisualDataset
+    name: VisualDataset
     config:
-      multimodal_root: &multimodal_root data/processed/multimodal-tensors
-      fold_root: &fold_root data/processed/splits/cn_mci_ad
+      multimodal_root: data/processed/multimodal-tensors
+      fold_root: data/processed/splits/cn_mci_ad
       split: train
   val:
-    name: *data_cls
+    name: VisualDataset
     config:
-      multimodal_root: *multimodal_root
-      fold_root: *fold_root
+      multimodal_root: data/processed/multimodal-tensors
+      fold_root: data/processed/splits/cn_mci_ad
       split: val
   test:
-    name: *data_cls
+    name: VisualDataset
     config:
-      multimodal_root: *multimodal_root
-      fold_root: *fold_root
+      multimodal_root: data/processed/multimodal-tensors
+      fold_root: data/processed/splits/cn_mci_ad
       split: test
 loader:
   batch_size: 64
-  shuffle: True
-  drop_last: False
+  shuffle: true
+  drop_last: false
   num_workers: 8
 model:
   name: ViT
   config:
     spatial_dims: 3
     in_channels: 2
-    img_size: [128, 128, 128]
-    patch_size: [16, 16, 16]
+    img_size:
+    - 128
+    - 128
+    - 128
+    patch_size:
+    - 16
+    - 16
+    - 16
     num_classes: 3
 criterion:
-  name: FocalLoss
+  name: CrossEntropyLoss
   config:
-    alpha: [0.276, 0.145, 0.579]
-    gamma: 2
+    weight:
+    - 1.123
+    - 0.593
+    - 2.359
 optimizer:
   name: AdamW
-  config: 
-    lr: 5e-5
+  config:
+    lr: 0.0002
+    weight_decay: 0.0001
 early_stop:
   name: EarlyStopping
   config:
-    verbose: True
+    verbose: true
     patience: 10
     path: model.pt
 scheduler:
-  name: HuggingFaceCosineScheduler  
-  config: 
-    num_warmup_epochs: 1
+  name: CosineAnnealingLR
+  config:
+    T_max: 50
+    eta_min: 1.0e-06
 metrics:
   acc:
     name: MulticlassAccuracy
     config:
-      num_classes: &num_classes 3
-      average: &average macro
+      num_classes: 3
+      average: macro
   f1-score:
     name: MulticlassF1Score
     config:
-      num_classes: *num_classes
-      average: *average
+      num_classes: 3
+      average: macro
   auc:
     name: MulticlassAUROC
-    config: 
-      num_classes: *num_classes
-      average: *average
+    config:
+      num_classes: 3
+      average: macro

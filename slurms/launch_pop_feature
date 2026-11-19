@@ -1,0 +1,40 @@
+#!/bin/bash
+#SBATCH -A IscrC_BRIDGEV
+#SBATCH -p lrd_all_serial
+#SBATCH --qos normal
+#SBATCH --time 02:00:00
+#SBATCH -N 1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=4
+#SBATCH --gpus=0
+
+source .venv/bin/activate
+
+TASK="$1"
+SPECIFIC_FOLD="$2"
+
+if [ -z "$TASK" ]; then
+    echo "Error: TASK argument not provided."
+    exit 1
+fi
+
+if [ -n "$SPECIFIC_FOLD" ]; then
+    FOLDS=("$SPECIFIC_FOLD")
+else
+    FOLDS=(0 1 2 3 4)
+fi
+
+echo "Starting feature reduction for task: ${TASK} on folds: ${FOLDS[*]}"
+
+for FOLD in "${FOLDS[@]}"; do
+    CONFIG="configs/preprocess/population_feature/${TASK}/fold_${FOLD}.yaml"
+    echo "=== Running ${TASK} Fold ${FOLD} (${CONFIG}) ==="
+    python main.py preprocess --parameters "$CONFIG" --cls PopulationFeatureProcessor
+    EXIT_CODE=$?
+    if [ $EXIT_CODE -ne 0 ]; then
+        echo "Error: Failed on ${TASK} Fold ${FOLD} with exit code ${EXIT_CODE}"
+        exit $EXIT_CODE
+    fi
+done
+
+echo "Successfully completed feature reduction for task: ${TASK}"

@@ -58,6 +58,7 @@ class SplitProcessor:
             train_df.to_csv(f"{self.out_dir}/folds/{ix}/train.csv", index=False)
             val_df.to_csv(f"{self.out_dir}/folds/{ix}/val.csv", index=False)
         test_df.to_csv(f"{self.out_dir}/test.csv", index=False)
+        cons_dataset.to_csv(f"{self.out_dir}/dataset.csv", index=False)
 
 
 

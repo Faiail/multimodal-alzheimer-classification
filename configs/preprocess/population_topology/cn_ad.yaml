@@ -1,0 +1,8 @@
+data: data/processed/splits/cn_ad/dataset.csv
+out_dir: data/processed/population_topology/cn_ad
+patient: PTID
+sex: true
+apoe4: true
+age: false
+age_threshold: 2.0
+lambda: 10.0

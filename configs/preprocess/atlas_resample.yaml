@@ -1,0 +1,5 @@
+atlas: configs/AAL3/AAL3v1_1mm.nii.gz
+template: data/processed/MNI152_T1_1mm.nii.gz
+out_dir: data/processed
+out_file: AAL3v1_1mm_197x233x189.nii.gz
+skip: true

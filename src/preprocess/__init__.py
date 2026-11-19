@@ -3,6 +3,12 @@ from .coregistration_processor import CoregistrationProcessor
 from .mri_atlas_registration_processor import MRIAtlasRegistrationProcessor
 from .pet_atlas_registration_processor import PETAtlasRegistrationProcessor
 from .multimodal_tensor_processor import MultimodalTensorProcessor
+from .atlas_resample_processor import AtlasResampleProcessor
+from .roi_feature_processor import ROIFeatureProcessor
+from .population_topology_processor import PopulationTopologyProcessor
+from .population_feature_processor import PopulationFeatureProcessor
+from .brain_gnn_processor import BrainGNNProcessor
+from .mm_gnn_processor import MMGraphProcessor
 
 
 def exe_preprocess_command(
@@ -19,6 +25,11 @@ __all__ = [
     "MRIAtlasRegistrationProcessor",
     "PETAtlasRegistrationProcessor",
     "MultimodalTensorProcessor",
+    "AtlasResampleProcessor",
+    "ROIFeatureProcessor",
+    "PopulationTopologyProcessor",
+    "PopulationFeatureProcessor",
+    "BrainGNNProcessor",
     "exe_preprocess_command",
 ]
 

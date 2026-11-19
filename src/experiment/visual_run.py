@@ -7,21 +7,6 @@ from torchmetrics import MetricCollection
 
 
 class VisualRun(Run):
-    def _init_metrics(self):
-        metrics_parameters = self.parameters.get(ParameterKeys.METRICS, {})
-        self.metrics = MetricCollection(
-            {
-                k: metric_pkg.__dict__[v.get(ParameterKeys.NAME)](
-                    **(v.get(ParameterKeys.CFG) or {})
-                )
-                for k, v in metrics_parameters.items()
-            }
-        )
-
-    def _format_preds_for_metrics(self, preds: torch.Tensor) -> torch.Tensor:
-        preds = preds.detach().cpu()
-        return preds.squeeze(-1) if preds.ndim > 1 and preds.shape[-1] == 1 else preds
-
     def print_metrics(self, phase: str, metrics=None):
         for k, v in metrics.items():
             print(f"{phase} {k}: {v:.4f}")

@@ -11,6 +11,8 @@ import src.models as models
 import src.scheduler as schedulers
 from src.utils import ParameterKeys
 from src.utils.general import set_seed, save_json
+from torchmetrics import MetricCollection
+import src.metrics as metric_pkg
 
 
 class Run:
@@ -76,7 +78,7 @@ class Run:
         )
         loader_params = deepcopy(self.parameters.get(ParameterKeys.LOADER, {}))
         val_loader_params = deepcopy(loader_params)
-        val_loader_params["shuffle"] = False
+        val_loader_params["shuffle"] = True
         val_loader_params["drop_last"] = False
 
         self.train_loader = DataLoader(
@@ -121,7 +123,19 @@ class Run:
             self.model.load_state_dict(self.run_state.get(ParameterKeys.MODEL))
 
     def _init_metrics(self):
-        raise NotImplementedError()
+        metrics_parameters = self.parameters.get(ParameterKeys.METRICS, {})
+        self.metrics = MetricCollection(
+            {
+                k: metric_pkg.__dict__[v.get(ParameterKeys.NAME)](
+                    **(v.get(ParameterKeys.CFG) or {})
+                )
+                for k, v in metrics_parameters.items()
+            }
+        )
+
+    def _format_preds_for_metrics(self, preds: torch.Tensor) -> torch.Tensor:
+        preds = preds.detach().cpu()
+        return preds.squeeze(-1) if preds.ndim > 1 and preds.shape[-1] == 1 else preds
 
     def print_stats(
         self,
@@ -133,13 +147,18 @@ class Run:
         print(f"Epoch {epoch}/{self.num_epochs}: {phase} loss: {cumulated_loss:.4f}")
         self.print_metrics(phase=phase, metrics=metrics)
 
-    def print_metrics(self, phase: str, metrics: dict = None):
-        raise NotImplementedError()
+    def print_metrics(self, phase: str, metrics=None):
+        for k, v in metrics.items():
+            print(f"{phase} {k}: {v:.4f}")
 
     def _init_optimizer(self):
         optimizer_parameters = self.parameters.get(ParameterKeys.OPTIMIZER)
         optimizer_name = optimizer_parameters.get(ParameterKeys.NAME)
-        optimizer_cfg = optimizer_parameters.get(ParameterKeys.CFG, {})
+        optimizer_cfg = deepcopy(optimizer_parameters.get(ParameterKeys.CFG, {}))
+        if "lr" in optimizer_cfg and optimizer_cfg["lr"] is not None:
+            optimizer_cfg["lr"] = float(optimizer_cfg["lr"])
+        if "weight_decay" in optimizer_cfg and optimizer_cfg["weight_decay"] is not None:
+            optimizer_cfg["weight_decay"] = float(optimizer_cfg["weight_decay"])
         self.optimizer = optimizers.__dict__[optimizer_name](
             params=self.model.parameters(), **optimizer_cfg
         )
@@ -150,8 +169,14 @@ class Run:
     def _init_criterion(self):
         criterion_parameters = self.parameters.get(ParameterKeys.CRITERION, {})
         criterion_name = criterion_parameters.get(ParameterKeys.NAME)
-        criterion_cfg = criterion_parameters.get(ParameterKeys.CFG, {})
+        criterion_cfg = deepcopy(criterion_parameters.get(ParameterKeys.CFG, {}))
+        if "weight" in criterion_cfg and criterion_cfg["weight"] is not None:
+            if not isinstance(criterion_cfg["weight"], torch.Tensor):
+                criterion_cfg["weight"] = torch.tensor(
+                    criterion_cfg["weight"], dtype=torch.float32, device=self.device
+                )
         self.criterion = losses.__dict__[criterion_name](**criterion_cfg)
+        self.criterion = self.criterion.to(self.device)
         if self.run_state.get(ParameterKeys.CRITERION) is not None:
             print("Restoring criterion state from previous run")
             self.criterion.load_state_dict(self.run_state.get(ParameterKeys.CRITERION))
@@ -184,6 +209,22 @@ class Run:
             self.cosine_sched = True
         else:
             self.cosine_sched = False
+            if scheduler_name == "CosineAnnealingLR":
+                scheduler_cfg.setdefault("T_max", self.num_epochs)
+                if "eta_min" in scheduler_cfg:
+                    scheduler_cfg["eta_min"] = float(scheduler_cfg["eta_min"])
+            elif scheduler_name == "StepLR":
+                if "step_size" in scheduler_cfg:
+                    scheduler_cfg["step_size"] = int(scheduler_cfg["step_size"])
+                if "gamma" in scheduler_cfg:
+                    scheduler_cfg["gamma"] = float(scheduler_cfg["gamma"])
+            elif scheduler_name == "ReduceLROnPlateau":
+                if "factor" in scheduler_cfg:
+                    scheduler_cfg["factor"] = float(scheduler_cfg["factor"])
+                if "patience" in scheduler_cfg:
+                    scheduler_cfg["patience"] = int(scheduler_cfg["patience"])
+                if "min_lr" in scheduler_cfg:
+                    scheduler_cfg["min_lr"] = float(scheduler_cfg["min_lr"])
         self.scheduler = schedulers.__dict__[scheduler_name](
             optimizer=self.optimizer, **scheduler_cfg
         )
@@ -214,7 +255,11 @@ class Run:
             return
         if phase == ParameterKeys.TRAIN and not self.cosine_sched:
             return
-        self.scheduler.step(**kwargs)
+        if isinstance(self.scheduler, torch.optim.lr_scheduler.ReduceLROnPlateau):
+            metric = kwargs.get("loss") if "loss" in kwargs else kwargs.get("metrics")
+            self.scheduler.step(metric)
+        else:
+            self.scheduler.step()
 
     def early_stop_callback(self, monitored_value: float) -> bool:
         if self.early_stop is None:

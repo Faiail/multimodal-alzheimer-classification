@@ -1,0 +1,63 @@
+general:
+  out_dir: models/population_gcn/cn_ad
+  device: cuda
+  num_epochs: 150
+data:
+  name: PopulationGraphDataset
+  config:
+    dataset_root: data/processed/splits/cn_ad
+    topology_root: data/processed/population_topology/cn_ad
+model:
+  name: PopulationGCN
+  config:
+    gnn_name: ChebNet
+    gnn_parameters:
+      in_channels: 128
+      hidden_channels: 16
+      num_layers: 6
+      out_channels: 16
+      dropout: 0.02
+      act: relu
+      K: 3
+      normalization: sym
+    hidden_size: 16
+    dropout: 0.02
+    num_classes: 2
+criterion:
+  name: CrossEntropyLoss
+  config:
+    weight:
+    - 0.738
+    - 1.55
+optimizer:
+  name: AdamW
+  config:
+    lr: 0.01
+    weight_decay: 1.0e-05
+early_stop:
+  name: EarlyStopping
+  config:
+    verbose: true
+    patience: 10
+    path: model.pt
+scheduler:
+  name: StepLR
+  config:
+    step_size: 25
+    gamma: 0.5
+metrics:
+  acc:
+    name: MulticlassAccuracy
+    config:
+      num_classes: 2
+      average: macro
+  f1-score:
+    name: MulticlassF1Score
+    config:
+      num_classes: 2
+      average: macro
+  auc:
+    name: MulticlassAUROC
+    config:
+      num_classes: 2
+      average: macro

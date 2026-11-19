@@ -1,0 +1,65 @@
+general:
+  out_dir: models/mm_gnn/cn_mci_ad
+  device: cuda
+  num_epochs: 150
+data:
+  name: MMGNNDataset
+  config:
+    graph_root: data/processed/mm_gnn/cn_mci_ad
+    split_root: data/processed/splits/cn_mci_ad
+    dataset: data/processed/population_topology/cn_mci_ad/population_dataset.csv
+model:
+  name: MMGNN
+  config:
+    mri_branch_parameters:
+      gnn_name: FastChebNet
+      gnn_config: &id001
+        num_layers: 2
+        in_channels: 13695
+        hidden_channels: 32
+        out_channels: 3
+        act: relu
+        K: 3
+        dropout: 0.5
+    pet_branch_parameters:
+      gnn_name: FastChebNet
+      gnn_config: *id001
+criterion:
+  name: CrossEntropyLoss
+  config:
+    weight:
+    - 1.123
+    - 0.593
+    - 2.359
+optimizer:
+  name: AdamW
+  config:
+    lr: 0.0001
+    weight_decay: 0.0001
+early_stop:
+  name: EarlyStopping
+  config:
+    verbose: true
+    patience: 10
+    path: model.pt
+scheduler:
+  name: CosineAnnealingLR
+  config:
+    T_max: 50
+    eta_min: 1.0e-06
+metrics:
+  acc:
+    name: MulticlassAccuracy
+    config:
+      num_classes: 3
+      average: macro
+  f1-score:
+    name: MulticlassF1Score
+    config:
+      num_classes: 3
+      average: macro
+  auc:
+    name: MulticlassAUROC
+    config:
+      num_classes: 3
+      average: macro

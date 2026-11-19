@@ -1,0 +1,27 @@
+general:
+  out_dir: data/processed/mm_gnn/cn_ad/4
+  fold_id: 4
+  pbar: True
+  sex: PTGENDER
+  apoe4: APOE4
+  threshold: 0.0
+data:
+  train:
+    name: &data_cls BrainFeatureExtractorDataset
+    config:
+      root: &roi_feature_root data/processed/roi-features
+      dataset: data/processed/splits/cn_ad/folds/4/train.csv
+      mri_col: &mri_col 0
+      pet_col: &pet_col 3
+      filter_label_value: &cn 0
+  population:
+    name: *data_cls
+    config:
+      root: *roi_feature_root
+      dataset: data/processed/population_topology/cn_ad/population_dataset.csv
+      mri_col: *mri_col
+      pet_col: *pet_col
+      sort_by_node: True
+loader:
+  batch_size: 128
+  num_workers: 8

@@ -1,61 +1,73 @@
 general:
   out_dir: models/densenet/cn_mci
   device: cuda
-  pbar: True
+  pbar: true
   num_epochs: 150
 data:
   train:
-    name: &data_cls VisualDataset
+    name: VisualDataset
     config:
-      multimodal_root: &multimodal_root data/processed/multimodal-tensors
-      fold_root: &fold_root data/processed/splits/cn_mci
+      multimodal_root: data/processed/multimodal-tensors
+      fold_root: data/processed/splits/cn_mci
       split: train
   val:
-    name: *data_cls
+    name: VisualDataset
     config:
-      multimodal_root: *multimodal_root
-      fold_root: *fold_root
+      multimodal_root: data/processed/multimodal-tensors
+      fold_root: data/processed/splits/cn_mci
       split: val
   test:
-    name: *data_cls
+    name: VisualDataset
     config:
-      multimodal_root: *multimodal_root
-      fold_root: *fold_root
+      multimodal_root: data/processed/multimodal-tensors
+      fold_root: data/processed/splits/cn_mci
       split: test
 loader:
   batch_size: 32
-  shuffle: True
-  drop_last: False
+  shuffle: true
+  drop_last: false
   num_workers: 8
 model:
   name: DenseNet121
   config:
     spatial_dims: 3
     in_channels: 2
-    out_channels: 1
+    out_channels: 2
 criterion:
-  name: FocalLoss
+  name: CrossEntropyLoss
   config:
-    alpha: 0.345
-    gamma: 2
+    weight:
+    - 1.447
+    - 0.764
 optimizer:
   name: AdamW
-  config: 
-    lr: 5e-5
+  config:
+    lr: 0.0001
+    weight_decay: 0.0001
 early_stop:
   name: EarlyStopping
   config:
-    verbose: True
+    verbose: true
     patience: 10
     path: model.pt
 scheduler:
-  name: HuggingFaceCosineScheduler  
-  config: 
-    num_warmup_epochs: 1
+  name: CosineAnnealingLR
+  config:
+    T_max: 50
+    eta_min: 1.0e-06
 metrics:
   acc:
-    name: BinaryAccuracy
+    name: MulticlassAccuracy
+    config:
+      num_classes: 2
+      average: macro
   f1-score:
-    name: BinaryF1Score
+    name: MulticlassF1Score
+    config:
+      num_classes: 2
+      average: macro
   auc:
-    name: BinaryAUROC
+    name: MulticlassAUROC
+    config:
+      num_classes: 2
+      average: macro
