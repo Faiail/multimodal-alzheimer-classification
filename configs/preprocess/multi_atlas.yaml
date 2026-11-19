@@ -1,0 +1,5 @@
+template: data/processed/AAL3v1_1mm_197x233x189.nii.gz
+out_dir: data/processed/atlases_1mm_197x233x189
+raw_dir: data/raw/atlases
+skip: true
+fsl_dir: null
