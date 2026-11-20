@@ -4,6 +4,7 @@ from .population_run import PopulationRun
 from .brain_gnn_run import BrainGNNRun
 from .hi_gnn_run import HiGNNRun
 from .mm_gnn_run import MMGNNRun
+from .lasso_net_run import LassoNetRun
 
 
 def exe_experiment(parameters: dict, cls: str):

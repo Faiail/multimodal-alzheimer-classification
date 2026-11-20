@@ -48,6 +48,13 @@ class Run:
         device_str = general_parameters.get(ParameterKeys.DEVICE, "cpu")
         if str(device_str).startswith("cuda") and not torch.cuda.is_available():
             device_str = "cpu"
+        elif str(device_str).startswith("cuda:") and torch.cuda.is_available():
+            try:
+                gpu_idx = int(str(device_str).split(":")[1])
+                if gpu_idx >= torch.cuda.device_count():
+                    device_str = "cuda:0"
+            except ValueError:
+                pass
         self.device = device_str
         self.pbar = general_parameters.get(ParameterKeys.PBAR, False)
         self.num_epochs = general_parameters.get(ParameterKeys.NUM_EPOCHS, 1)

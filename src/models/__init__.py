@@ -6,3 +6,4 @@ from .population_gcn import PopulationGCN
 from .brain_gnn import BrainGNN
 from .hi_gnn import HiGNN
 from .mm_gnn import MMGNN
+from .song import *

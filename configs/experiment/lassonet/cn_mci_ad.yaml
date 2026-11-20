@@ -1,0 +1,75 @@
+general:
+  out_dir: models/lassonet/cn_mci_ad
+  device: cuda
+  pbar: True
+  num_epochs: 200
+data:
+  train:
+    name: &data_cls LassoDataset
+    config:
+      multimodal_root: &multimodal_root data/processed/multi_atlas_safetensors
+      fold_root: &fold_root data/processed/splits/cn_mci_ad
+      split: train
+  val:
+    name: *data_cls
+    config:
+      multimodal_root: *multimodal_root
+      fold_root: *fold_root
+      split: val
+  test:
+    name: *data_cls
+    config:
+      multimodal_root: *multimodal_root
+      fold_root: *fold_root
+      split: test
+loader:
+  batch_size: 512
+  shuffle: True
+  drop_last: False
+  num_workers: 8
+model:
+  name: KGLassoNet
+  config:
+    in_dim: 1976
+    hidden_dims: [[1976, 128], [128, 64], [64, 64]]
+    out_dim: &num_classes 3
+    multimodal: True
+    dropout: 0.1
+    lambda_reg: 0.01
+    M: 10
+    prior_c:
+      AAL1:
+        c_06: [36, 37]
+        c_08: [40, 41]
+      AAL2:
+        c_06: [40, 41]
+        c_08: [42, 43]
+      AAL3:
+        c_06: [40, 41]
+        c_08: [42, 43]
+      Brodmann:
+        c_06: [27, 28]
+        c_08: [33, 7]
+      Hammersmith:
+        c_06: [0, 1]
+        c_08: [4, 5]
+      HarvardOxford:
+        c_06: [9, 19]
+        c_08: [11, 21]
+      Juelich:
+        c_06: [46, 47]
+        c_08: [48, 49]
+      Brainnetome:
+        c_06: [214, 215]
+        c_08: [212, 213]
+optimizer:
+  name: AdamW
+  config:
+    lr: 0.005
+    weight_decay: 5e-4
+early_stop:
+  name: EarlyStopping
+  config:
+    verbose: True
+    patience: 20
+    path: model.pt

@@ -15,3 +15,5 @@ class BatchKeys(StrEnum):
     GRAPH = "graph"
     HAS_MRI = "has_mri"
     HAS_PET = "has_pet"
+    CONCAT = "concat"
+    SMRI = "smri"
