@@ -38,8 +38,8 @@ criterion:
   name: CrossEntropyLoss
   config:
     weight:
-    - 0.738
-    - 1.55
+    - 0.9153
+    - 1.102
 optimizer:
   name: AdamW
   config:

@@ -42,8 +42,8 @@ criterion:
   name: BrainGNNLoss
   config:
     weight:
-    - 0.626
-    - 2.488
+    - 0.7664
+    - 1.4384
     lambda1: 0.1
     lambda2: 0.1
     eps: 1e-7
