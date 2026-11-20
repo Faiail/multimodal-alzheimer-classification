@@ -623,3 +623,41 @@ with tab_dataset:
         .properties(height=260)
     )
     st.altair_chart(mmse_chart, use_container_width=True)
+
+    st.divider()
+
+    # -------------------------------------------------------------------------
+    # ADNIMERGE INTEGRATION & FAILURE ANALYSIS SECTION
+    # -------------------------------------------------------------------------
+    st.markdown("### 🔬 Indagine Diagnostica ADNIMERGE: Perché i Modelli Hanno Risultati Bassi?")
+    st.caption("Integrazione con `data/raw/ADNIMERGE_31Dec2025.csv` (16.421 record, 116 biomarcatori) e analisi dei fattori limitanti.")
+
+    # KPI summary cards
+    a1, a2, a3, a4 = st.columns(4)
+    a1.metric("Pazienti Convertitori", "284 (26.0%)", delta="Rumore Etichetta", delta_color="inverse")
+    a2.metric("PET Mancante / Zeri", "2,439 (48.8%)", delta="Zero-Padding", delta_color="inverse")
+    a3.metric("Follow-up Medio", "4.9 anni", delta="Max: 16.9 anni", delta_color="off")
+    a4.metric("Scala Multi-Atlas sMRI", "4.3 × 10⁷", delta="vs PET: 0.0 - 2.5", delta_color="inverse")
+
+    st.markdown("""
+    #### 🚨 Le 6 Cause Primarie Identificate:
+    1. **Rumore di Etichetta (Label Contradiction) sui Dati Longitudinali**:
+       - Il **26.0% dei pazienti converte** nel tempo (**224 MCI &rarr; AD**, **41 CN &rarr; MCI**, **19 CN &rarr; AD**).
+       - Nel dataset di training, a tutte le scansioni di un paziente è stata assegnata la diagnosi statica baseline (`original_class`). Un paziente MCI convertito ad Alzheimer conclamato dopo 3 anni viene addestrato/valutato con etichetta obsoleta *"MCI"*, penalizzando il modello quando rileva la neurodegenerazione reale.
+    2. **Mancanza di PET nel 48.8% dei Campioni e Zero-Padding**:
+       - Quasi metà del dataset non dispone di PET. Il codice inietta canali di **zeri costanti** (`mri * 0.0`). Questo squilibra le statistiche di *Batch Normalization* delle 3D-CNN e costringe le reti ad apprendere se la PET è presente invece del metabolismo cerebrale.
+    3. **Catastrofe di Scala nelle Feature Multi-Atlas ($10^7$ vs $1.0$)**:
+       - Per `KGLassoNet`, le feature sMRI non sono standardizzate (somma voxel = fino a $43.594.032$), mentre la PET è SUVR ($0.0 - 2.5$). La matrice di pesi viene dominata dalla risonanza di un fattore $10^6$, annullando il segnale metabolico.
+    4. **Indistinguibilità Biologica tra CN ed Early MCI (EMCI)**:
+       - Il volume medio dell'ippocampo in EMCI ($7.327\\text{ mm}^3$) è identico ai sani CN ($7.352\\text{ mm}^3$), e il metabolismo FDG è $1.30$ per entrambi. Senza traccianti molecolari dell'amiloide, la sMRI strutturale non contiene segnali differenziali in fase prodromica precoce.
+    5. **Eterogeneità Scanner e Protocolli (ADNI1 1.5T vs ADNI2/3 3.0T)**:
+       - Le scansioni uniscono protocolli a 1.5T e 3.0T di 50+ centri clinici senza armonizzazione (es. ComBat).
+    6. **Sbilanciamento di Classe**:
+       - La classe AD rappresenta solo il 14.1% del dataset totale (707 scansioni su 5.003).
+
+    #### 🛠️ Roadmap Raccomandata per Incrementare le Performance:
+    - ✅ **Etichettatura Dinamica Visita-per-Visita**: associare a ogni singola scansione la diagnosi clinica `DX` registrata alla data esatta di quella visita in `ADNIMERGE`.
+    - ✅ **Standardizzazione Z-Score su Multi-Atlas**: normalizzare $z = (x - \\mu) / \\sigma$ separatamente sMRI e PET prima dell'ingresso in LassoNet.
+    - ✅ **Valutazione Specializzata sul Sottoinsieme Paired**: addestrare/testare i modelli multimodali sulle 2.564 scansioni con entrambi i volumi reali.
+    - ✅ **Scomposizione MCI**: testare CN vs Late-MCI (LMCI) o predire la conversione a 24 mesi (*MCI-Stable vs MCI-Converter*).
+    """)
